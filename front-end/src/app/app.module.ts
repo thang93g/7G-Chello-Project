@@ -8,8 +8,10 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BoardpageComponent } from './core/boardpage/boardpage.component';
-
 import { NavbarComponent } from './core/homepage/navbar.component';
+import { LoginComponent } from './login/login.component';
+import { SingupComponent } from './singup/singup.component';
+
 import { ProfileComponent } from './core/profile/profile/profile.component';
 
 @NgModule({
@@ -17,6 +19,8 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
     AppComponent,
     BoardpageComponent,
     NavbarComponent,
+    LoginComponent,
+    SingupComponent,
     ProfileComponent
   ],
 
