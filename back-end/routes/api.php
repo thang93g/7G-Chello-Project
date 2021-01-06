@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Account\UserController;
+use App\Http\Controllers\Account\ChangePassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::put('/users/{id}',[UserController::class,'store']);
+Route::post('changePassword/{id}', [ChangePassword::class,'changePassword']);

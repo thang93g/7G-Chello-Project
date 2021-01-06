@@ -5,30 +5,33 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { BoardpageComponent } from './core/boardpage/boardpage.component';
-
 
 import { NavbarComponent } from './core/homepage/navbar.component';
 import { ProfileComponent } from './core/profile/profile/profile.component';
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [
     AppComponent,
     BoardpageComponent,
     NavbarComponent,
     ProfileComponent
   ],
+=======
+  declarations: [AppComponent, BoardpageComponent, NavbarComponent],
+>>>>>>> 772fd75c11115949d05f2c2465bca12526f30b28
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatSliderModule,
     MatBadgeModule,
-    MatToolbarModule
+    MatToolbarModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
