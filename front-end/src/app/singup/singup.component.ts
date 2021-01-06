@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
+import { SingupService } from './singup.service';
 
 
 @Component({
@@ -13,12 +14,37 @@ export class SingupComponent implements OnInit {
 
   user: User = new User();
   submitted = false;
+  userName !: string;
+  email !: string;
+  password !: string;
+  phone !: number;
 
-  constructor(private UserService: UserService,
+
+  constructor(private UserService: SingupService,
     private router : Router) { }
 
   ngOnInit(): void {
   }
+
+  newUser(): void {
+    this.submitted = false;
+    this.user = new User();
+  }
+  save() {
+    this.UserService
+      .register(this.user).subscribe((data: any) => {
+        console.log(data)
+        this.user = new User();
+        // this.gotoList();
+      },
+        (error: any) => console.log(error));
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    this.save();
+  }
+  
   
 
 }

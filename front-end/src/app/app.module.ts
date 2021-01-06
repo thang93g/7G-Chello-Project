@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,8 @@ import { BoardpageComponent } from './core/boardpage/boardpage.component';
 import { NavbarComponent } from './core/homepage/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { SingupComponent } from './singup/singup.component';
+import { FormsModule } from '@angular/forms';
+
 
 import { ProfileComponent } from './core/profile/profile/profile.component';
 
@@ -31,6 +34,8 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
     MatSliderModule,
     MatBadgeModule,
     MatToolbarModule,
+    HttpClientModule,
+    FormsModule
 
   ],
   providers: [],
