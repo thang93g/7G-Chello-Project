@@ -13,16 +13,13 @@ import { NavbarComponent } from './core/homepage/navbar.component';
 import { ProfileComponent } from './core/profile/profile/profile.component';
 
 @NgModule({
-<<<<<<< HEAD
   declarations: [
     AppComponent,
     BoardpageComponent,
     NavbarComponent,
     ProfileComponent
   ],
-=======
-  declarations: [AppComponent, BoardpageComponent, NavbarComponent],
->>>>>>> 772fd75c11115949d05f2c2465bca12526f30b28
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +27,7 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
     MatSliderModule,
     MatBadgeModule,
     MatToolbarModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent],
