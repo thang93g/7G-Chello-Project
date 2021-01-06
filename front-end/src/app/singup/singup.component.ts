@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../user/user';
+import { UserService } from '../user/user.service';
+
 
 @Component({
   selector: 'app-singup',
@@ -7,9 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingupComponent implements OnInit {
 
-  constructor() { }
+  user: User = new User();
+  submitted = false;
+
+  constructor(private UserService: UserService,
+    private router : Router) { }
 
   ngOnInit(): void {
   }
+  
 
 }
