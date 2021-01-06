@@ -7,14 +7,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { BoardpageComponent } from './base/boardpage/boardpage.component';
+import { BoardpageComponent } from './core/boardpage/boardpage.component';
 
 
+import { NavbarComponent } from './core/homepage/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoardpageComponent
+    BoardpageComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
