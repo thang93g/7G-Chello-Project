@@ -24,5 +24,6 @@ Route::post('login',[UserController::class,'authenticate']);
 Route::post('register',[UserController::class,'register']);
 
 
-Route::put('/users/{id}',[UserController::class,'store']);
+Route::put('/users/{id}',[UserController::class,'update']);
+Route::get('/users/{id}',[UserController::class,'show']);
 Route::post('changePassword/{id}', [ChangePassword::class,'changePassword']);
