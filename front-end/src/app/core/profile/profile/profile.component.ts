@@ -1,28 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from "@angular/fire/storage";
-import { map, finalize } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { AngularFireStorage } from '@angular/fire/storage';
+import { map, finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
+import { User } from 'src/app/user/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  title = "cloudsSorage";
+  title = 'cloudsSorage';
   selectedFile!: any;
-  fb!: any;
   downloadURL!: Observable<string>;
   user!: any;
+  id!: number;
 
   constructor(
     private storage: AngularFireStorage,
-    private userService: UserService,
-    ) {}
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
+    this.user = new User();
 
+    this.id = 1;
+
+    this.userService.getUser(this.id).subscribe(
+      (data) => {
+        this.user = data;
+        if(this.user.image == null){
+          this.user.image = "https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1609947281357?alt=media&token=ce9b79aa-1033-4d18-8778-3eab36bf105e"
+        }
+      },
+      (error) => console.log(error)
+    );
   }
 
   onFileSelected(event: any) {
@@ -36,19 +49,27 @@ export class ProfileComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
+          this.downloadURL.subscribe((url) => {
             if (url) {
-              this.fb = url;
+              this.user.image = url;
             }
-            console.log(this.fb);
+            console.log(this.user.image);
           });
         })
       )
-      .subscribe(url => {
+      .subscribe((url) => {
         if (url) {
           console.log(url);
         }
       });
   }
 
+  updateUser() {
+    this.userService.update(this.id, this.user)
+      .subscribe(data => {
+        console.log(data);
+        this.user = new User();
+        window.location.reload();
+      }, error => console.log(error));
+  }
 }
