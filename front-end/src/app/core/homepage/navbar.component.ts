@@ -1,3 +1,4 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,12 +9,19 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router : Router) { }
+
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
   }
+  
   gotoSingup(){
-    this.router.navigate(['singup'])
+    this.route.navigate(['singup'])
+  }
+
+  gotoLogin() {
+    console.log('1');
+    this.route.navigate(['login'])
   }
 
 }

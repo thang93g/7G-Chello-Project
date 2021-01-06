@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,10 +15,12 @@ import { BoardpageComponent } from './core/boardpage/boardpage.component';
 import { NavbarComponent } from './core/homepage/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { SingupComponent } from './singup/singup.component';
-import { FormsModule } from '@angular/forms';
 
 
 import { ProfileComponent } from './core/profile/profile/profile.component';
+import { AngularFireModule } from "@angular/fire";
+import { environment } from "../environments/environment";
+import { AngularFireStorageModule } from "@angular/fire/storage";
 
 @NgModule({
   declarations: [
@@ -28,6 +33,7 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
   ],
 
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -35,7 +41,8 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
     MatBadgeModule,
     MatToolbarModule,
     HttpClientModule,
-    FormsModule
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, "cloud")
 
   ],
   providers: [],

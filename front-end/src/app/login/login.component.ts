@@ -1,7 +1,9 @@
+import { LoginService } from './login.service';
+import { User } from '../user/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../user/user';
 import { UserService } from '../user/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,29 @@ import { UserService } from '../user/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User();
-  submitted = false;
 
-  constructor(private UserService: UserService,
-    private router : Router) { }
+  result!: Observable<any>;
+  // token = new Observable<any>();
+  // token!: Observable<string>;
+  email !: string;
+  password !: string;
+
+  constructor(private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    // this.getToken();
+  }
+
+  
+  getToken() {
+    console.log(this.email, this.password);
+    this.loginService.login(this.email, this.password).subscribe(
+      data => {
+        console.log(data.token);
+        localStorage.setItem('token',data.token);
+      },
+      error => console.log(error));
   }
 
 }
