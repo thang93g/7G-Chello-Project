@@ -16,6 +16,7 @@ import { NavbarComponent } from './core/homepage/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { SingupComponent } from './singup/singup.component';
 
+
 import { ProfileComponent } from './core/profile/profile/profile.component';
 import { AngularFireModule } from "@angular/fire";
 import { environment } from "../environments/environment";

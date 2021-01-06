@@ -9,9 +9,14 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
+
   constructor(private route: Router) { }
 
   ngOnInit(): void {
+  }
+  
+  gotoSingup(){
+    this.route.navigate(['singup'])
   }
 
   gotoLogin() {
