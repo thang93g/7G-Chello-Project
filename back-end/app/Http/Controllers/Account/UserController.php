@@ -152,7 +152,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'image' => 'required',
-            'phone' => 'required|numeric|min:6|max:20',
+            'phone' => 'required|string|min:6|max:20',
         ]);
 
         if($validator->fails()){
