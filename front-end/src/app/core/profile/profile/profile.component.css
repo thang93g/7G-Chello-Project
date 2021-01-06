@@ -3,6 +3,7 @@
   height: 200px;
   background-color: rgb(236, 233, 233);
   text-align: center;
+  border-bottom: solid 1px rgb(199, 195, 195);
 }
 #page-body{
   text-align: center;

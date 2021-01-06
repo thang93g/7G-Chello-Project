@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserController extends Controller
-{/*
+{ /*
      * get token
      */
     public function authenticate(Request $request)
@@ -81,9 +81,11 @@ class UserController extends Controller
         }
 
         return response()->json(compact('user'));
+    
+
     }
 
-  /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -150,7 +152,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'image' => 'required',
-            'phone' => 'required|numeric|min:6|max:20',
+            'phone' => 'required|string|min:6|max:20',
         ]);
 
         if($validator->fails()){

@@ -2,6 +2,7 @@ import { LoginService } from './login.service';
 import { User } from '../user/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
 
   result!: Observable<any>;
   // token = new Observable<any>();
@@ -33,6 +35,13 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token',data.token);
       },
       error => console.log(error));
+  }
+  gotoSingup(){
+    this.router.navigate(['singup'])
+  }
+
+  gobackHomePage() {
+    this.router.navigate([''])
   }
 
 }

@@ -5,5 +5,6 @@ export class User {
     email! : string;
     image! : string;
     phone! : string;
+    password! : string;
     active!: boolean;
  }
