@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8f5b99c-837b-40ef-93bf-58fb465683ef" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/core/homepage/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/core/homepage/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/core/profile/profile/profile.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/core/profile/profile/profile.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/core/profile/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/core/profile/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/src/app/core/profile/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/src/app/core/profile/profile/profile.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,6 +150,7 @@
       <option name="presentableId" value="Default" />
       <updated>1609898305806</updated>
       <workItem from="1609898306838" duration="495000" />
+      <workItem from="1609902942361" duration="13000" />
     </task>
     <servers />
   </component>
