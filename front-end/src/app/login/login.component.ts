@@ -36,5 +36,12 @@ export class LoginComponent implements OnInit {
       },
       error => console.log(error));
   }
+  gotoSingup(){
+    this.router.navigate(['singup'])
+  }
+
+  gobackHomePage() {
+    this.router.navigate([''])
+  }
 
 }

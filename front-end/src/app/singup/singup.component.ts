@@ -40,6 +40,14 @@ export class SingupComponent implements OnInit {
     this.submitted = true;
     this.save();
   }
+
+  gotoLogin() {
+    console.log('1');
+    this.router.navigate(['login'])
+  }
+  gobackHomePage() {
+    this.router.navigate([''])
+  }
   
   
 
