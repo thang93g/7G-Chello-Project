@@ -11,12 +11,14 @@ import { BoardpageComponent } from './core/boardpage/boardpage.component';
 
 
 import { NavbarComponent } from './core/homepage/navbar.component';
+import { ProfileComponent } from './core/profile/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardpageComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
