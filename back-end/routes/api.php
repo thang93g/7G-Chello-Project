@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/users', function (Request $request) {
     return $request->user();
 });
+Route::get('users',[UserController::class,'index']);
+Route::post('login',[UserController::class,'authenticate']);
+Route::post('register',[UserController::class,'register']);
+
 
 Route::put('/users/{id}',[UserController::class,'store']);
 Route::post('changePassword/{id}', [ChangePassword::class,'changePassword']);
