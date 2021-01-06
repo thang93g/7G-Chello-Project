@@ -40,4 +40,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['singup'])
   }
 
+  gobackHomePage() {
+    this.router.navigate([''])
+  }
+
 }
