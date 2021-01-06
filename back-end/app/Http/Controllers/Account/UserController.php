@@ -147,6 +147,16 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'image' => 'required',
+            'phone' => 'required|numeric|min:6|max:20',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
         $user = User::find($id);
         $user->fill($request->all());
         $user->save();
