@@ -16,15 +16,37 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <form name="singup" class="box" (ngSubmit)="onSubmit()">
+                    <form #signup="ngForm" name="singup" class="box"  (ngSubmit)="onSubmit()" novalidate>
                         <h1>Đăng ký</h1>
                         <p class="text-muted"> Làm ơn nhập đầy đủ thông tin :(</p> 
-                        <input type="text" [(ngModel)]="user.name" name="userName" required  placeholder="Tên người dùng "> 
-                        <input type="email" [(ngModel)]="user.email" name="email" required  placeholder="Email"> 
-                        <input type="password" [(ngModel)]="user.password" name="password" required  placeholder="Mật khẩu"> 
-                        <input type="text" [(ngModel)]="user.phone" name="phone" required  placeholder="Số điện thoại"> 
+                        <div class="form-group">
+                                <input type="text" [(ngModel)]="user.name" name="userName" required #userName="ngModel" [class.is-invalid]="userName.invalid && userName.touched"  placeholder="Tên người dùng "> 
+                            <div *ngIf="userName.errors && (userName.valid || userName.touched)">
+                                <small class="text-danger" *ngIf="userName.errors.required">Tên người dùng không được để trống</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <input type="email" [(ngModel)]="user.email" name="email" required email #email="ngModel" [class.is-invalid]="email.invalid && email.touched"   placeholder="Email">
+                            <div *ngIf="email.errors && (email.valid || email.touched)">
+                                <small class="text-danger" *ngIf="email.errors.required">Email không được để trống</small>
+                                <small class="text-danger" *ngIf="email.errors.email">Email Phải đúng định dạng</small>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                                <input type="password" [(ngModel)]="user.password" name="password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Mật khẩu">
+                            <div *ngIf="password.errors && (password.valid || password.touched)">
+                                <small class="text-danger" *ngIf="password.errors.required">Mật khẩu không được để trống</small>
+                            </div> 
+                        </div> 
+                        <div class="form-group">
+                        <input type="text" [(ngModel)]="user.phone" name="phone" required pattern="^[0-9]+[0-9]" #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched" placeholder="Số điện thoại"> 
+                        <div *ngIf="phone.errors && (phone.valid || phone.touched)">
+                            <small class="text-danger" *ngIf="phone.errors.required">Số điện thoại không được để trống</small>
+                            <small class="text-danger" *ngIf="phone.errors.pattern">Số điện thoại phải là số</small>
+                        </div> 
+                        </div>
                         <hr>
-                        <input type="submit" name="" value="Đăng ký" href="#">
+                        <input type="submit" name="" [disabled]="signup.form.invalid" value="Đăng ký">
                         <div class="col-md-12">
                             <ul class="social-network social-circle">
                                 <li><a href="#" class="icoFacebook" title="Facebook"><i style="font-size:24px" class="fa">&#xf09a;</i></a></li>
@@ -32,7 +54,7 @@
                             </ul>
                         </div>
                         <hr>
-                        <a href="">Đăng nhập</a>
+                        <input type='submit' style="color: white;" class="btn" value="Đăng nhập " (click)="gotoLogin()">
                     </form>
                 </div>
             </div>
