@@ -108,6 +108,10 @@
       <path value="$PROJECT_DIR$/back-end/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/back-end/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/back-end/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/back-end/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/back-end/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/back-end/vendor/lcobucci/jwt" />
     </include_path>
   </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />
 </project>
