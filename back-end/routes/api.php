@@ -22,14 +22,14 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:api')->get('/columns', function (Request $request){
-    return $request->user();
-});
 
 Route::get('columns',[ColumnController::class,'index']);
 Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
 
+Route::get('columns',[ColumnController::class,'index']);
+Route::post('columns/create',[ColumnController::class,'create']);
+Route::put('columns/{id}/update',[ColumnController::class,'update']);
 
 Route::get('users',[UserController::class,'index']);
 Route::post('login',[UserController::class,'authenticate']);

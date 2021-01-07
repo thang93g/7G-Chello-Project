@@ -4,6 +4,7 @@ import { map, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 import { User } from 'src/app/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,17 +16,18 @@ export class ProfileComponent implements OnInit {
   selectedFile!: any;
   downloadURL!: Observable<string>;
   user!: any;
-  id!: number;
+  id!: any;
 
   constructor(
     private storage: AngularFireStorage,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.user = new User();
 
-    this.id = 1;
+    this.id = localStorage.getItem('id');
 
     this.userService.getUser(this.id).subscribe(
       (data) => {
@@ -71,5 +73,13 @@ export class ProfileComponent implements OnInit {
         this.user = new User();
         window.location.reload();
       }, error => console.log(error));
+  }
+
+  back() {
+    this.router.navigate(['board'])
+  }
+
+  changePassword() {
+    this.router.navigate(['password']);
   }
 }
