@@ -26,8 +26,6 @@ import { environment } from "../environments/environment";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 
 import { BoardlistComponent } from './core/boardlist/boardlist.component';
-import { PasswordComponent } from './password/password.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +35,6 @@ import { PasswordComponent } from './password/password.component';
     SingupComponent,
     ProfileComponent,
     BoardlistComponent,
-    PasswordComponent
   ],
 
   imports: [
