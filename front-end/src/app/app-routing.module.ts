@@ -9,6 +9,8 @@ import { NavbarComponent } from './core/homepage/navbar.component';
 import { BoardpageComponent } from './core/boardpage/boardpage.component';
 import { BoardlistComponent } from './core/boardlist/boardlist.component';
 import { ProfileComponent } from './core/profile/profile/profile.component';
+// import { PasswordComponent } from './password/password.component';
+
 
 const routes: Routes = [
   // { path: '', redirectTo: '', pathMatch: 'full' },
@@ -18,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
+  // { path: 'password', component: PasswordComponent },
 
 ];
 
