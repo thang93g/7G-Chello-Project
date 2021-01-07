@@ -26,7 +26,12 @@ export class PasswordComponent implements OnInit {
   }
 
   updatePassword() {
-    this.passwordService.changePassword(this.id, this.oldPassword, this.newPassword, this.newPasswordConfirm);
+    this.passwordService.changePassword(this.id, this.oldPassword, this.newPassword, this.newPasswordConfirm).subscribe(
+      data => {
+        console.log(data);
+        this.back
+      }
+    );
   }
 
   back() {
