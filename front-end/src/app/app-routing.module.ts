@@ -9,8 +9,11 @@ import { NavbarComponent } from './core/homepage/navbar.component';
 import { BoardpageComponent } from './core/boardpage/boardpage.component';
 import { BoardlistComponent } from './core/boardlist/boardlist.component';
 import { ProfileComponent } from './core/profile/profile/profile.component';
+<<<<<<< HEAD
+=======
 // import { PasswordComponent } from './password/password.component';
 
+>>>>>>> b5b2fef5084f6ad333b20d45bb92e021c370bcac
 
 const routes: Routes = [
   // { path: '', redirectTo: '', pathMatch: 'full' },
@@ -20,7 +23,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
+<<<<<<< HEAD
+=======
   // { path: 'password', component: PasswordComponent },
+>>>>>>> b5b2fef5084f6ad333b20d45bb92e021c370bcac
 
 ];
 
