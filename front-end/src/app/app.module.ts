@@ -33,7 +33,7 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     LoginComponent,
     SingupComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
 
   imports: [

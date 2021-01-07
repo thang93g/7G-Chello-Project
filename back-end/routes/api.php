@@ -23,6 +23,8 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
 Route::get('columns',[ColumnController::class,'index']);
 Route::post('columns/create',[ColumnController::class,'create']);
 
+Route::get('boards',[BoardController::class,'index']);
+Route::post('boards/create',[BoardController::class,'create']);
 
 Route::get('users',[UserController::class,'index']);
 Route::post('login',[UserController::class,'authenticate']);
