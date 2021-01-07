@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,12 @@ class UserController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
+        $group = new Group();
+        $group->name = "Bảng cá nhân";
+        $group->user_id = $user->id;
+        $group->save();
+        $group->users()->attach($user->id);
+
         return response()->json(compact('user','token'),201);
     }
 
@@ -81,7 +88,7 @@ class UserController extends Controller
         }
 
         return response()->json(compact('user'));
-    
+
 
     }
 
