@@ -5,6 +5,7 @@ use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,11 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
 Route::get('columns',[ColumnController::class,'index']);
 Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
+
+Route::get('tasks',[TaskController::class,'index']);
+Route::post('tasks/create',[TaskController::class,'create']);
+Route::put('tasks/update/{id}',[TaskController::class,'update']);
+Route::delete('tasks/{id}',[TaskController::class,'delete']);
 
 Route::get('boards',[BoardController::class,'index']);
 Route::post('boards/create',[BoardController::class,'create']);
