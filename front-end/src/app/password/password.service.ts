@@ -17,16 +17,16 @@ export class PasswordService {
   //   return this.http.post(`${this.baseUrl}/${id}`, value);
   // }
   changePassword(id: any, oldPassword: string, newPassword:string, newPasswordConfirm:string): Observable<any> {
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+    // var reqHeader = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    // });
   
     var data = {
       "oldPassword": oldPassword,
       "newPassword": newPassword,
       "newPasswordConfirm": newPasswordConfirm
     };
-    return this.http.post(`${this.baseUrl}/${id}`, data, { headers: reqHeader, responseType: 'json' });
+    return this.http.put(`${this.baseUrl}/${id}`, data);
   }
 
 }
