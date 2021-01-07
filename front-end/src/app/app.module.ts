@@ -25,6 +25,8 @@ import { environment } from "../environments/environment";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BoardlistComponent } from './core/boardlist/boardlist.component';
+import { PasswordComponent } from './password/password.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     LoginComponent,
     SingupComponent,
-    ProfileComponent
+    ProfileComponent,
+    BoardlistComponent,
+    PasswordComponent
   ],
 
   imports: [
