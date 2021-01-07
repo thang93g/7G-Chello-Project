@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\UserController;
 use App\Http\Controllers\Account\ChangePassword;
+use App\Http\Controllers\ColumnController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/users', function (Request $request) {
     return $request->user();
 });
+Route::get('columns',[ColumnController::class,'index']);
+Route::post('columns/create',[ColumnController::class,'create']);
+
+
 Route::get('users',[UserController::class,'index']);
 Route::post('login',[UserController::class,'authenticate']);
 Route::post('register',[UserController::class,'register']);
