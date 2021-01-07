@@ -3,6 +3,7 @@
 use App\Http\Controllers\Account\UserController;
 use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -38,3 +39,5 @@ Route::post('register',[UserController::class,'register']);
 Route::put('/users/{id}',[UserController::class,'update']);
 Route::get('/users/{id}',[UserController::class,'show']);
 Route::post('changePassword/{id}', [ChangePassword::class,'changePassword']);
+
+Route::get('/groups/{id}',[GroupController::class,'index']);

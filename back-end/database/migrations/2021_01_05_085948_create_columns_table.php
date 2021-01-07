@@ -17,7 +17,7 @@ class CreateColumnsTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('board_id');
-            $table->integer('order');
+            $table->integer('orders');
             $table->timestamps();
             $table->softDeletes();
         });
