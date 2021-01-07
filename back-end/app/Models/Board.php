@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Board extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','group_id	'];
+    protected $fillable = ['name','group_id'];
 
 
     public function getJWTIdentifier()

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Account\UserController;
 use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

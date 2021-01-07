@@ -45,7 +45,7 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
