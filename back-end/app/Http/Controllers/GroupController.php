@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class GroupController extends Controller
 {
@@ -47,7 +49,26 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $group = new Group();
+        $group->name = $request->name;
+        $group->user_id = $request->user_id;
+        $group->save();
+        $group->users()->attach($request->user_id);
+        return response()->json($group);
+    }
+
+    public function addUser($id,Request $request){
+        $group = Group::find($id);
+        $group->users()->attach($request->user_id);
+        return response()->json($group);
     }
 
     /**
@@ -81,7 +102,10 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $group = Group::find($id);
+        $group->name = $request->name;
+        $group->save();
+        return response()->json($group);
     }
 
     /**
@@ -92,6 +116,8 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = Group::find($id);
+        $group->users()->detach();
+        $group->delete();
     }
 }

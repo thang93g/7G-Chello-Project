@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Column;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Board;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-
-class ColumnController extends Controller
+class BoardController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -33,12 +33,12 @@ class ColumnController extends Controller
         return response()->json(compact('token'));
     }
 
+
     public function index()
     {
-        $cols = Column::all();
-        return response()->json($cols);
+        $boards = Board::all();
+        return response()->json($boards);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -49,23 +49,20 @@ class ColumnController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'board_id' => 'required|numeric|min:1',
-            'orders' => 'required',
+            'group_id' => 'required|numeric|min:1',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $col = Column::create([
+        $board = Board::create([
             'name' => $request->get('name'),
-            'board_id' => $request->get('board_id'),
-            'orders' => $request->get('orders'),
+            'group_id' => $request->get('group_id'),
         ]);
+        return response()->json(compact('board'),201);
 
-        return response()->json(compact('col'),201);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -109,18 +106,7 @@ class ColumnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255'
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-
-        $col = Column::find($id);
-        $col->fill($request->all());
-        $col->save();
-        return response()->json($col);
+        //
     }
 
     /**

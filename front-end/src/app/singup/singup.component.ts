@@ -31,7 +31,7 @@ export class SingupComponent implements OnInit {
       .register(this.user).subscribe((data: any) => {
         console.log(data)
         this.user = new User();
-        // this.gotoList();
+        this.gotoLogin();
       },
         (error: any) => console.log(error));
   }
