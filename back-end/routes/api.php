@@ -35,3 +35,7 @@ Route::get('/users/{id}',[UserController::class,'show']);
 Route::post('changePassword/{id}', [ChangePassword::class,'changePassword']);
 
 Route::get('/groups/{id}',[GroupController::class,'index']);
+Route::post('/groups/{id}',[GroupController::class,'addUser']);
+Route::put('/groups/{id}',[GroupController::class,'update']);
+Route::delete('/groups/{id}',[GroupController::class,'destroy']);
+Route::post('/groups',[GroupController::class,'store']);
