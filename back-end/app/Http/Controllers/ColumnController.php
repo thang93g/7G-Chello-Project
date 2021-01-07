@@ -17,20 +17,20 @@ class ColumnController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function authenticate(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        try {
-            if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
-            }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
-
-        return response()->json(compact('token'));
-    }
+//    public function authenticate(Request $request)
+//    {
+//        $credentials = $request->only('email', 'password');
+//
+//        try {
+//            if (!$token = JWTAuth::attempt($credentials)) {
+//                return response()->json(['error' => 'invalid_credentials'], 400);
+//            }
+//        } catch (JWTException $e) {
+//            return response()->json(['error' => 'could_not_create_token'], 500);
+//        }
+//
+//        return response()->json(compact('token'));
+//    }
 
     public function index()
     {
@@ -108,7 +108,19 @@ class ColumnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string|max:255'
+        ]);
+
+
+        if($validator->fails()){
+            return response()->json($validator->errors()->toJson(), 400);
+        }
+
+        $col = Column::find($id);
+        $col->fill($request->all());
+        $col->save();
+        return response()->json($col);
     }
 
     /**
