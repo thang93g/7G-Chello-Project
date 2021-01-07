@@ -3,6 +3,7 @@
 use App\Http\Controllers\Account\UserController;
 use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\BoardController;
 use App\Http\Controllers\GroupController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,8 @@ Route::get('columns',[ColumnController::class,'index']);
 Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
 
+Route::get('boards',[BoardController::class,'index']);
+Route::post('boards/create',[BoardController::class,'create']);
 
 Route::get('users',[UserController::class,'index']);
 Route::post('login',[UserController::class,'authenticate']);
