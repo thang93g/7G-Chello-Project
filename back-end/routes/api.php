@@ -39,7 +39,7 @@ Route::post('register',[UserController::class,'register']);
 
 Route::put('/users/{id}',[UserController::class,'update']);
 Route::get('/users/{id}',[UserController::class,'show']);
-Route::post('changePassword/{id}', [ChangePassword::class,'changePassword']);
+Route::put('changePassword/{id}', [ChangePassword::class,'changePassword']);
 
 Route::get('/groups/{id}',[GroupController::class,'index']);
 Route::post('/groups/{id}',[GroupController::class,'addUser']);
