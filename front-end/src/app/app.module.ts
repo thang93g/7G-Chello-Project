@@ -26,13 +26,10 @@ import { environment } from "../environments/environment";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 
 import { BoardlistComponent } from './core/boardlist/boardlist.component';
-<<<<<<< HEAD
-=======
 // import { PasswordComponent } from './password/password.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
->>>>>>> b5b2fef5084f6ad333b20d45bb92e021c370bcac
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,10 +39,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SingupComponent,
     ProfileComponent,
     BoardlistComponent,
-<<<<<<< HEAD
-=======
     // PasswordComponent
->>>>>>> b5b2fef5084f6ad333b20d45bb92e021c370bcac
   ],
 
   imports: [
