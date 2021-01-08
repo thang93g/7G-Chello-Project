@@ -15,8 +15,10 @@ export class TasklistComponent implements OnInit {
   currentTask = null;
   currentIndex = -1;
   name = '';
-
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService,
+    private router: Router,
+    private groupService: GroupService,
+    private userService: UserService,) { }
 
   ngOnInit(): void {
     this.readTasks();
@@ -67,5 +69,9 @@ export class TasklistComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+  logOut() {
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }
