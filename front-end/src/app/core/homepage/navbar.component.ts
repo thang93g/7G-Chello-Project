@@ -20,7 +20,6 @@ export class NavbarComponent implements OnInit {
   }
 
   gotoLogin() {
-    console.log('1');
     this.route.navigate(['login'])
   }
 
