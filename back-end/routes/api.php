@@ -35,7 +35,7 @@ Route::put('tasks/update/{id}',[TaskController::class,'update']);
 Route::delete('tasks/{id}',[TaskController::class,'delete']);
 
 Route::get('boards',[BoardController::class,'index']);
-Route::post('boards/create',[BoardController::class,'create']);
+Route::post('boards/{id}',[BoardController::class,'create']);
 
 Route::get('users',[UserController::class,'index']);
 Route::post('login',[UserController::class,'authenticate']);
