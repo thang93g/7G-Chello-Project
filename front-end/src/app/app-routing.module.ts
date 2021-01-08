@@ -10,6 +10,7 @@ import { BoardpageComponent } from './core/boardpage/boardpage.component';
 import { BoardlistComponent } from './core/boardlist/boardlist.component';
 import { ProfileComponent } from './core/profile/profile/profile.component';
 import { PasswordComponent } from './password/password.component';
+import { GroupDetailComponent } from './core/group-detail/group-detail.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'password', component: PasswordComponent },
+  { path: 'group/:id', component: GroupDetailComponent },
 
 
 ];

@@ -54,4 +54,8 @@ export class BoardlistComponent implements OnInit {
       document.location.reload();
     },(error: any) => console.log(error) )
   }
+
+  viewGroup(id: number){
+    this.router.navigate(['group',id]);
+  }
 }
