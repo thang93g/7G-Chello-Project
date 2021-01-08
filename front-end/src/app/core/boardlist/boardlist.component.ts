@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { GroupService } from 'src/app/group/group.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { Board } from './board';
+import { BoardService } from './board.service';
 
 @Component({
   selector: 'app-boardlist',
@@ -13,11 +15,13 @@ export class BoardlistComponent implements OnInit {
   user_id!: any;
   user!: any;
   groups!: any;
+  board: Board = new Board();
 
   constructor(
     private router: Router,
     private groupService: GroupService,
-    private userService: UserService
+    private userService: UserService,
+    private boardService: BoardService,
     ) {}
 
   ngOnInit(): void {
@@ -42,5 +46,12 @@ export class BoardlistComponent implements OnInit {
 
   getInfo() {
     this.router.navigate(['profile']);
+  }
+
+  onSubmit(id: number){
+    this.boardService.createBoard(id,this.board).subscribe((data: any) =>{
+      this.board = new Board();
+      document.location.reload();
+    },(error: any) => console.log(error) )
   }
 }
