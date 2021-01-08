@@ -29,7 +29,7 @@ export class TasklistComponent implements OnInit {
     this.user_id = localStorage.getItem('id');
 
     this.groupService.getBoardList(this.user_id).subscribe(data => {
-      this.groups = data;
+      this.group = data;
     },error => console.log(error));
 
     this.userService.getUser(this.user_id).subscribe(data => {
