@@ -1,7 +1,7 @@
 /*
 
-All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 320). 
-            
+All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 320).
+
 The 'supports' rule will only run if your browr supports CSS grid.
 
 Flexbox is used as a fallback so that browsers which don't support grid will still recieve an identical layout.
@@ -326,13 +326,13 @@ body {
 
 The following rule will only run if your browser supports CSS grid.
 
-Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling. 
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox styling.
 
 */
 
 @supports (display: grid) {
     body {
-        display: grid;
+        /* display: grid; */
         grid-template-rows: 4rem 3rem auto;
         grid-row-gap: 0.8rem;
     }
@@ -379,4 +379,28 @@ Remove or comment-out the code block below to see how the browser will fall-back
     .user-settings-btn {
         margin: 0;
     }
+}
+
+.my-group{
+  margin-top: 15px;
+  width: 100%;
+  height: 160px;
+  left: 30px;
+  background-color: greenyellow;
+}
+
+.my-board{
+  margin-left: 10px;
+  width: 200px;
+  height: 100px;
+  float: left;
+  background-color: ivory;
+  border-radius: 10px;
+}
+
+.add-board-button{
+  margin-left: 10px;
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
 }
