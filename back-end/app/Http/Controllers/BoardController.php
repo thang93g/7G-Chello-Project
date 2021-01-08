@@ -45,11 +45,10 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'group_id' => 'required|numeric|min:1',
         ]);
 
         if($validator->fails()){
@@ -58,7 +57,7 @@ class BoardController extends Controller
 
         $board = Board::create([
             'name' => $request->get('name'),
-            'group_id' => $request->get('group_id'),
+            'group_id' => $id,
         ]);
         return response()->json(compact('board'),201);
 
