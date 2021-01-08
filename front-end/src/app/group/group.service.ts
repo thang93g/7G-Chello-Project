@@ -13,6 +13,10 @@ export class GroupService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
+  getTaskList(id: number){
+    return this.http.get(`${this.baseUrl}/${id}`);
+  };
+
   getGroup(id: number){
     return this.http.get(`${this.baseUrl}/detail/${id}`);
   }
