@@ -1,0 +1,11 @@
+<h4>Product List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let task of tasks; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setCurrentTask(task, i)"
+      >
+
+      </li>
+    </ul>

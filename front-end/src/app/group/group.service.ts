@@ -12,4 +12,9 @@ export class GroupService {
   getBoardList(id: number){
     return this.http.get(`${this.baseUrl}/${id}`);
   }
+
+  getTaskList(id: number){
+    return this.http.get(`${this.baseUrl}/${id}`);
+  };
+
 }

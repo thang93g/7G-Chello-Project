@@ -30,6 +30,7 @@ import { PasswordComponent } from './password/password.component';
 
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { TasklistComponent } from './core/tasklist/tasklist.component';
 
 
 @NgModule({
@@ -42,7 +43,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ProfileComponent,
     BoardlistComponent,
 
-    PasswordComponent
+    PasswordComponent,
+
+    TasklistComponent
 
   ],
 
