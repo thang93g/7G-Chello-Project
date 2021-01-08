@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Board;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -21,7 +22,9 @@ class GroupController extends Controller
         $array = [];
         foreach($groups as $group){
             $boards = Board::where('group_id','=',$group->id)->get();
+            $total = DB::table('group_user')->select(DB::raw('COUNT(user_id) as total'))->where('group_id','=',$group->id)->get();
             $gr = [
+                "total" => $total,
                 "group" => $group,
                 "boards" => $boards,
             ];
