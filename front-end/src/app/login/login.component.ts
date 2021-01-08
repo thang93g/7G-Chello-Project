@@ -28,10 +28,8 @@ export class LoginComponent implements OnInit {
 
   
   getToken() {
-    console.log(this.email, this.password);
     this.loginService.login(this.email, this.password).subscribe(
       data => {
-        console.log(data[1]);
         localStorage.setItem('token',data[1]);
         localStorage.setItem('id',data[0].id);
         this.router.navigate(['board']);

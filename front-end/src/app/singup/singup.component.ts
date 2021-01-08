@@ -42,7 +42,6 @@ export class SingupComponent implements OnInit {
   }
 
   gotoLogin() {
-    console.log('1');
     this.router.navigate(['login'])
   }
   gobackHomePage() {

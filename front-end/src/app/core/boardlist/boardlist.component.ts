@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupService } from 'src/app/group/group.service';
+import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 
 @Component({
@@ -16,10 +17,12 @@ export class BoardlistComponent implements OnInit {
   constructor(
     private router: Router,
     private groupService: GroupService,
-    private userService: UserService,
+    private userService: UserService
     ) {}
 
   ngOnInit(): void {
+    this.user = new User();
+
     this.user_id = localStorage.getItem('id');
 
     this.groupService.getBoardList(this.user_id).subscribe(data => {
