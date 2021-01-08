@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { error } from 'protractor';
+import { NotificationService } from '../notice/notice.service';
 import { UserService } from '../user/user.service';
 import { PasswordService } from './password.service';
 
@@ -18,20 +20,30 @@ export class PasswordComponent implements OnInit {
 
   constructor(private router: Router,
     private passwordService: PasswordService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private noticeService: NotificationService) { }
 
   ngOnInit(): void {
     this.id = localStorage.getItem("id");
-    this.user = this.userService.getUser(this.id)
+    this.user = this.userService.getUser(this.id);
   }
 
   updatePassword() {
     this.passwordService.changePassword(this.id, this.oldPassword, this.newPassword, this.newPasswordConfirm).subscribe(
       data => {
-        alert(data);
-      }
-    );
+       this.changePasswordSuccess(data);
+      });
   }
+
+  changePasswordSuccess(data:string) {
+    if(data === "Đổi mật khẩu thành công") {
+      alert(data)
+    this.router.navigate(['/profile']);
+  } else {
+    alert(data);
+  }
+  }
+
 
   back() {
     this.router.navigate(['/profile']);
