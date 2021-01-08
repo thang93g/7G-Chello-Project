@@ -25,7 +25,7 @@
   <body>
     <header class="masthead">
       <div class="boards-menu">
-        <button class="boards-btn btn">
+        <button class="btn btn-primary">
           <i style="font-size: 24px" class="fa">&#xf181;</i> .Boards
         </button>
 
@@ -116,10 +116,10 @@
       </div>
       <div class="group-body mt-3">
         <div *ngFor = "let board of group.boards" class="my-board">
-          <h3>{{ board.name }}</h3>
+          <button class="add-board-button">{{ board.name }}</button>
         </div>
       </div>
-      <button class="add-board-button">Tạo bảng mới</button>
+      <button class="add-board-button2">Tạo bảng mới</button>
     </div>
     <!-- End of board info bar -->
 
