@@ -88,4 +88,9 @@ export class TasklistComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['']);
   }
+
+  getInfo() {
+    this.router.navigate(['profile']);
+  }
+
 }
