@@ -24,4 +24,16 @@ export class GroupService {
   addMember(id: number,data: any){
     return this.http.post(`${this.baseUrl}/${id}`,data);
   }
+
+  deleteMember(id: number,user_id: number){
+    return this.http.delete(`${this.baseUrl}/member/${id}/${user_id}`);
+  }
+
+  deleteGroup(id:number){
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  createGroup(value: any){
+    return this.http.post(`${this.baseUrl}`,value);
+  }
 }
