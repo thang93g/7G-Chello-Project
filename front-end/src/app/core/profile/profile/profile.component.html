@@ -15,7 +15,7 @@
 <body>
     <h1 class="mt-5" style="text-align: center; font-size: 50px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Hồ sơ cá nhân</h1>
     <br>
-    <form (ngSubmit)="updateUser()">
+    <form (ngSubmit)="updateUser()" #profile = "ngForm">
         <div class="container mt-5">
             <div class="card shadow-lg p-3 mb-5 bg-white rounded">
                 <div class="row justify-content-center mt-5">
@@ -30,7 +30,10 @@
                             <h1 style="text-align: center;font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">Thông tin</h1>
                             <div class=" mb-3 ">
                                 <label>Tên người dùng</label>
-                                <input class="form-control " type="text " required [(ngModel)]="user.name " id="name " name="name " />
+                                <input class="form-control" type="text" required #name='ngModel' [class.is-invalid]="name.invalid && name.touched" [(ngModel)]="user.name" id="name" name="name" />
+                                <div *ngIf="name.errors && (name.valid || name.touched)">
+                                    <small class="text-danger" *ngIf="name.errors.required">Tên người dùng không được để trống</small>
+                                </div>
                             </div>
                             <div class="mb-3 ">
                                 <label>Tài khoản</label>
@@ -47,11 +50,14 @@
                             </div>
                             <div class="mb-3 ">
                                 <label>Phone</label>
-                                <input class="form-control " type="text " [(ngModel)]="user.phone " id="phone " name="phone " />
-
+                                <input class="form-control " type="text" required pattern="[0-9]{6,20}" #phone='ngModel' [class.is-invalid]="phone.invalid && phone.touched"  [(ngModel)]="user.phone " id="phone" name="phone" />
+                                <div *ngIf="phone.errors && (phone.valid || phone.touched)">
+                                    <small class="text-danger" *ngIf="phone.errors.required">Số điện thoại không được để trống</small>
+                                    <small class="text-danger" *ngIf="phone.errors.pattern">Số điện thoại không hợp lệ</small>
+                                </div>
                             </div>
                             <div class="mb-3 ">
-                                <input class="form-control btn btn-success mt-3 " type="submit " value="Cập nhận thông tin " />
+                                <input class="form-control btn btn-success mt-3 " [disabled]="profile.form.invalid" type="submit" value="Cập nhận thông tin " />
                             </div>
                             <div style="text-align: center; " class="mb-3 ">
                                 <button class="btn btn-link " (click)="back() ">Quay lại</button>

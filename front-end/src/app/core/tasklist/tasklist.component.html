@@ -30,13 +30,15 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand font-italic" href="#">Chello</a>
-
+      <a class="navbar-brand"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" fill="currentColor" class="bi bi-menu-button" viewBox="0 0 16 16">
+        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h8A1.5 1.5 0 0 1 11 1.5v2A1.5 1.5 0 0 1 9.5 5h-8A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-8z"/>
+        <path d="M7.823 2.823l-.396-.396A.25.25 0 0 1 7.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+    </svg> <i>SevenG</i></a>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#"
-              ><svg
+            <a class="nav-link" (click)='combackBoardList()'
+><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
                 height="25"
@@ -53,24 +55,24 @@
                   d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
                 />
               </svg>
-              <span class="sr-only">(current)</span></a
+              <span class="sr-only">(current)</span><i class="btn">List Board</i></a
             >
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-sm-0">
-        <li class="nav-item">
-          <a (click)="getInfo()"
-            ><div
-              id="avatar"
-              style="background-image: url({{user.image}});"
-            ></div>
-          </a>
-        </li>
-        <li class="nav-item ml-3">
-          Hello {{ user.name }},
-          <a (click)="logOut()">Đăng xuất</a>
-        </li>
-      </ul>
+          <li class="nav-item">
+            <a (click)="getInfo()"
+              ><div
+                id="avatar"
+                style="background-image: url({{user.image}});"
+                title="{{ user.name }} ( {{ user.email }} )"
+              ></div>
+            </a>
+                </li>
+                <li class="nav-item ml-3">
+                    <a class="btn btn-primary" (click)="logOut()">Đăng xuất</a>
+                </li>
+            </ul>
       </div>
     </nav>
 
