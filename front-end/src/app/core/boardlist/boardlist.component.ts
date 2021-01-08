@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Group } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
@@ -14,6 +15,7 @@ import { BoardService } from './board.service';
 export class BoardlistComponent implements OnInit {
   user_id!: any;
   user!: any;
+  group!: any;
   groups!: any;
   board: Board = new Board();
 
@@ -27,7 +29,10 @@ export class BoardlistComponent implements OnInit {
   ngOnInit(): void {
     this.user = new User();
 
+    this.group = new Group();
+
     this.user_id = localStorage.getItem('id');
+    this.group.user_id = this.user_id;
 
     this.groupService.getBoardList(this.user_id).subscribe(data => {
       this.groups = data;
@@ -57,5 +62,15 @@ export class BoardlistComponent implements OnInit {
 
   viewGroup(id: number){
     this.router.navigate(['group',id]);
+  }
+
+  createGroup(){
+    this.groupService.createGroup(this.group).subscribe(
+      data => {
+        console.log(this.group)
+        this.group = new Group();
+        document.location.reload();
+      },error => console.log(error)
+    )
   }
 }

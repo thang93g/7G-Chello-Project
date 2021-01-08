@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Group } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
 import { User } from 'src/app/user/user';
@@ -20,6 +20,7 @@ export class GroupDetailComponent implements OnInit {
     private groupService: GroupService,
     private userService: UserService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +47,19 @@ export class GroupDetailComponent implements OnInit {
       this.user = new User();
       document.location.reload();
     },(error: any) => console.log(error))
+  }
+
+  deleteMember(user_id: number){
+    this.groupService.deleteMember(this.id,user_id).subscribe(
+      data => {document.location.reload();}
+    )
+  }
+
+  deleteGroup(){
+    this.groupService.deleteGroup(this.id).subscribe(
+      data => {
+        this.router.navigate(['board']);
+      }
+    )
   }
 }
