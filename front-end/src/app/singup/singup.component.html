@@ -18,7 +18,7 @@
     <div class="row justify-content-center">
         <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 25rem; height: 35rem;">
             <div class="card-body">
-                <form (ngSubmit)="onSubmit()">
+                <form #addform="ngForm" (ngSubmit)="onSubmit()">
                     <p style="text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"> <b> Đăng ký cho tài khoản của bạn </b></p>
                     <br>
                     <div class="mb-3">
@@ -48,11 +48,11 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="buttonSign btn btn-success ">Đăng ký tài khoản</button>
+                        <button type="submit" class="buttonSign btn btn-success" [disabled]="addform.form.invalid">Đăng ký tài khoản</button>
                     </div>
                     <hr>
                     <div style="text-align: center;" class="mb-3">
-                        <a (click)="gotoLogin()" class="btn btn-link">Bạn có tài khoản? Đăng nhập</a> <a class="btn btn-link" (click)="gobackHomePage()">Trở về trang chủ</a>
+                        <a (click)="gotoLogin()"  class="btn btn-link">Bạn có tài khoản? Đăng nhập</a> <a class="btn btn-link" (click)="gobackHomePage()">Trở về trang chủ</a>
                     </div>
                 </form>
             </div>
