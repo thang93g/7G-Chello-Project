@@ -30,9 +30,13 @@ export class LoginComponent implements OnInit {
   getToken() {
     this.loginService.login(this.email, this.password).subscribe(
       data => {
+        if(data === null) {
+          alert("Tài khoản hoặc mật khẩu không đúng")
+        } else {
         localStorage.setItem('token',data[1]);
         localStorage.setItem('id',data[0].id);
         this.router.navigate(['board']);
+      }
       },
       error => console.log(error));
   }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-boardpage',
@@ -8,7 +10,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class BoardpageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +38,10 @@ export class BoardpageComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+  }
+
+  gotoBoardList(){
+    this.router.navigate(['board']);
   }
 
 }

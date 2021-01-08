@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Board;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +19,8 @@ class GroupController extends Controller
      */
     public function index($id)
     {
-        $groups = Group::where('user_id','=',$id)->get();
+        $user = User::find($id);
+        $groups = $user->groups;
         $array = [];
         foreach($groups as $group){
             $boards = Board::where('group_id','=',$group->id)->get();
@@ -70,7 +72,8 @@ class GroupController extends Controller
 
     public function addUser($id,Request $request){
         $group = Group::find($id);
-        $group->users()->attach($request->user_id);
+        $user_id = User::where('email','=',$request->email)->get('id');
+        $group->users()->attach($user_id);
         return response()->json($group);
     }
 
@@ -82,7 +85,8 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        //
+        $group = Group::find($id);
+        return response()->json($group);
     }
 
     /**
@@ -122,5 +126,11 @@ class GroupController extends Controller
         $group = Group::find($id);
         $group->users()->detach();
         $group->delete();
+    }
+
+    public function getUser($id){
+        $group = Group::find($id);
+        $users = $group->users;
+        return response()->json($users);
     }
 }

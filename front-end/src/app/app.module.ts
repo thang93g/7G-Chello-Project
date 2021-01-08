@@ -8,8 +8,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 
 
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,6 +30,7 @@ import { PasswordComponent } from './password/password.component';
 
 
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { GroupDetailComponent } from './core/group-detail/group-detail.component';
 
 
 @NgModule({
@@ -44,7 +43,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ProfileComponent,
     BoardlistComponent,
 
-    PasswordComponent
+    PasswordComponent,
+
+    GroupDetailComponent
 
   ],
 

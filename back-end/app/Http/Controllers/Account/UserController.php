@@ -52,6 +52,8 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'phone' => $request->get('phone'),
             'password' => Hash::make($request->get('password')),
+            'image' => 'https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1609947281357?alt=media&token=ce9b79aa-1033-4d18-8778-3eab36bf105e',
+            
         ]);
 
         $token = JWTAuth::fromUser($user);
