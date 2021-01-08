@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { GroupService } from 'src/app/group/group.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { Board } from './board';
+import { BoardService } from './board.service';
 
 @Component({
   selector: 'app-boardlist',
@@ -11,26 +13,30 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class BoardlistComponent implements OnInit {
   user_id!: any;
-  groups!: any;
   user!: any;
+  groups!: any;
+  board: Board = new Board();
 
   constructor(
     private router: Router,
     private groupService: GroupService,
-    private userService: UserService
+    private userService: UserService,
+    private boardService: BoardService,
     ) {}
 
   ngOnInit(): void {
     this.user = new User();
-    this.userService.getUser(this.user_id).subscribe(u => {
-      this.user = u;
-      console.log(u)
-;
-    }, error => console.log(error))
+
     this.user_id = localStorage.getItem('id');
+
     this.groupService.getBoardList(this.user_id).subscribe(data => {
       this.groups = data;
     },error => console.log(error));
+
+    this.userService.getUser(this.user_id).subscribe(data => {
+      this.user = data;
+    },error => console.log(error)
+    )
   }
 
   logOut() {
@@ -40,5 +46,12 @@ export class BoardlistComponent implements OnInit {
 
   getInfo() {
     this.router.navigate(['profile']);
+  }
+
+  onSubmit(id: number){
+    this.boardService.createBoard(id,this.board).subscribe((data: any) =>{
+      this.board = new Board();
+      document.location.reload();
+    },(error: any) => console.log(error) )
   }
 }
