@@ -25,7 +25,7 @@ export class TasklistComponent implements OnInit {
   readTasks(): void {
     this.taskService.readAll()
       .subscribe(
-        products => {
+        tasks => {
           this.tasks = tasks;
           console.log(this.tasks);
         },
@@ -40,7 +40,7 @@ export class TasklistComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setCurrentTask(task, index): void {
+  setCurrentTask(task :any, index: number): void {
     this.currentTask = task;
     this.currentIndex = index;
   }
