@@ -29,11 +29,13 @@ export class SingupComponent implements OnInit {
   save() {
     this.UserService
       .register(this.user).subscribe((data: any) => {
-        console.log(data)
+        if(data) {
+          alert("Đăng ký thành công")
         this.user = new User();
         this.gotoLogin();
+      } 
       },
-        (error: any) => console.log(error));
+        (error: any) => alert("Đăng ký thất bại, tài khoản đã tồn tại"));
   }
 
   onSubmit() {

@@ -4,6 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 
@@ -58,7 +60,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     HttpClientModule,
-    DragDropModule
+    DragDropModule,
+    ToastrModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent],
