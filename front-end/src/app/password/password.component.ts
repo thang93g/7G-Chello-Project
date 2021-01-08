@@ -5,6 +5,7 @@ import { NotificationService } from '../notice/notice.service';
 import { UserService } from '../user/user.service';
 import { PasswordService } from './password.service';
 
+
 @Component({
   selector: 'app-password',
   templateUrl: './password.component.html',
