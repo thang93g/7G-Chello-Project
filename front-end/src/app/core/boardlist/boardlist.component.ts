@@ -11,8 +11,8 @@ import { UserService } from 'src/app/user/user.service';
 })
 export class BoardlistComponent implements OnInit {
   user_id!: any;
-  groups!: any;
   user!: any;
+  groups!: any;
 
   constructor(
     private router: Router,
@@ -22,15 +22,17 @@ export class BoardlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = new User();
-    this.userService.getUser(this.user_id).subscribe(u => {
-      this.user = u;
-      console.log(u)
-;
-    }, error => console.log(error))
+
     this.user_id = localStorage.getItem('id');
+
     this.groupService.getBoardList(this.user_id).subscribe(data => {
       this.groups = data;
     },error => console.log(error));
+
+    this.userService.getUser(this.user_id).subscribe(data => {
+      this.user = data;
+    },error => console.log(error)
+    )
   }
 
   logOut() {
