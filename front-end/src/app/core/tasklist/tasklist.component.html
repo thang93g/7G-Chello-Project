@@ -84,11 +84,31 @@
     </section>
     <div class="container">   
       <div class="list-body"> 
-        <div class="task-body">
+        <!-- <div class="task-body">
           <ul *ngFor="let task of tasks">
             <li>{{task.title}}</li>
           </ul>
+        </div> -->
+
+        <div class="list">
+          <div class="list">
+            <div class="list-body">
+              <h2>List header</h2>
+              <ul *ngFor="let task of tasks">
+                <div class="list">
+                <li>{{task.title}}</li>
+              </div>
+              </ul>
+              <footer>Add a card...</footer>
+            </div>
+          </div>
+          
+          
         </div>
+            
+        
+            
+
       </div>  
       </div>
 
