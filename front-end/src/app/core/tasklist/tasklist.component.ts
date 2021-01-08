@@ -18,6 +18,7 @@ export class TasklistComponent implements OnInit {
   currentTask = null;
   currentIndex = -1;
   name = '';
+
   constructor(private taskService: TaskService,
     private router: Router,
     private groupService: GroupService,
@@ -87,5 +88,11 @@ export class TasklistComponent implements OnInit {
   logOut() {
     localStorage.clear();
     this.router.navigate(['']);
+  }
+  getInfo() {
+    this.router.navigate(['profile']);
+  }
+  combackBoardList(){
+    this.router.navigate(['board']);
   }
 }
