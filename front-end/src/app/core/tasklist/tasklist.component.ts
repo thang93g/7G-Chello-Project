@@ -73,6 +73,10 @@ export class TasklistComponent implements OnInit {
         });
   }
 
+  getInfo() {
+    this.router.navigate(['profile']);
+  }
+
   searchByName(): void {
     this.taskService.searchByName(this.name)
       .subscribe(

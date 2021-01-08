@@ -51,7 +51,7 @@ export class GroupDetailComponent implements OnInit {
 
   deleteMember(user_id: number){
     this.groupService.deleteMember(this.id,user_id).subscribe(
-      data => {document.location.reload();}
+      (      data: any) => {document.location.reload();}
     )
   }
 

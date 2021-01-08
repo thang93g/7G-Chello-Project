@@ -24,7 +24,7 @@
       </div>
       <div class="body">
         Thành viên của nhóm
-        <button class="btn btn-danger" (click)="deleteGroup(group.id)">Xóa nhóm</button>
+        <button class="btn btn-danger" (click)="deleteGroup()">Xóa nhóm</button>
         <form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit()">
           <input [(ngModel)]="user.email" name="email" class="form-control mr-sm-2" type="search" placeholder="Nhập email ">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Thêm thành viên</button>
