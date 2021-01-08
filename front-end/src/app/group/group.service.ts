@@ -12,4 +12,16 @@ export class GroupService {
   getBoardList(id: number){
     return this.http.get(`${this.baseUrl}/${id}`);
   }
+
+  getGroup(id: number){
+    return this.http.get(`${this.baseUrl}/detail/${id}`);
+  }
+
+  getMember(id: number){
+    return this.http.get(`${this.baseUrl}/member/${id}`);
+  }
+
+  addMember(id: number,data: any){
+    return this.http.post(`${this.baseUrl}/${id}`,data);
+  }
 }
