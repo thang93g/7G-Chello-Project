@@ -57,7 +57,6 @@ class BoardController extends Controller
 
         $board = Board::create([
             'name' => $request->get('name'),
-            
         ]);
         return response()->json(compact('board'),201);
 
