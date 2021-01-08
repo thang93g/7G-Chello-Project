@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit {
     this.userService.update(this.id, this.user)
       .subscribe(data => {
         console.log(data);
+        alert("Cập nhật thông tin thành công")
         this.user = new User();
         window.location.reload();
       }, error => console.log(error));
