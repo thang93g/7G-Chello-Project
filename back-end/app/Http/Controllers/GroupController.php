@@ -133,4 +133,9 @@ class GroupController extends Controller
         $users = $group->users;
         return response()->json($users);
     }
+
+    public function deleteUser($id,$user_id){
+        $group = Group::find($id);
+        $group->users()->detach($user_id);
+    }
 }

@@ -24,6 +24,7 @@
       </div>
       <div class="body">
         Thành viên của nhóm
+        <button class="btn btn-danger" (click)="deleteGroup(group.id)">Xóa nhóm</button>
         <form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit()">
           <input [(ngModel)]="user.email" name="email" class="form-control mr-sm-2" type="search" placeholder="Nhập email ">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Thêm thành viên</button>
@@ -33,7 +34,7 @@
               <tr>
                 <td><div style="width: 30px;float: left; background-size: cover; height: 30px; border-radius: 50%; background-image: url({{user.image}});"></div>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td *ngIf="group.user_id !== user.id"><button>Loại bỏ...</button></td>
+                <td *ngIf="group.user_id !== user.id"><button (click)="deleteMember(user.id)">Loại bỏ...</button></td>
               </tr>
             </tbody>
           </table>

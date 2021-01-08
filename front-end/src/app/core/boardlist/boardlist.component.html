@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <title>Title</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
     <!-- Bootstrap CSS -->
+    <<<<<<< HEAD <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+=======
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -20,7 +25,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <button
-        class="navbar-toggler"  
+        class="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarTogglerDemo03"
@@ -28,15 +33,18 @@
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
+>>>>>>> 9c65097d9e5daa81e225dca7733446e8b9b136a6
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand font-italic">Chello</a>
+        <a class="navbar-brand"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" fill="currentColor" class="bi bi-menu-button" viewBox="0 0 16 16">
+                    <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h8A1.5 1.5 0 0 1 11 1.5v2A1.5 1.5 0 0 1 9.5 5h-8A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-8z"/>
+                    <path d="M7.823 2.823l-.396-.396A.25.25 0 0 1 7.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                </svg> <i>SevenG</i></a>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a class="nav-link"
-              ><svg
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link"><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="25"
                 height="25"
@@ -63,33 +71,42 @@
               ><div
                 id="avatar"
                 style="background-image: url({{user.image}});"
+                title="{{ user.name }} ( {{ user.email }} )"
               ></div>
             </a>
-          </li>
-          <li class="nav-item ml-3">
-            Hello {{ user.name }},
-            <a (click)="logOut()">Đăng xuất</a>
-          </li>
-        </ul>
-      </div>
+                </li>
+                <li class="nav-item ml-3">
+
+                    <a class="btn btn-primary" (click)="logOut()">Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Board info bar -->
     <section class="board-info-bar">
-      <div class="board-controls">
-        <button class="board-title btn">
+        <div class="board-controls">
+            <button class="board-title btn">
           <h2>Danh sách các bảng</h2>
         </button>
-      </div>
+            <div class="container" style="width: 300px;">
+                <form (ngSubmit)="createGroup()">
+                    <input type="text" name="name" [(ngModel)]="group.name" class="form-control">
+                    <button type="submit" class="btn btn-success form-control">
+              Tạo nhóm mới
+            </button>
+                </form>
+            </div>
+        </div>
     </section>
     <div class="container">
-      <div *ngFor="let group of groups" class="my-group">
-        <div class="group-header row">
-          <div class="col md-5">
-            <h2>{{ group.group.name }}</h2>
-          </div>
-          <div *ngIf="group.group.name !== 'Bảng cá nhân'">
-            <button class="buttonn mr-4">
+        <div *ngFor="let group of groups" class="my-group">
+            <div class="group-header row">
+                <div class="col md-5">
+                    <h2>{{ group.group.name }}</h2>
+                </div>
+                <div *ngIf="group.group.name !== 'Bảng cá nhân'">
+                    <button class="buttonn mr-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -104,7 +121,7 @@
               </svg>
               Thành viên ( {{ group.total[0].total }} )
             </button>
-            <button (click)="viewGroup(group.group.id)" *ngIf="group.group.user_id == user_id" class="buttonn">
+                    <button (click)="viewGroup(group.group.id)" *ngIf="group.group.user_id == user_id" class="buttonn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -122,40 +139,29 @@
               </svg>
               Cài đặt
             </button>
-          </div>
-        </div>
-        <div class="group-body">
-          <div style="float: left;" >
-            <button *ngFor="let board of group.boards" class="my-board">
+                </div>
+            </div>
+            <div class="group-body">
+                <div style="float: left;">
+                    <button *ngFor="let board of group.boards" class="my-board">
               <h3>{{ board.name }}</h3>
             </button>
-          </div>
-          <div style="float: left;" class="add-board-button">
-            <form (ngSubmit)="onSubmit(group.group.id)">
-              <input [(ngModel)]="board.name" name="name" type="text" class="form-control" />
-              <button class="form-control mt-4" type="submit">Tạo bảng mới</button>
-            </form>
-          </div>
+                </div>
+                <div style="float: left;" class="add-board-button">
+                    <form (ngSubmit)="onSubmit(group.group.id)">
+                        <input [(ngModel)]="board.name" name="name" type="text" class="form-control" />
+                        <button class="form-control mt-4" type="submit">Tạo bảng mới</button>
+                    </form>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
 </html>
