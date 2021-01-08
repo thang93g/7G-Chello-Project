@@ -12,6 +12,9 @@ import { TaskService } from './task.service';
 })
 export class TasklistComponent implements OnInit {
   tasks: any;
+  user_id: any;
+  user: any;
+  group: any;
   currentTask = null;
   currentIndex = -1;
   name = '';
@@ -22,6 +25,17 @@ export class TasklistComponent implements OnInit {
 
   ngOnInit(): void {
     this.readTasks();
+    this.user = new User;
+    this.user_id = localStorage.getItem('id');
+
+    this.groupService.getBoardList(this.user_id).subscribe(data => {
+      this.groups = data;
+    },error => console.log(error));
+
+    this.userService.getUser(this.user_id).subscribe(data => {
+      this.user = data;
+    },error => console.log(error)
+    )
   }
 
   readTasks(): void {
