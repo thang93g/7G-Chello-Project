@@ -58,19 +58,19 @@
           </li>
         </ul>
         <ul class="navbar-nav my-2 my-sm-0">
-        <li class="nav-item">
-          <a (click)="getInfo()"
-            ><div
-              id="avatar"
-              style="background-image: url({{user.image}});"
-            ></div>
-          </a>
-        </li>
-        <li class="nav-item ml-3">
-          Hello {{ user.name }},
-          <a class="btn btn-primary" (click)="logOut()">Đăng xuất</a>
-        </li>
-      </ul>
+          <li class="nav-item">
+            <a (click)="getInfo()"
+              ><div
+                id="avatar"
+                style="background-image: url({{user.image}});"
+              ></div>
+            </a>
+          </li>
+          <li class="nav-item ml-3">
+            Hello {{ user.name }},
+            <a (click)="logOut()">Đăng xuất</a>
+          </li>
+        </ul>
       </div>
     </nav>
 
@@ -88,7 +88,7 @@
           <div class="col md-5">
             <h2>{{ group.group.name }}</h2>
           </div>
-          <div *ngIf = "group.group.name !== 'Bảng cá nhân'">
+          <div *ngIf="group.group.name !== 'Bảng cá nhân'">
             <button class="buttonn mr-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -104,10 +104,7 @@
               </svg>
               Thành viên ( {{ group.total[0].total }} )
             </button>
-            <button
-              *ngIf="group.group.user_id == user_id"
-              class="buttonn"
-            >
+            <button *ngIf="group.group.user_id == user_id" class="buttonn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -128,11 +125,18 @@
           </div>
         </div>
         <div class="group-body">
-          <button *ngFor="let board of group.boards" class="my-board">
-            <h3>{{ board.name }}</h3>
-          </button>
+          <div style="float: left;" >
+            <button *ngFor="let board of group.boards" class="my-board">
+              <h3>{{ board.name }}</h3>
+            </button>
+          </div>
+          <div style="float: left;" class="add-board-button">
+            <form (ngSubmit)="onSubmit(group.group.id)">
+              <input [(ngModel)]="board.name" name="name" type="text" class="form-control" />
+              <button class="form-control mt-4" type="submit">Tạo bảng mới</button>
+            </form>
+          </div>
         </div>
-        <button class="add-board-button" >Tạo bảng mới</button>
       </div>
     </div>
 

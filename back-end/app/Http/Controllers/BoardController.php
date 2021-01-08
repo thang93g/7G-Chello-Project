@@ -45,7 +45,7 @@ class BoardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request,$id)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -57,6 +57,7 @@ class BoardController extends Controller
 
         $board = Board::create([
             'name' => $request->get('name'),
+            'group_id' => $id,
         ]);
         return response()->json(compact('board'),201);
 

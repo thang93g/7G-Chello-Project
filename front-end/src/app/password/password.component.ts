@@ -22,7 +22,7 @@ export class PasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = localStorage.getItem("id");
-    this.user = this.userService.getUser(this.id)
+    this.user = this.userService.getUser(this.id);
   }
 
   updatePassword() {
