@@ -4,6 +4,8 @@ import { error } from 'protractor';
 import { NotificationService } from '../notice/notice.service';
 import { UserService } from '../user/user.service';
 import { PasswordService } from './password.service';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-password',
@@ -17,6 +19,8 @@ export class PasswordComponent implements OnInit {
   newPassword!: any;
   newPasswordConfirm!: any;
   value!: any
+  passWordForm: FormGroup | undefined;
+
 
   constructor(private router: Router,
     private passwordService: PasswordService,
