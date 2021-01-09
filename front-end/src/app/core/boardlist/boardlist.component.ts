@@ -49,6 +49,10 @@ export class BoardlistComponent implements OnInit {
     this.router.navigate(['']);
   }
 
+  goHome() {
+    this.router.navigate(['board']);
+  }
+
   getInfo() {
     this.router.navigate(['profile']);
   }
