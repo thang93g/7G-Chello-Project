@@ -18,7 +18,7 @@
     width: 200px;
     height: 100px;
     float: left;
-    background-color: rgb(49, 190, 49);
+    background-color: rgb(2, 129, 80);
     border-radius: 10px;
     border: 0px;
 }
@@ -54,4 +54,16 @@
     font-size: 32px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
     color: white !important;
+}
+
+.navbar-brand:hover {
+    color: grey!important;
+}
+
+#getInfo:hover {
+    color: grey!important;
+}
+
+#logout:hover {
+    color: white!important;
 }
