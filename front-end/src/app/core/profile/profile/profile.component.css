@@ -1,20 +1,84 @@
-#page-header{
-  width: 100%;
-  height: 200px;
-  background-color: rgb(236, 233, 233);
-  text-align: center;
-  border-bottom: solid 1px rgb(199, 195, 195);
+#page-header {
+    width: 100%;
+    height: 200px;
+    background-color: rgb(236, 233, 233);
+    text-align: center;
+    border-bottom: solid 1px rgb(199, 195, 195);
 }
-#page-body{
-  text-align: center;
+
+#page-body {
+    text-align: center;
 }
-#property{
-  width: 50%;
-  left: 25%;
-  position: relative;
-  text-align: center;
+
+#property {
+    width: 50%;
+    left: 25%;
+    position: relative;
+    text-align: center;
 }
+
 .error {
-  padding: 12px;
-  color: red;
+    padding: 12px;
+    color: red;
+}
+
+.navbar {
+    background-color: #3399ff;
+}
+
+.navbar-brand {
+    font-size: 32px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+}
+
+.navbar-brand:hover {
+    color: grey;
+}
+
+#navbar-login {
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+#navbar-login:hover {
+    color: grey !important;
+}
+
+#navbar-sign {
+    font-family: sans-serif;
+    width: 120px;
+    color: #3399ff;
+    font-size: 18px;
+}
+
+#navbar-sign:hover {
+    color: grey;
+    background-color: #3399ff !important;
+}
+
+#content-1 {
+    background-color: lightblue;
+}
+
+#try-it {
+    font-family: sans-serif;
+    font-size: 25px;
+    background-color: #3399ff;
+    color: white;
+}
+
+#try-it:hover {
+    background-color: lightskyblue;
+    color: grey;
+}
+
+h1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 50px;
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 18px;
 }
