@@ -85,35 +85,50 @@
       </div>
     </section>
     <div class="container">   
-      <div class="list-body"> 
-        <!-- <div class="task-body">
-          <ul *ngFor="let task of tasks">
-            <li>{{task.title}}</li>
-          </ul>
-        </div> -->
+      <div class="board">
 
-        <div class="list">
-          <div class="list">
-            <div class="list-body">
-              <h2>List header</h2>
-              <ul *ngFor="let task of tasks">
-                <div class="list">
-                <li>{{task.title}}</li>
+        <div class="board-bar">
+          <p class="board-name">Board 1</p>
+        </div>
+    
+        <div class="board-wrapper">
+    
+          <div class="board-columns" cdkDropListGroup>
+            <!-- <div class="board-column" *ngFor="let board of boards"> -->
+    <div cdkDropList
+    [cdkDropListData]="tasks"
+    (cdkDropListDropped)="drop($event)">
+      <div>
+        <div class="board-title" >
+<h2>Backlog</h2>              
+  </div>
+
+        <div class="tasks-container"
+        cdkDropList
+        [cdkDropListData]="tasks"
+        (cdkDropListDropped)="drop($event)">
+          <div class="task"*ngFor="let task of tasks" cdkDrag>
+            <h2>{{task.title}}</h2>
+          </div>
+        </div>
+      </div>
+              <div class="board-title">
+<h2>To do</h2>              </div>
+    
+              <div class="tasks-container"
+              cdkDropList
+              [cdkDropListData]="tasks"
+              (cdkDropListDropped)="drop($event)">
+                <div class="task"*ngFor="let task of tasks" cdkDrag>
+                  <h2>{{task.title}}</h2>
+                </div>
               </div>
-              </ul>
-              <footer>Add a card...</footer>
             </div>
           </div>
-          
-          
         </div>
-            
-        
-            
-
-      </div>  
-      </div>
-
+        </div>
+        <a href="">Add new task...</a>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script

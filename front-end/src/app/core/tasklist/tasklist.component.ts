@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GroupService } from 'src/app/group/group.service';
@@ -37,6 +38,17 @@ export class TasklistComponent implements OnInit {
       this.user = data;
     },error => console.log(error)
     )
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
   }
 
   readTasks(): void {
@@ -93,10 +105,7 @@ export class TasklistComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['']);
   }
-  getInfo() {
-    this.router.navigate(['profile']);
-  }
-  
+
   combackBoardList(){
     this.router.navigate(['board']);
   }
