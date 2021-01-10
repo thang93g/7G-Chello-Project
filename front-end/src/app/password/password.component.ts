@@ -50,4 +50,8 @@ export class PasswordComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
+  goHome(){
+    
+  }
+
 }
