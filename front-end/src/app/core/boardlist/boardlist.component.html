@@ -158,8 +158,7 @@
                             </div>
                         </div>
                         <div class="group-body">
-                            <div style="float: left;">
-                                <button style="height: 80px;" *ngFor="let board of group.boards" class="my-board mt-3 shadow p-2 mb-2 rounded">
+                                <button style="height: 80px;" *ngFor="let board of group.boards" (click)="gotoBoard(board.id)" class="my-board mt-3 shadow p-2 mb-2 rounded">
               <h3 style="text-align: left;">{{ board.name }}</h3>
             </button>
                                 <div style="float: left;" class="add-board-button mt-3">
@@ -168,8 +167,6 @@
                                         <button class="form-control mt-2 btn btn-outline-primary" type="submit">Tạo bảng mới</button>
                                     </form>
                                 </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>

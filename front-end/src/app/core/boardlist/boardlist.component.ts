@@ -77,4 +77,8 @@ export class BoardlistComponent implements OnInit {
       },error => console.log(error)
     )
   }
+
+  gotoBoard(id: number){
+    this.router.navigate(['board',id]);
+  }
 }

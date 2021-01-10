@@ -25,10 +25,11 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
 });
 
 
-Route::get('columns',[ColumnController::class,'index']);
+Route::get('columns/{board_id}',[ColumnController::class,'index']);
+Route::get('columns/show/{id}',[ColumnController::class,'show']);
 Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
-Route::put('columns/swap/{id1}/{id2}',[ColumnController::class,'swap']);
+Route::get('columns/swap/{id}/{index}',[ColumnController::class,'swap']);
 
 Route::get('tasks',[TaskController::class,'index']);
 Route::post('tasks/create',[TaskController::class,'create']);
