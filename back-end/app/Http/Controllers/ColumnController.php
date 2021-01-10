@@ -121,4 +121,17 @@ class ColumnController extends Controller
     {
         //
     }
+
+    public function swap($id1,$id2){
+        $column1 = Column::find($id1);
+        $column2 = Column::find($id2);
+
+        $ordering = $column1->orders;
+        $column1->orders = $column2->orders;
+        $column2->orders = $ordering;
+        $column1->save();
+        $column2->save();
+
+        return response()->json([$column1,$column2]);
+    }
 }
