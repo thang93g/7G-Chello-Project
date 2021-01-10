@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Column;
+use App\Models\Task;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +21,21 @@ class ColumnController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index($board_id)
     {
-        $cols = Column::all();
-        return response()->json($cols);
+        $cols = Column::where("board_id","=",$board_id)->orderBy('orders')->get();
+        $array = [];
+        foreach($cols as $col){
+            $tasks = Task::where("column_id","=",$col->id)->get();
+            $column = [
+                "column" => $col,
+                "tasks" => $tasks,
+            ];
+            array_push($array,$column);
+        }
+
+
+        return response()->json($array);
     }
 
 
@@ -73,7 +85,8 @@ class ColumnController extends Controller
      */
     public function show($id)
     {
-        //
+        $column = Column::find($id);
+        return response()->json($column);
     }
 
     /**
@@ -122,16 +135,11 @@ class ColumnController extends Controller
         //
     }
 
-    public function swap($id1,$id2){
-        $column1 = Column::find($id1);
-        $column2 = Column::find($id2);
+    public function swap($id,$index){
+        $column = Column::find($id);
+        $column->orders = $index;
+        $column->save();
 
-        $ordering = $column1->orders;
-        $column1->orders = $column2->orders;
-        $column2->orders = $ordering;
-        $column1->save();
-        $column2->save();
-
-        return response()->json([$column1,$column2]);
+        return response()->json($column);
     }
 }
