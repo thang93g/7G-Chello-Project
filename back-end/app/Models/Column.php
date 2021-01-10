@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Column extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','board_id','orders'];
+    protected $fillable = ['name','board_id'];
 
 
     public function getJWTIdentifier()
