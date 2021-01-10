@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Column;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -36,18 +37,18 @@ class ColumnController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'board_id' => 'required|numeric|min:1',
-            'orders' => 'required',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $col = Column::create([
-            'name' => $request->get('name'),
-            'board_id' => $request->get('board_id'),
-            'orders' => $request->get('orders'),
-        ]);
+        // $col = Column::create([
+        //     'name' => $request->get('name'),
+        //     'board_id' => $request->get('board_id'),
+        // ]);
+
+        $col = DB::select("CALL autoInc('$request->name',$request->board_id)");
 
         return response()->json(compact('col'),201);
     }
