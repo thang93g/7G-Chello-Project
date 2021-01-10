@@ -81,4 +81,14 @@ export class BoardlistComponent implements OnInit {
   gotoBoard(id: number){
     this.router.navigate(['board',id]);
   }
+
+  deleteBoard(id: number){
+    if(window.confirm('Bạn chắc chắn muốn xóa ? ')){
+      this.boardService.deleteBoard(id).subscribe(
+        data => {
+          document.location.reload();
+        }, error => console.log(error)
+      )
+    }
+  }
 }
