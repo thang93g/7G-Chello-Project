@@ -23,27 +23,26 @@
                     <br>
                     <br>
                     <div class="mb-3">
-                        <input [(ngModel)]="email" name="email" required email type="text" class="form-control" #emails='ngModel' [class.is-invalid]="emails.invalid && emails.touched"  placeholder="Nhập email">
+                        <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="email" name="email" required email type="text"  #emails='ngModel' [class.is-invalid]="emails.invalid && emails.touched"  placeholder="Nhập email">
+                        </mat-form-field>
                         <div *ngIf="emails.errors && (emails.valid || emails.touched)">
                             <small class="text-danger" *ngIf="emails.errors.required">Email không được để trống</small>
                             <small class="text-danger" *ngIf="emails.errors.email">Email phải nhập đúng định dạng</small>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <div class="input-group ">
-                          <input style="float: left;" class="form-control" matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password" name="password" required pattern="[\w]+[\w]{5,}" type="password" required #pass='ngModel' [class.is-invalid]="pass.invalid && pass.touched" placeholder="Nhập mật khẩu">
-                          <span class="input-group-text " id="basic-addon2 ">
-                              <button style="float: right; border: 0px ; background-color: white;" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required pattern="[\w]+[\w]{5,}" type="password"  #pass='ngModel' [class.is-invalid]="pass.invalid && pass.touched">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </button>
-                          </span>
-                        </div>
-                        <div *ngIf="pass.errors && (pass.valid || pass.touched)">
+                          </mat-form-field>
+                          <div *ngIf="pass.errors && (pass.valid || pass.touched)">
                             <small class="text-danger" *ngIf="pass.errors.required">Mật khẩu không được để trống</small>
                             <small class="text-danger" *ngIf="pass.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký tự đặc biệt</small>
                         </div>
                       </div>
-                      
                     <div style="text-align: center;" class="mb-3">
                         <button type="submit" class="loginButton btn btn-success " [disabled]="login.form.invalid" (click)="getToken()">Đăng nhập</button>
                     </div>

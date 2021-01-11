@@ -68,7 +68,7 @@
                 </div>
                 <div style="width: 200px;" class="mt-2">
                     <form (ngSubmit)="createGroup()">
-                        <input placeholder="Nhập tên nhóm" type="text" name="name" #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
+                        <input placeholder="Nhập tên nhóm" type="text" name="name" required #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
                         <div *ngIf="groupp.errors && (groupp.valid || groupp.touched)">
                           <small class="text-danger" *ngIf="groupp.errors.required">Tên nhóm không được để trống</small>
                         </div>
@@ -160,7 +160,10 @@
                                 </div>
                                 <div style="float: left;" class="add-board-button mt-3">
                                     <form (ngSubmit)="onSubmit(group.group.id)">
-                                        <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" name="name" type="text" class="form-control" />
+                                        <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" required #name='ngModel' [class.is-invalid]="name.invalid && name.touched" name="name" type="text" class="form-control" />
+                                        <div *ngIf="name.errors && (name.valid || name.touched)">
+                                          <small class="text-danger" *ngIf="name.errors.required">Tên nhóm không được để trống</small>
+                                        </div>
                                         <button class="form-control mt-2 btn btn-outline-primary" type="submit">Tạo bảng mới</button>
                                     </form>
                                 </div>
