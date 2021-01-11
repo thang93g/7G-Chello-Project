@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Group } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
 import { User } from 'src/app/user/user';
@@ -20,17 +21,18 @@ export class GroupDetailComponent implements OnInit {
     private groupService: GroupService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
-    this.user = new User();
-    this.group = new Group();
-    this.id = this.route.snapshot.params['id'];
     this.loadData();
   }
 
   loadData() {
+    this.user = new User();
+    this.group = new Group();
+    this.id = this.route.snapshot.params['id'];
     this.groupService.getGroup(this.id).subscribe(
       (data) => {
         this.group = data;
@@ -51,8 +53,12 @@ export class GroupDetailComponent implements OnInit {
       (data) => {
         this.user = new User();
         this.loadData();
+        this.toastr.success('Thêm thành viên thành công !');
       },
-      (error: any) => console.log(error)
+      (error: any) => {
+        console.log(error)
+        this.toastr.error('Thêm thành viên không thành công !');
+      }
     );
   }
 
@@ -60,6 +66,7 @@ export class GroupDetailComponent implements OnInit {
     if (window.confirm('Bạn thực sự muốn xóa ?')) {
       this.groupService.deleteMember(this.id, user_id).subscribe((data) => {
         this.loadData();
+        this.toastr.success('Xóa thành viên thành công !');
       });
     }
   }
@@ -68,6 +75,7 @@ export class GroupDetailComponent implements OnInit {
     if (window.confirm('Bạn thực sự muốn xóa ?')) {
       this.groupService.deleteGroup(this.id).subscribe((data) => {
         this.router.navigate(['board']);
+        this.toastr.success('Xóa dự án thành công !');
       });
     }
   }

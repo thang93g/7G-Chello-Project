@@ -18,14 +18,14 @@ export class PasswordComponent implements OnInit {
   newPassword!: any;
   newPasswordConfirm!: any;
   value!: any
-  hide : true | undefined;
-  hide2 : true | undefined;
-  hide3 : true | undefined;
+  hide = true;
+  hide2 = true;
+  hide3 = true ;
 
   constructor(private router: Router,
     private passwordService: PasswordService,
     private userService: UserService,
-    private noticeService: NotificationService) { }
+   ) { }
 
   ngOnInit(): void {
     this.id = localStorage.getItem("id");

@@ -74,3 +74,11 @@
   background-color: rgb(2, 129, 80);
   color: white;
 }
+
+.small-avatar{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  float: left;
+  background-size: cover;
+}
