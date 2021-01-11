@@ -104,7 +104,7 @@
                                                 </svg> {{ group.group.name }}</h2>
                                             </div>
                                             <div class="col-4">
-                                                <button style="background-color: lightgray;" class="buttonn mr-2">
+                                                <button mat-button [matMenuTriggerFor]="menu" style="background-color: lightgray;" class="buttonn mr-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -119,6 +119,12 @@
               </svg>
               Thành viên({{group.total[0].total}})
             </button>
+            <mat-menu #menu="matMenu">
+              <div mat-menu-item *ngFor="let user of group.users" style="width: 250px;">
+                <div class="small-avatar" style="background-image: url({{user.image}});"></div>
+                <div style="margin-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.name }}</div>
+              </div>
+            </mat-menu>
                                             </div>
                                             <div class="col-1">
 
