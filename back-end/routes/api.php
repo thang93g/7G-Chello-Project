@@ -41,6 +41,7 @@ Route::get('tasks/drop/{id}/{column_id}',[TaskController::class,'drop']);
 Route::get('boards',[BoardController::class,'index']);
 Route::delete('boards/{id}',[BoardController::class,'destroy']);
 Route::post('boards/{id}',[BoardController::class,'create']);
+Route::get('boards/detail/{id}',[BoardController::class,'getBoardById']);
 
 Route::get('users',[UserController::class,'index']);
 Route::post('login',[UserController::class,'authenticate']);

@@ -13,6 +13,11 @@ export class BoardService {
     return this.http.post(`${this.baseURL}/${id}`,value);
   }
 
+  getBoardDetail(id:number) {
+    return this.http.get(`${this.baseURL}/detail/${id}`);
+
+  }
+
   deleteBoard(id: number){
     return this.http.delete(`${this.baseURL}/${id}`);
   }

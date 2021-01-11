@@ -18,6 +18,12 @@ class BoardController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+
+    public function getBoardById($id)
+    {
+        $board = Board::find($id);
+        return response()->json($board);
+    }
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');

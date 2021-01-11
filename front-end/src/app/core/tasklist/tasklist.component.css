@@ -363,10 +363,14 @@ Remove or comment-out the code block below to see how the browser will fall-back
         grid-auto-flow: column;
         grid-column-gap: 1rem;
     }
-
+    
     .list {
+        font-family: sans-serif;
         display: grid;
-        grid-template-rows: auto minmax(auto, 1fr) auto;
+        border-radius: 5px;
+        width: 150px;
+        height: fit-content;
+        background-color: rgba(139, 138, 230, 0.856);
     }
     
     .list-body {
