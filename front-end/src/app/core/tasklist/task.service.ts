@@ -39,4 +39,12 @@ export class TaskService {
   searchByName(name: any): Observable<any> {
     return this.httpClient.get(`${baseURL}?name=${name}`);
   }
+
+  swapTask(id: number,order: number){
+    return this.httpClient.get(`${baseURL}/swap/${id}/${order}`);
+  }
+
+  dropTask(id: number,column_id: number){
+    return this.httpClient.get(`${baseURL}/drop/${id}/${column_id}`);
+  }
 }
