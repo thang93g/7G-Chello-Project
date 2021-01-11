@@ -51,7 +51,7 @@ export class PasswordComponent implements OnInit {
   }
 
   goHome(){
-    
+    this.router.navigate(['board'])
   }
 
 }
