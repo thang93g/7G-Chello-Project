@@ -20,51 +20,55 @@ export class GroupDetailComponent implements OnInit {
     private groupService: GroupService,
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.user = new User();
     this.group = new Group();
     this.id = this.route.snapshot.params['id'];
+    this.loadData();
+  }
+
+  loadData() {
     this.groupService.getGroup(this.id).subscribe(
       (data) => {
         this.group = data;
       },
       (error) => console.log(error)
-    )
+    );
 
     this.groupService.getMember(this.id).subscribe(
       (data) => {
         this.members = data;
       },
       (error) => console.log(error)
-    )
+    );
   }
 
-  onSubmit(){
-    this.groupService.addMember(this.id,this.user).subscribe((data)=>{
-      this.user = new User();
-      document.location.reload();
-    },(error: any) => console.log(error))
+  onSubmit() {
+    this.groupService.addMember(this.id, this.user).subscribe(
+      (data) => {
+        this.user = new User();
+        this.loadData();
+      },
+      (error: any) => console.log(error)
+    );
   }
 
-  deleteMember(user_id: number){
-    if(window.confirm('Bạn thực sự muốn xóa ?')){
-    this.groupService.deleteMember(this.id,user_id).subscribe(
-      data => {document.location.reload();}
-    )
-
+  deleteMember(user_id: number) {
+    if (window.confirm('Bạn thực sự muốn xóa ?')) {
+      this.groupService.deleteMember(this.id, user_id).subscribe((data) => {
+        this.loadData();
+      });
     }
   }
 
-  deleteGroup(){
-    if(window.confirm('Bạn thực sự muốn xóa ?')){
-      this.groupService.deleteGroup(this.id).subscribe(
-        data => {
-          this.router.navigate(['board']);
-        }
-      )
+  deleteGroup() {
+    if (window.confirm('Bạn thực sự muốn xóa ?')) {
+      this.groupService.deleteGroup(this.id).subscribe((data) => {
+        this.router.navigate(['board']);
+      });
     }
   }
 
@@ -77,7 +81,7 @@ export class GroupDetailComponent implements OnInit {
     this.router.navigate(['profile']);
   }
 
-  combackBoardList(){
+  combackBoardList() {
     this.router.navigate(['board']);
   }
 }
