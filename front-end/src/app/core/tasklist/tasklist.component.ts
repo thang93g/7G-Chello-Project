@@ -94,7 +94,6 @@ export class TasklistComponent implements OnInit {
     this.router.navigate(['']);
   }
   
-  
   combackBoardList(){
     this.router.navigate(['board']);
   }
