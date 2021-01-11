@@ -83,7 +83,7 @@ export class BoardlistComponent implements OnInit {
 
   createGroup(){
     this.groupService.createGroup(this.group).subscribe(
-      data => {
+      (      data: any) => {
         console.log(this.group)
         this.group = new Group();
         this.loadData();

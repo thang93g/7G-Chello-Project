@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ColumnService } from './column.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Column } from './column';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ColumnListComponent implements OnInit {
     private router : Router,
     private columnService: ColumnService,
     private route: ActivatedRoute,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,8 @@ export class ColumnListComponent implements OnInit {
         this.column = new Column();
         this.column.board_id = this.board_id;
         this.loadData();
-      }
+        this.toastr.success('Thêm cột thành công');
+      }, error => {this.toastr.error('Thêm cột không thành công')}
     )
   }
 
