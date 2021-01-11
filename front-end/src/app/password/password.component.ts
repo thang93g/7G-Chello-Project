@@ -22,7 +22,7 @@ export class PasswordComponent implements OnInit {
   constructor(private router: Router,
     private passwordService: PasswordService,
     private userService: UserService,
-    private noticeService: NotificationService) { }
+   ) { }
 
   ngOnInit(): void {
     this.id = localStorage.getItem("id");
