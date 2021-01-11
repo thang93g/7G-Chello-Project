@@ -50,17 +50,22 @@ export class GroupDetailComponent implements OnInit {
   }
 
   deleteMember(user_id: number){
+    if(window.confirm('Bạn thực sự muốn xóa ?')){
     this.groupService.deleteMember(this.id,user_id).subscribe(
       (      data: any) => {document.location.reload();}
     )
+
+    }
   }
 
   deleteGroup(){
-    this.groupService.deleteGroup(this.id).subscribe(
-      data => {
-        this.router.navigate(['board']);
-      }
-    )
+    if(window.confirm('Bạn thực sự muốn xóa ?')){
+      this.groupService.deleteGroup(this.id).subscribe(
+        data => {
+          this.router.navigate(['board']);
+        }
+      )
+    }
   }
 
   logOut() {
