@@ -14,7 +14,6 @@ export class SingupComponent implements OnInit {
 
   user: User = new User();
   submitted = false;
-  
 
   constructor(private UserService: SingupService,
     private router : Router) { }
