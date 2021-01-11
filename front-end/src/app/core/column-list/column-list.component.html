@@ -69,15 +69,23 @@
                 </div>
             </div> -->
         </div>
-        <div class="column-content mt-3 ml-4 shadow p-2 mb-2 rounded card-columns">
-            <div class="card-body float-left">
-                <form (ngSubmit)="addColumn()">
-                    <input [(ngModel)]="column.name" name="name" />
-                    <button class="btn btn-outline-primary mt-2" type="submit">Thêm cột mới</button>
-                </form>
+        <div class="column-content mt-3 ml-4 card-columns bg-w" cdkDrag>
+            <div style="border: 0px;" class="card shadow  rounded">
+                <div class="card-body">
+                    <form (ngSubmit)="addColumn()">
+                        <div>
+                            <input class="form-control" [(ngModel)]="column.name" name="name" />
+                        </div>
+                        <div>
+                            <button class="form-control btn btn-outline-primary mt-2" type="submit">Thêm cột mới</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
