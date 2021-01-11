@@ -27,6 +27,10 @@ export class ColumnListComponent implements OnInit {
     this.column = new Column();
     this.column.board_id = this.board_id;
 
+    this.loadData();
+  }
+
+  loadData(){
     this.columnService.getColumnList(this.board_id).subscribe(
       (data: any) => {
         this.columns = data;
@@ -39,13 +43,48 @@ export class ColumnListComponent implements OnInit {
     this.columnService.createColumn(this.column).subscribe(
       data => {
         this.column = new Column();
-        window.location.reload();
+        this.column.board_id = this.board_id;
+        this.loadData();
       }
     )
   }
 
   dropColumn(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
+    let id = this.columns[event.currentIndex].column.id;
+    let index = event.currentIndex + 1;
+
+    this.columnService.swapColumn(id,index).subscribe(
+      data => {
+        console.log(data);
+      },error => console.log(error)
+    );
+
+    let int = event.previousIndex - event.currentIndex;
+    console.log(id);
+    if(int < 0 ){
+      for(let i = 0; i < Math.abs(int); i++){
+        index -= 1;
+        let id = this.columns[index - 1].column.id;
+        this.columnService.swapColumn(id,index).subscribe(
+          data => {
+            console.log(data);
+          },error => console.log(error)
+        );
+      }
+    }
+
+    if(int > 0){
+      for(let i = 0; i < int; i++){
+        index += 1;
+        let id = this.columns[index - 1].column.id;
+        this.columnService.swapColumn(id,index).subscribe(
+          data => {
+            console.log(data);
+          },error => console.log(error)
+        );
+      }
+    }
   }
 
   dropTask(event: CdkDragDrop<string[]>) {
