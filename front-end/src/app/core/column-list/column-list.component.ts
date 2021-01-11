@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ColumnService } from './column.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Column } from './column';
+import { TaskService } from '../tasklist/task.service';
+import { Task } from './task';
 
 
 @Component({
@@ -14,11 +16,13 @@ export class ColumnListComponent implements OnInit {
   columns!: any;
   board_id!: any;
   column!: any;
+  task!: any;
 
   constructor(
     private router : Router,
     private columnService: ColumnService,
     private route: ActivatedRoute,
+    private taskService: TaskService,
   ) {}
 
   ngOnInit(): void {
@@ -51,52 +55,66 @@ export class ColumnListComponent implements OnInit {
 
   dropColumn(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
-    let id = this.columns[event.currentIndex].column.id;
-    let index = event.currentIndex + 1;
-
-    this.columnService.swapColumn(id,index).subscribe(
-      data => {
-        console.log(data);
-      },error => console.log(error)
-    );
-
-    let int = event.previousIndex - event.currentIndex;
-    console.log(id);
-    if(int < 0 ){
-      for(let i = 0; i < Math.abs(int); i++){
-        index -= 1;
-        let id = this.columns[index - 1].column.id;
-        this.columnService.swapColumn(id,index).subscribe(
-          data => {
-            console.log(data);
-          },error => console.log(error)
-        );
-      }
-    }
-
-    if(int > 0){
-      for(let i = 0; i < int; i++){
-        index += 1;
-        let id = this.columns[index - 1].column.id;
-        this.columnService.swapColumn(id,index).subscribe(
-          data => {
-            console.log(data);
-          },error => console.log(error)
-        );
-      }
+    for(let i = 0;i < this.columns.length;i++){
+      this.column = this.columns[i];
+      let id = this.column.column.id;
+      this.columnService.swapColumn(id,i).subscribe(
+        data => {
+          // console.log(data);
+        },error => console.log(error)
+      );
     }
   }
 
-  dropTask(event: CdkDragDrop<string[]>) {
+  dropTask(event: CdkDragDrop<string[]>,column_id: number) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      let arr = event.container.data;
+      for(let i = 0;i < arr.length; i++){
+        this.task = arr[i];
+        let id = this.task.id;
+        this.taskService.swapTask(id,i).subscribe(
+          data => {
+          },error => console.log(error)
+        )
+      }
     } else {
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
-                        event.currentIndex);
+                        event.currentIndex,);
+      let array1 = event.previousContainer.data;
+      let array2 = event.container.data;
+
+      this.task = event.container.data[event.currentIndex];
+      let id = this.task.id;
+      this.taskService.dropTask(id,column_id).subscribe(
+        data => {
+          console.log(data)
+        },error => console.log(error)
+      )
+
+
+      for(let i = 0;i < array1.length; i++){
+        this.task = array1[i];
+        let id = this.task.id;
+        this.taskService.swapTask(id,i).subscribe(
+          data => {
+          },error => console.log(error)
+        )
+      }
+
+      for(let j = 0;j < array2.length; j++){
+        this.task = array2[j];
+        let id = this.task.id;
+        this.taskService.swapTask(id,j).subscribe(
+          data => {
+          },error => console.log(error)
+        )
+      }
     }
   }
+
   combackBoardList(){
     this.router.navigate(['board']);
   }
