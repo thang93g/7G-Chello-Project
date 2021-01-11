@@ -35,6 +35,8 @@ Route::get('tasks',[TaskController::class,'index']);
 Route::post('tasks/create',[TaskController::class,'create']);
 Route::put('tasks/update/{id}',[TaskController::class,'update']);
 Route::delete('tasks/{id}',[TaskController::class,'delete']);
+Route::get('tasks/swap/{id}/{orders}',[TaskController::class,'swap']);
+Route::get('tasks/drop/{id}/{column_id}',[TaskController::class,'drop']);
 
 Route::get('boards',[BoardController::class,'index']);
 Route::delete('boards/{id}',[BoardController::class,'destroy']);
