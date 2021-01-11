@@ -12,4 +12,8 @@ export class BoardService {
   createBoard(id: number,value: any){
     return this.http.post(`${this.baseURL}/${id}`,value);
   }
+
+  deleteBoard(id: number){
+    return this.http.delete(`${this.baseURL}/${id}`);
+  }
 }

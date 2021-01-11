@@ -12,6 +12,7 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
 import { PasswordComponent } from './password/password.component';
 import { TasklistComponent} from './core/tasklist/tasklist.component';
 import { GroupDetailComponent } from './core/group-detail/group-detail.component';
+import { ColumnListComponent } from './core/column-list/column-list.component';
 
 
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   // { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', component: NavbarComponent },
   { path: 'board', component: BoardlistComponent },
+  { path: 'board/:board_id', component: ColumnListComponent },
   { path: 'column', component: BoardpageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'singup', component: SingupComponent },

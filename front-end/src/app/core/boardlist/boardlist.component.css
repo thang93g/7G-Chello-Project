@@ -67,3 +67,10 @@
 #logout:hover {
     color: white!important;
 }
+
+.board-button{
+  float: right;
+  border: 0px rgb(2, 129, 80);
+  background-color: rgb(2, 129, 80);
+  color: white;
+}

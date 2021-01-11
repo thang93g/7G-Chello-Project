@@ -116,6 +116,7 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $board = Board::find($id);
+        $board->delete();
     }
 }
