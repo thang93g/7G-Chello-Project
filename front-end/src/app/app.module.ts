@@ -8,7 +8,6 @@ import { ToastrModule } from 'ngx-toastr';
 import {MatMenuModule} from '@angular/material/menu';
 
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -57,6 +56,7 @@ import { ColumnListComponent } from './core/column-list/column-list.component';
     MatSliderModule,
     MatBadgeModule,
     MatToolbarModule,
+    MatMenuModule,
     HttpClientModule,
     AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
