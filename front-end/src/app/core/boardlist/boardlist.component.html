@@ -67,12 +67,12 @@
                     <h2>Thêm nhóm mới</h2>
                 </div>
                 <div style="width: 200px;" class="mt-2">
-                    <form (ngSubmit)="createGroup()">
-                        <input placeholder="Nhập tên nhóm" type="text" name="name" #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
+                    <form #addform='ngForm' (ngSubmit)="createGroup()">
+                        <input placeholder="Nhập tên nhóm" type="text" name="name" required #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
                         <div *ngIf="groupp.errors && (groupp.valid || groupp.touched)">
                             <small class="text-danger" *ngIf="groupp.errors.required">Tên nhóm không được để trống</small>
                         </div>
-                        <button type="submit" class="mt-2 btn btn-outline-primary form-control">Thêm nhóm</button>
+                        <button type="submit" class="mt-2 btn btn-outline-primary form-control" [disabled]="addform.form.invalid">Thêm nhóm</button>
                     </form>
                 </div>
             </div>
@@ -119,12 +119,12 @@
               </svg>
               Thành viên({{group.total[0].total}})
             </button>
-            <mat-menu #menu="matMenu">
-              <div mat-menu-item *ngFor="let user of group.users" style="width: 250px;">
-                <div class="small-avatar" style="background-image: url({{user.image}});"></div>
-                <div style="margin-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.name }}</div>
-              </div>
-            </mat-menu>
+                                                <mat-menu #menu="matMenu">
+                                                    <div mat-menu-item *ngFor="let user of group.users" style="width: 250px;">
+                                                        <div class="small-avatar" style="background-image: url({{user.image}});"></div>
+                                                        <div style="margin-left: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.name }}</div>
+                                                    </div>
+                                                </mat-menu>
                                             </div>
                                             <div class="col-1">
 
@@ -165,9 +165,12 @@
               </svg></button>
                             </div>
                             <div style="float: left;" class="add-board-button mt-3">
-                                <form (ngSubmit)="onSubmit(group.group.id)">
-                                    <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" name="name" type="text" class="form-control" />
-                                    <button class="form-control mt-2 btn btn-outline-primary" type="submit">Tạo bảng mới</button>
+                                <form #addform='ngForm' (ngSubmit)="onSubmit(group.group.id)">
+                                    <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" required #name='ngModel' [class.is-invalid]="name.invalid && name.touched" name="name" type="text" class="form-control" />
+                                    <div *ngIf="name.errors && (name.valid || name.touched)">
+                                        <small class="text-danger" *ngIf="name.errors.required">Tên nhóm không được để trống</small>
+                                    </div>
+                                    <button class="form-control mt-2 btn btn-outline-primary" type="submit" [disabled]="addform.form.invalid">Tạo bảng mới</button>
                                 </form>
                             </div>
                         </div>

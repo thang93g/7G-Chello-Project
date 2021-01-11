@@ -74,6 +74,10 @@ export class TasklistComponent implements OnInit {
         });
   }
 
+  getInfo() {
+    this.router.navigate(['profile']);
+  }
+
   searchByName(): void {
     this.taskService.searchByName(this.name)
       .subscribe(
@@ -88,9 +92,6 @@ export class TasklistComponent implements OnInit {
   logOut() {
     localStorage.clear();
     this.router.navigate(['']);
-  }
-  getInfo() {
-    this.router.navigate(['profile']);
   }
   
   combackBoardList(){

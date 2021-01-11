@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 import { User } from 'src/app/user/user';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
+  templateUrl: './profile.component.html', 
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
@@ -21,10 +22,15 @@ export class ProfileComponent implements OnInit {
   constructor(
     private storage: AngularFireStorage,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  loadData(){
     this.user = new User();
 
     this.id = localStorage.getItem('id');
@@ -41,6 +47,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
+    
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
@@ -66,15 +73,17 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  
+
   updateUser() {
     this.userService.update(this.id, this.user)
       .subscribe(data => {
         console.log(data);
-        alert("Cập nhật thông tin thành công")
+        this.toastr.success("Cập nhật thông tin thành công")
         this.user = new User();
-        window.location.reload();
-      }, error => console.log(error));
-  }
+        this.loadData();
+      }, error => {this.toastr.error('Cập nhật thông tin không thành công')})
+    }
 
   back() {
     this.router.navigate(['board'])

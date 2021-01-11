@@ -18,6 +18,9 @@ export class PasswordComponent implements OnInit {
   newPassword!: any;
   newPasswordConfirm!: any;
   value!: any
+  hide = true;
+  hide2 = true;
+  hide3 = true ;
 
   constructor(private router: Router,
     private passwordService: PasswordService,
