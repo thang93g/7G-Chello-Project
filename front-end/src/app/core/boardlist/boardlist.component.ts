@@ -7,6 +7,8 @@ import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Board } from './board';
 import { BoardService } from './board.service';
+import {MatDialog} from '@angular/material/dialog';
+
 
 
 
@@ -28,6 +30,7 @@ export class BoardlistComponent implements OnInit {
     private userService: UserService,
     private boardService: BoardService,
     private toastr: ToastrService,
+    public dialog: MatDialog
     ) {}
 
   ngOnInit(): void {
@@ -107,4 +110,16 @@ export class BoardlistComponent implements OnInit {
       )
     }
   }
+  openDialog() {
+    console.log(1);
+    this.dialog.open(DialogElementsExampleDialog);
+  }
 }
+
+
+
+@Component({
+  selector: 'dialog-elements-example-dialog',
+  templateUrl: 'dialog-elements-example-dialog.html',
+})
+export class DialogElementsExampleDialog {}
