@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ColumnService } from './column.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Column } from './column';
@@ -16,6 +16,7 @@ export class ColumnListComponent implements OnInit {
   column!: any;
 
   constructor(
+    private router : Router,
     private columnService: ColumnService,
     private route: ActivatedRoute,
   ) {}
@@ -56,5 +57,8 @@ export class ColumnListComponent implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
+  }
+  combackBoardList(){
+    this.router.navigate(['board']);
   }
 }
