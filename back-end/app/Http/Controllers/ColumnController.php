@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Column;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -36,18 +37,18 @@ class ColumnController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'board_id' => 'required|numeric|min:1',
-            'orders' => 'required',
         ]);
 
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $col = Column::create([
-            'name' => $request->get('name'),
-            'board_id' => $request->get('board_id'),
-            'orders' => $request->get('orders'),
-        ]);
+        // $col = Column::create([
+        //     'name' => $request->get('name'),
+        //     'board_id' => $request->get('board_id'),
+        // ]);
+
+        $col = DB::select("CALL autoInc('$request->name',$request->board_id)");
 
         return response()->json(compact('col'),201);
     }
@@ -119,5 +120,18 @@ class ColumnController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function swap($id1,$id2){
+        $column1 = Column::find($id1);
+        $column2 = Column::find($id2);
+
+        $ordering = $column1->orders;
+        $column1->orders = $column2->orders;
+        $column2->orders = $ordering;
+        $column1->save();
+        $column2->save();
+
+        return response()->json([$column1,$column2]);
     }
 }
