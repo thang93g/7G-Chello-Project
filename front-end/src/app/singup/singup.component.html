@@ -35,9 +35,19 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <input class="form-control" type="password" [(ngModel)]="user.password" name="password" required #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Mật khẩu">
+                        <input class="form-control" type="password" [(ngModel)]="user.password" name="password" required pattern="[\w]+[\w]{5,}" #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Mật khẩu">
                         <div *ngIf="password.errors && (password.valid || password.touched)">
                             <small class="text-danger" *ngIf="password.errors.required">Mật khẩu không được để trống</small>
+                            <small class="text-danger" *ngIf="password.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký tự đặc biệt</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <input [(ngModel)]="newPasswordConfirm" class="form-control" type="password" required  #newPassAgain="ngModel" [class.is-invalid]="newPassAgain.invalid && newPassAgain.touched" id="name" name="newPassAgain" placeholder="Nhập lại mật khẩu" />
+                        <div *ngIf="newPassAgain.errors && (newPassAgain.valid || newPassAgain.touched)">
+                            <small class="text-danger" *ngIf="newPassAgain.errors.required">Mật khẩu mới không được để trống</small>
+                        </div>
+                        <div *ngIf="newPassAgain.valid && newPassAgain.value != password.value">
+                            <small class="text-danger" *ngIf="newPassAgain.valid && newPassAgain.value != password.value">Mật khẩu không khớp </small>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -48,11 +58,11 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="buttonSign btn btn-success" >Đăng ký tài khoản</button>
+                        <button type="submit" class="buttonSign btn btn-success" [disabled]="addform.form.invalid" >Đăng ký tài khoản</button>
                     </div>
                     <hr>
                     <div style="text-align: center;" class="mb-3">
-                        <a (click)="gotoLogin()"  class="btn btn-link">Bạn có tài khoản? Đăng nhập</a> <a class="btn btn-link" (click)="gobackHomePage()">Trở về trang chủ</a>
+                        <a (click)="gotoLogin()" class="btn btn-link">Bạn có tài khoản? Đăng nhập</a> <a class="btn btn-link" (click)="gobackHomePage()">Trở về trang chủ</a>
                     </div>
                 </form>
             </div>

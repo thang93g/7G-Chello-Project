@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-
+  hide = true;
   result!: Observable<any>;
   // token = new Observable<any>();
   // token!: Observable<string>;

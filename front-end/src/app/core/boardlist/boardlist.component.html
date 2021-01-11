@@ -46,30 +46,16 @@
             >
           </li>
         </ul>
-        <ul class="navbar-nav my-2 my-sm-0">
-          <li class="nav-item">
-            <a (click)="getInfo()"
-              ><div
-                id="avatar"
-                style="background-image: url({{user.image}});"
-                title="{{ user.name }} ( {{ user.email }} )"
-              ></div>
-            </a>
-                </li>
-                <li class="nav-item">
-                    <div>
-                        <a class="btn btn-link" (click)="getInfo()">
-                            <p id="getInfo" style="color: white;">{{ user.name }}</p>
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item ml-3">
-                    <a title="Đăng xuất" id="logout" class="btn" (click)="logOut()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                      <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                    </svg></a>
-                </li>
-            </ul>
+          <a class="btn" mat-button [matMenuTriggerFor]="animals"><div
+          id="avatar"
+          style="background-image: url({{user.image}});"
+          title="{{ user.name }} ( {{ user.email }} )"
+        ></div></a>
+                    <!-- #docregion sub-menu -->
+                    <mat-menu #animals="matMenu">
+                        <a (click)="getInfo()" mat-menu-item>Hồ sơ cá nhân</a>
+                        <a (click)="logOut()" mat-menu-item>Đăng xuất </a>
+                    </mat-menu>
         </div>
     </nav>
 
@@ -82,7 +68,10 @@
                 </div>
                 <div style="width: 200px;" class="mt-2">
                     <form (ngSubmit)="createGroup()">
-                        <input placeholder="Nhập tên nhóm" type="text" name="name" [(ngModel)]="group.name" class="form-control">
+                        <input placeholder="Nhập tên nhóm" type="text" name="name" #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
+                        <div *ngIf="groupp.errors && (groupp.valid || groupp.touched)">
+                            <small class="text-danger" *ngIf="groupp.errors.required">Tên nhóm không được để trống</small>
+                        </div>
                         <button type="submit" class="mt-2 btn btn-outline-primary form-control">Thêm nhóm</button>
                     </form>
                 </div>
@@ -128,7 +117,7 @@
                   d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"
                 />
               </svg>
-              Thành viên ( {{ group.total[0].total }} )
+              Thành viên({{group.total[0].total}})
             </button>
             <mat-menu #menu="matMenu">
               <div mat-menu-item *ngFor="let user of group.users" style="width: 250px;">
@@ -139,7 +128,7 @@
                                             </div>
                                             <div class="col-1">
 
-                                                <button style="background-color: lightgray;" (click)="viewGroup(group.group.id)" *ngIf="group.group.user_id == user_id" class="buttonn">
+                                                <button style="background-color: lightgray;width: 100px;" (click)="viewGroup(group.group.id)" *ngIf="group.group.user_id == user_id" class="buttonn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -164,23 +153,23 @@
                             </div>
                         </div>
                         <div class="group-body">
-                                <div style="height: 80px;" *ngFor="let board of group.boards" class="my-board mt-3 shadow p-2 mb-2 rounded">
-              <h3 style="text-align: left;float: left;width: 120px;">{{ board.name }}</h3>
-              <button class="board-button" (click)="deleteBoard(board.id)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <div style="height: 80px;" *ngFor="let board of group.boards" class="my-board mt-3 shadow p-2 mb-2 rounded">
+                                <h3 style="text-align: left;float: left;width: 120px;">{{ board.name }}</h3>
+                                <button class="board-button" (click)="deleteBoard(board.id)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
               </svg></button>
-              <button class="board-button" (click)="gotoBoard(board.id)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <button class="board-button" (click)="gotoBoard(board.id)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
               </svg></button>
-                                </div>
-                                <div style="float: left;" class="add-board-button mt-3">
-                                    <form (ngSubmit)="onSubmit(group.group.id)">
-                                        <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" name="name" type="text" class="form-control" />
-                                        <button class="form-control mt-2 btn btn-outline-primary" type="submit">Tạo bảng mới</button>
-                                    </form>
-                                </div>
+                            </div>
+                            <div style="float: left;" class="add-board-button mt-3">
+                                <form (ngSubmit)="onSubmit(group.group.id)">
+                                    <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" name="name" type="text" class="form-control" />
+                                    <button class="form-control mt-2 btn btn-outline-primary" type="submit">Tạo bảng mới</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
