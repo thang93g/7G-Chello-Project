@@ -36,9 +36,7 @@ export class BoardlistComponent implements OnInit {
 
   loadData(){
     this.user = new User();
-
     this.group = new Group();
-
     this.user_id = localStorage.getItem('id');
     this.group.user_id = this.user_id;
 
