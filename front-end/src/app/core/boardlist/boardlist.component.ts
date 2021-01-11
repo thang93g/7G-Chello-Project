@@ -34,6 +34,10 @@ export class BoardlistComponent implements OnInit {
     this.user_id = localStorage.getItem('id');
     this.group.user_id = this.user_id;
 
+    this.loadData();
+  }
+
+  loadData(){
     this.groupService.getBoardList(this.user_id).subscribe(data => {
       this.groups = data;
     },error => console.log(error));
@@ -60,7 +64,7 @@ export class BoardlistComponent implements OnInit {
   onSubmit(id: number){
     this.boardService.createBoard(id,this.board).subscribe((data: any) =>{
       this.board = new Board();
-      document.location.reload();
+      this.loadData();
     },(error: any) => console.log(error) )
   }
 
@@ -73,7 +77,7 @@ export class BoardlistComponent implements OnInit {
       data => {
         console.log(this.group)
         this.group = new Group();
-        document.location.reload();
+        this.loadData();
       },error => console.log(error)
     )
   }
@@ -86,7 +90,7 @@ export class BoardlistComponent implements OnInit {
     if(window.confirm('Bạn chắc chắn muốn xóa ? ')){
       this.boardService.deleteBoard(id).subscribe(
         data => {
-          document.location.reload();
+          this.loadData();
         }, error => console.log(error)
       )
     }
