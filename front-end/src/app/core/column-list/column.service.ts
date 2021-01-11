@@ -21,4 +21,8 @@ export class ColumnService {
   createColumn(value: any){
     return this.http.post(`${this.baseUrl}/create`,value);
   }
+
+  swapColumn(id: number, orders: number){
+    return this.http.get(`${this.baseUrl}/swap/${id}/${orders}`);
+  }
 }
