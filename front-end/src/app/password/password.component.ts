@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
-import { NotificationService } from '../notice/notice.service';
+import { NotificationService } from '../Notice/notice.service';
 import { UserService } from '../user/user.service';
 import { PasswordService } from './password.service';
 

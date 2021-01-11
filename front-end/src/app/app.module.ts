@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -43,7 +45,7 @@ import { ColumnListComponent } from './core/column-list/column-list.component';
 
     TasklistComponent,
     GroupDetailComponent,
-    ColumnListComponent
+    ColumnListComponent,
 
   ],
 
@@ -60,7 +62,8 @@ import { ColumnListComponent } from './core/column-list/column-list.component';
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     HttpClientModule,
     DragDropModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatMenuModule
 
   ],
   providers: [],
