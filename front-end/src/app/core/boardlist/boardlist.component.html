@@ -82,7 +82,10 @@
                 </div>
                 <div style="width: 200px;" class="mt-2">
                     <form (ngSubmit)="createGroup()">
-                        <input placeholder="Nhập tên nhóm" type="text" name="name" [(ngModel)]="group.name" class="form-control">
+                        <input placeholder="Nhập tên nhóm" type="text" name="name" #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
+                        <div *ngIf="groupp.errors && (groupp.valid || groupp.touched)">
+                          <small class="text-danger" *ngIf="groupp.errors.required">Tên nhóm không được để trống</small>
+                        </div>
                         <button type="submit" class="mt-2 btn btn-outline-primary form-control">Thêm nhóm</button>
                     </form>
                 </div>
