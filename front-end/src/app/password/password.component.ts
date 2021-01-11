@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
-import { NotificationService } from '../Notice/notice.service';
+import { NotificationService } from '../notice/notice.service';
 import { UserService } from '../user/user.service';
 import { PasswordService } from './password.service';
 
@@ -22,7 +22,7 @@ export class PasswordComponent implements OnInit {
   constructor(private router: Router,
     private passwordService: PasswordService,
     private userService: UserService,
-    private noticeService: NotificationService) { }
+   ) { }
 
   ngOnInit(): void {
     this.id = localStorage.getItem("id");
