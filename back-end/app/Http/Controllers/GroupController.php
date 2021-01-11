@@ -24,8 +24,10 @@ class GroupController extends Controller
         $array = [];
         foreach($groups as $group){
             $boards = Board::where('group_id','=',$group->id)->get();
+            $users = $group->users;
             $total = DB::table('group_user')->select(DB::raw('COUNT(user_id) as total'))->where('group_id','=',$group->id)->get();
             $gr = [
+                "users" => $users,
                 "total" => $total,
                 "group" => $group,
                 "boards" => $boards,
