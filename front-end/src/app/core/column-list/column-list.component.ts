@@ -8,6 +8,7 @@ import { Task } from './task';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { BoardService } from '../boardlist/board.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class ColumnListComponent implements OnInit {
   task!: any;
   user!: any;
   user_id!: any;
+  board!: any;
 
 
   constructor(
@@ -30,7 +32,8 @@ export class ColumnListComponent implements OnInit {
     private route: ActivatedRoute,
     private taskService: TaskService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private boardService: BoardService,
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +42,11 @@ export class ColumnListComponent implements OnInit {
     this.column = new Column();
     this.column.board_id = this.board_id;
     this.user_id = localStorage.getItem('id');
+    this.boardService.getBoardDetail(this.board_id).subscribe(
+      data => {
+        this.board = data;
+      }
+    )
     this.loadData();
   }
 
