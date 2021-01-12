@@ -83,7 +83,8 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
-    AddBoardDialog
+    AddBoardDialog,
+    
   ],
 
   imports: [
@@ -96,7 +97,16 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     HttpClientModule,
     DragDropModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 2000,
+        progressBar: true,
+        progressAnimation: 'increasing',
+        positionClass: 'toast-top-left',
+
+
+      }
+    ),
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

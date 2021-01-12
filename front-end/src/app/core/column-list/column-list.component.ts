@@ -8,6 +8,8 @@ import { Task } from './task';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -22,6 +24,7 @@ export class ColumnListComponent implements OnInit {
   task!: any;
   user!: any;
   user_id!: any;
+  downloadURL: any;
 
 
   constructor(
@@ -30,7 +33,9 @@ export class ColumnListComponent implements OnInit {
     private route: ActivatedRoute,
     private taskService: TaskService,
     private toastr: ToastrService,
-    private userService: UserService
+    private userService: UserService,
+    private storage: AngularFireStorage,
+
   ) {}
 
   ngOnInit(): void {
@@ -142,4 +147,5 @@ export class ColumnListComponent implements OnInit {
   combackBoardList(){
     this.router.navigate(['board']);
   }
+
 }
