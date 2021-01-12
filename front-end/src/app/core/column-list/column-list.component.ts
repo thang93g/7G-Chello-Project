@@ -22,7 +22,7 @@ export class ColumnListComponent implements OnInit {
   task!: any;
   user!: any;
   user_id!: any;
-
+  id!: any;
 
   constructor(
     private router : Router,
@@ -142,4 +142,17 @@ export class ColumnListComponent implements OnInit {
   combackBoardList(){
     this.router.navigate(['board']);
   }
+
+  changeNameList(id : number){
+    this.columnService.getColumn(id).subscribe(data => {
+      this.column = data
+    })
+   this.columnService.updateColumn(id,this.column)
+   .subscribe(data =>{
+     this.column = new Column();
+     this.loadData();
+   })
+
+  }
+
 }
