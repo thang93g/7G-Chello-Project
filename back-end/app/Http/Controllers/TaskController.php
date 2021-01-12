@@ -34,9 +34,9 @@ class TaskController extends Controller
         //     'orders' => $request->get('orders'),
         // ]);
 
-        $task = DB::select("CALL autoIncTask('$request->title',$request->label,$request->column_id)");
+        $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
 
-        return response()->json(compact('task'),201);
+        return response()->json($task);
 
     }
 
