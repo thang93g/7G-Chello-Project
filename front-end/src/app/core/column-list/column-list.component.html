@@ -60,7 +60,7 @@
     <div cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="example-list" (cdkDropListDropped)="dropColumn($event)">
         <div class="column-content mt-3 ml-4 shadow p-2 mb-2 rounded card-columns" *ngFor="let column of columns" cdkDrag>
             <div class="card-body float-left">
-                <input  (keydown.enter)="changeNameList(column.column.id)" style="border: 0px; width: 80px;" type="text" value="{{column.column.name}}">
+                <input (keydown.enter)="changeNameList(column.column.id)" style="border: 0px; width: 80px;" type="text" value="{{column.column.name}}">
             </div>
             <div cdkDropList [cdkDropListData]="column.tasks" class="card" (cdkDropListDropped)="dropTask($event,column.column.id)">
                 <div class="swimlane-content" *ngFor="let task of column.tasks" cdkDrag>
