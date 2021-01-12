@@ -26,6 +26,12 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
+  // keyword = 'name';
+  // public countries = [
+  //   {
+  //     name: 'hello'
+  //   }
+  // ];
 
   constructor(
     private router: Router,

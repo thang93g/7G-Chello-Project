@@ -24,6 +24,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TasklistComponent } from './core/tasklist/tasklist.component';
 import { GroupDetailComponent } from './core/group-detail/group-detail.component';
 import { ColumnListComponent } from './core/column-list/column-list.component';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 // angular material
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -64,7 +65,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
-import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 
 
 
@@ -134,8 +134,7 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    UploaderModule
-
+    AutocompleteLibModule
   ],
   providers: [],
   bootstrap: [AppComponent],

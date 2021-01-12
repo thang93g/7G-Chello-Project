@@ -86,3 +86,10 @@
 #openAddBoardDialog {
     margin-top: 15px !important;
 }
+.ng-autocomplete {
+    width:100%;
+    max-width: 600px;
+    display: table;
+    margin: 0 auto;
+  }
+  
