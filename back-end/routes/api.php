@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\UserController;
 use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
@@ -60,3 +61,6 @@ Route::post('/groups/{id}',[GroupController::class,'addUser']);
 Route::put('/groups/{id}',[GroupController::class,'update']);
 Route::delete('/groups/{id}',[GroupController::class,'destroy']);
 Route::post('/groups',[GroupController::class,'store']);
+
+
+Route::post('/comment', [CommentController::class,'commentOnTask']);
