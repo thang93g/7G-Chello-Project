@@ -46,6 +46,7 @@ export class ColumnListComponent implements OnInit {
     this.columnService.getColumnList(this.board_id).subscribe(
       (data: any) => {
         this.columns = data;
+        console.log(data)
       }, error => console.log(error)
     )
     this.userService.getUser(this.user_id).subscribe(data => {
