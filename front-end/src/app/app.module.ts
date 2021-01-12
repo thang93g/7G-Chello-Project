@@ -23,7 +23,7 @@ import { PasswordComponent } from './password/password.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TasklistComponent } from './core/tasklist/tasklist.component';
 import { GroupDetailComponent } from './core/group-detail/group-detail.component';
-import { ColumnListComponent } from './core/column-list/column-list.component';
+import { ColumnListComponent, CommentOnTaskDialog } from './core/column-list/column-list.component';
 
 // angular material
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -82,7 +82,8 @@ import { PortalModule } from '@angular/cdk/portal';
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
-    AddBoardDialog
+    AddBoardDialog,
+    CommentOnTaskDialog
   ],
 
   imports: [
