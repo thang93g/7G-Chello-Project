@@ -20,7 +20,7 @@ import { environment } from "../environments/environment";
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { BoardlistComponent, AddBoardDialog } from './core/boardlist/boardlist.component';
 import { PasswordComponent } from './password/password.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TasklistComponent } from './core/tasklist/tasklist.component';
 import { GroupDetailComponent } from './core/group-detail/group-detail.component';
 import { ColumnListComponent } from './core/column-list/column-list.component';
@@ -64,6 +64,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
+import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 
 
 
@@ -135,6 +136,7 @@ import { PortalModule } from '@angular/cdk/portal';
     OverlayModule,
     PortalModule,
     ScrollingModule,
+    UploaderModule
 
   ],
   providers: [],

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
+import {ToastrService} from 'ngx-toastr'
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,13 @@ export class LoginComponent implements OnInit {
 
   hide = true;
   result!: Observable<any>;
-  // token = new Observable<any>();
-  // token!: Observable<string>;
   email !: string;
   password !: string;
 
   constructor(private loginService: LoginService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
     // this.getToken();
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.email, this.password).subscribe(
       data => {
         if(data === null) {
-          alert("Tài khoản hoặc mật khẩu không đúng")
+          this.toastr.error("Tài khoản hoặc mật khẩu không đúng")
         } else {
         localStorage.setItem('token',data[1]);
         localStorage.setItem('id',data[0].id);
