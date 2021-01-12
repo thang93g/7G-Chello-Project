@@ -26,10 +26,12 @@ export class ColumnListComponent implements OnInit {
   columns!: any;
   board_id!: any;
   column!: any;
+  newtask!: any;
   task!: any;
   user!: any;
   user_id!: any;
   downloadURL: any;
+  id!: any;
   task_id!: any;
   comment!: any;
 
@@ -50,6 +52,8 @@ export class ColumnListComponent implements OnInit {
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();
+    this.newtask = new Task();
+    this.task = new Task();
     this.column.board_id = this.board_id;
     this.user_id = localStorage.getItem('id');
     this.loadData();
@@ -89,6 +93,18 @@ export class ColumnListComponent implements OnInit {
         this.loadData();
         this.toastr.success('Thêm cột thành công');
       }, error => {this.toastr.error('Thêm cột không thành công')}
+    )
+  }
+
+  addTask(id : any){
+    this.newtask.column_id = id;
+    this.newtask.label = 'aaa';
+    console.log(this.newtask);
+    this.taskService.create(this.newtask).subscribe(
+      data => {
+        this.newtask = new Task();
+        this.loadData();
+      }
     )
   }
 
@@ -155,6 +171,18 @@ export class ColumnListComponent implements OnInit {
   }
   combackBoardList(){
     this.router.navigate(['board']);
+  }
+
+  changeNameList(id : number){
+    this.columnService.getColumn(id).subscribe(data => {
+      this.column = data
+    })
+   this.columnService.updateColumn(id,this.column)
+   .subscribe(data =>{
+     this.column = new Column();
+     this.loadData();
+   })
+
   }
 
 

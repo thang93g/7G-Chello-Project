@@ -111,7 +111,7 @@ class ColumnController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255'
+            'name' => 'required|string|max:255',
         ]);
 
         if($validator->fails()){
