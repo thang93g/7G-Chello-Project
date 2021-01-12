@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { User } from '../user/user';
 import { UserService } from '../user/user.service';
 import { SingupService } from './singup.service';
+import {ToastrService} from 'ngx-toastr'
 
 
 @Component({
@@ -19,7 +20,9 @@ export class SingupComponent implements OnInit {
   hide2 = true;
 
   constructor(private UserService: SingupService,
-    private router : Router) { }
+    private router : Router,
+    private toastr: ToastrService,
+    ) { }
 
   ngOnInit(): void {
   }
@@ -32,12 +35,12 @@ export class SingupComponent implements OnInit {
     this.UserService
       .register(this.user).subscribe((data: any) => {
         if(data) {
-          alert("Đăng ký thành công")
+          this.toastr.success("Đăng ký thành công")
         this.user = new User();
         this.gotoLogin();
       } 
       },
-        (error: any) => alert("Đăng ký thất bại, tài khoản đã tồn tại"));
+        (error: any) => this.toastr.error("Đăng ký thất bại, tài khoản đã tồn tại"));
   }
 
   onSubmit() {

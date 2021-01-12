@@ -5,25 +5,33 @@ import { Observable } from 'rxjs';
 import { UserService } from 'src/app/user/user.service';
 import { User } from 'src/app/user/user';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr'; 
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html', 
   styleUrls: ['./profile.component.css'],
+  template: `
+  <ejs-uploader #defaultupload  [asyncSettings]='path' allowedExtensions = '.jpg,.png'></ejs-uploader>
+ `
 })
 export class ProfileComponent implements OnInit {
+
+    public path: Object = {
+      saveUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Save',
+      removeUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Remove' };
   title = 'cloudsSorage';
   selectedFile!: any;
   downloadURL!: Observable<string>;
   user!: any;
   id!: any;
-
+  userInfoFormGroup!: FormGroup;
   constructor(
     private storage: AngularFireStorage,
     private userService: UserService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit() {
@@ -79,9 +87,9 @@ export class ProfileComponent implements OnInit {
     this.userService.update(this.id, this.user)
       .subscribe(data => {
         console.log(data);
-        this.toastr.success("Cập nhật thông tin thành công")
         this.user = new User();
         this.loadData();
+        this.toastr.success("Cập nhật thông tin thành công")
       }, error => {this.toastr.error('Cập nhật thông tin không thành công')})
     }
 

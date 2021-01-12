@@ -223,4 +223,3 @@ export class AddBoardDialog implements OnInit {
 export interface DialogData {
   board_id: number,
 }
-
