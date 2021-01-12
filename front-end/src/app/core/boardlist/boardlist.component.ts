@@ -132,11 +132,6 @@ export class BoardlistComponent implements OnInit {
      this.loadData();
     });
   }
-
-
-  openGroupDetailDialog() {
-    this.dialog.open(GroupDetailsDialog);
-  }
 }
 
 @Component({
@@ -227,16 +222,4 @@ export class AddBoardDialog implements OnInit {
 
 export interface DialogData {
   board_id: number,
-}
-
-
-
-
-@Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'group-detail.html',
-})
-export class GroupDetailsDialog {
-
-
 }
