@@ -10,7 +10,12 @@ import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 
+export interface DialogData {
+  task_id: any;
+}
 
 @Component({
   selector: 'app-column-list',
@@ -25,6 +30,8 @@ export class ColumnListComponent implements OnInit {
   user!: any;
   user_id!: any;
   downloadURL: any;
+  task_id!: any;
+  comment!: any;
 
 
   constructor(
@@ -36,6 +43,7 @@ export class ColumnListComponent implements OnInit {
     private userService: UserService,
     private storage: AngularFireStorage,
 
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +53,7 @@ export class ColumnListComponent implements OnInit {
     this.column.board_id = this.board_id;
     this.user_id = localStorage.getItem('id');
     this.loadData();
+    this.comment = new Comment();
   }
 
   loadData(){
@@ -144,9 +153,45 @@ export class ColumnListComponent implements OnInit {
       }
     }
   }
-
   combackBoardList(){
     this.router.navigate(['board']);
   }
 
+
+
+  openCommentDialog(task_id:any) {
+    this.dialog.open(CommentOnTaskDialog, {
+      width: "250px",
+      height: "250px",
+      data : {task_id: task_id },
+    });
+  }
+}
+
+
+@Component({
+  selector: 'comment-dialog',
+  templateUrl: 'comment-dialog.html',
+})
+export class CommentOnTaskDialog implements OnInit {
+
+  user_id!: any;
+  task_id!: any;
+  comment!: any; 
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogData>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private columnService: ColumnService
+  ) {}
+
+  ngOnInit(): void {
+    this.comment = new Comment();
+  }
+
+  commentOnTask(task_id: any) {
+   this.comment.user_id = localStorage.getItem('id');
+    this.comment.task_id = task_id;
+    this.columnService.commentOnTask(this.comment).subscribe();
+  }
 }
