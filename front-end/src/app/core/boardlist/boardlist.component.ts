@@ -1,4 +1,6 @@
+import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Group } from 'src/app/group/group';
@@ -7,10 +9,10 @@ import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Board } from './board';
 import { BoardService } from './board.service';
-import {MatDialog} from '@angular/material/dialog';
 
-
-
+export interface DialogData {
+  group_id: any;
+}
 
 @Component({
   selector: 'app-boardlist',
@@ -45,7 +47,6 @@ export class BoardlistComponent implements OnInit {
 
     this.groupService.getBoardList(this.user_id).subscribe(data => {
       this.groups = data;
-      console.log(data);
     },error => console.log(error));
 
     this.userService.getUser(this.user_id).subscribe(data => {
@@ -85,7 +86,6 @@ export class BoardlistComponent implements OnInit {
   createGroup(){
     this.groupService.createGroup(this.group).subscribe(
       (      data: any) => {
-        console.log(this.group)
         this.group = new Group();
         this.loadData();
         this.toastr.success('Tạo dự án thành công !');
@@ -110,16 +110,76 @@ export class BoardlistComponent implements OnInit {
       )
     }
   }
-  openDialog() {
-    console.log(1);
-    this.dialog.open(DialogElementsExampleDialog);
+
+  openAddBoardDialog(id: number) {
+    const dialogRef =  this.dialog.open(AddBoardDialog, {
+      width: '300px',
+      height: '250px',
+      data: {group_id : id},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     this.loadData();
+    });
+  }
+}
+
+
+@Component({
+  selector: 'dialog-add-board',
+  templateUrl: 'dialog-add-board.html',
+})
+export class AddBoardDialog implements OnInit {
+  user_id!: any;
+  user!: any;
+  group!: any;
+  groups!: any;
+  group_id!: any;
+  board: Board = new Board();
+
+  constructor(
+    private groupService: GroupService,
+    private userService: UserService,
+    private boardService: BoardService,
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<DialogData>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    ) {}
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+
+  onSubmit(id: number){
+    this.boardService.createBoard(id,this.board).subscribe((data: any) =>{
+      this.board = new Board();
+      this.loadData();
+      this.toastr.success('Tạo mới bảng thành công !');
+      this.dialogRef.close();
+    },(error: any) => {
+      console.log(error);
+      this.toastr.error('Tạo mới bảng không thành công !')
+    })
+  }
+
+  loadData(){
+    this.user = new User();
+    this.group = new Group();
+    this.user_id = localStorage.getItem('id');
+    this.group.user_id = this.user_id;
+
+    this.groupService.getBoardList(this.user_id).subscribe(data => {
+      this.groups = data;
+    },error => console.log(error));
+
+    this.userService.getUser(this.user_id).subscribe(data => {
+      this.user = data;
+    },error => console.log(error)
+    )
   }
 }
 
 
 
-@Component({
-  selector: 'dialog-elements-example-dialog',
-  templateUrl: 'dialog-elements-example-dialog.html',
-})
-export class DialogElementsExampleDialog {}
