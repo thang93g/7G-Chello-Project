@@ -28,4 +28,7 @@ export class ColumnService {
   updateColumn(id: number ,value :any ){
     return this.http.put(`${this.baseUrl}/update/${id}`,value)
   }
+  commentOnTask(value: any) {
+    return this.http.post(`${this.baseUrl}/comment`, value);
+  }
 }
