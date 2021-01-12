@@ -25,6 +25,7 @@ export class BoardlistComponent implements OnInit {
   group!: any;
   groups!: any;
   board: Board = new Board();
+  show: boolean = true;
 
   constructor(
     private router: Router,
@@ -53,6 +54,13 @@ export class BoardlistComponent implements OnInit {
       this.user = data;
     },error => console.log(error)
     )
+  }
+
+  showFormAddGroup() {
+    this.show = false;
+  }
+  hideFormAddGroup() {
+    this.show = true;
   }
 
   logOut() {
@@ -89,6 +97,7 @@ export class BoardlistComponent implements OnInit {
         this.group = new Group();
         this.loadData();
         this.toastr.success('Tạo dự án thành công !');
+        this.show = true;
       },error => {
         console.log(error);
         this.toastr.error('Tạo dự án không thành công !');
