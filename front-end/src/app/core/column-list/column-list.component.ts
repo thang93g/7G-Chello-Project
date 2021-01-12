@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ColumnService } from './column.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -10,8 +10,8 @@ import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Inject } from '@angular/core';
 
 export interface DialogData {
   task_id: any;
@@ -32,6 +32,8 @@ export class ColumnListComponent implements OnInit {
   user_id!: any;
   downloadURL: any;
   id!: any;
+  show!: boolean;
+  dialogRef: any;
   task_id!: any;
   comment!: any;
 
@@ -48,6 +50,7 @@ export class ColumnListComponent implements OnInit {
     public dialog: MatDialog
   ) {}
 
+
   ngOnInit(): void {
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
@@ -58,6 +61,10 @@ export class ColumnListComponent implements OnInit {
     this.user_id = localStorage.getItem('id');
     this.loadData();
     this.comment = new Comment();
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   loadData(){
@@ -173,7 +180,7 @@ export class ColumnListComponent implements OnInit {
     this.router.navigate(['board']);
   }
 
-  changeNameList(id : number){
+changeNameList(id : number){
     this.columnService.getColumn(id).subscribe(data => {
       this.column = data
     })
@@ -185,7 +192,53 @@ export class ColumnListComponent implements OnInit {
 
   }
 
+  onFileSelected(event: any) {
+    
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `UserFile/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`UserFile/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe((url: any) => {
+            if (url) {
+              this.user.image = url;
+            }
+            console.log(this.user.image);
+          });
+        })
+      )
+      .subscribe((url) => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
 
+  openDialog(id: number) {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {board_id: id}
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed');
+      this.loadData();
+    });
+  }
+
+
+  showFormAddFile() {
+    this.show = false;
+  }
+  hideFormAddFile() {
+    this.show = true;
+  }
+  
 
   openCommentDialog(task_id:any) {
     this.dialog.open(CommentOnTaskDialog, {
@@ -223,3 +276,5 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.commentOnTask(this.comment).subscribe();
   }
 }
+
+
