@@ -64,7 +64,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
-import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 
 
 
@@ -136,7 +135,6 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    UploaderModule
 
   ],
   providers: [],
