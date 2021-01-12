@@ -64,13 +64,15 @@
             </div>
             <div>
             <div cdkDropList [cdkDropListData]="column.tasks" class="my-column" (cdkDropListDropped)="dropTask($event,column.column.id)">
-                <div class="my-task" *ngFor="let task of column.tasks" cdkDrag>
+                <div style=" padding-bottom: 100px;">
+                  <div class="my-task" *ngFor="let task of column.tasks" cdkDrag>
                     {{ task.title }}
                 </div>
-                <div class="mt-2">
+                </div>
+                <div style="bottom: 5%;position: absolute;width: 287px;">
                   <form>
                     <input class="form-control" type="text">
-                    <button class="form-control btn btn-success mt-1">them</button>
+                    <button class="btn btn-success mt-1">them</button>
                   </form>
                 </div>
             </div>
