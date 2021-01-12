@@ -18,7 +18,7 @@ import { ProfileComponent } from './core/profile/profile/profile.component';
 import { AngularFireModule } from "@angular/fire";
 import { environment } from "../environments/environment";
 import { AngularFireStorageModule } from "@angular/fire/storage";
-import { BoardlistComponent } from './core/boardlist/boardlist.component';
+import { BoardlistComponent, AddBoardDialog } from './core/boardlist/boardlist.component';
 import { PasswordComponent } from './password/password.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { TasklistComponent } from './core/tasklist/tasklist.component';
@@ -82,7 +82,7 @@ import { PortalModule } from '@angular/cdk/portal';
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
-
+    AddBoardDialog
   ],
 
   imports: [

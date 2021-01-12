@@ -66,13 +66,23 @@
                 <div style="text-align: left;;" class="mt-5">
                     <h2>Thêm dự án mới</h2>
                 </div>
-                <div style="width: 200px;" class="mt-2">
+                <button class="mt-2 btn btn-outline-primary form-control" (click)="showFormAddGroup()" *ngIf="show === true">Thêm dự án mới</button>
+                <div *ngIf="show === false" style="width: 200px;" class="mt-2">
                     <form #addform='ngForm' (ngSubmit)="createGroup()">
                         <input placeholder="Nhập tên dự án" type="text" name="name" required #groupp='ngModel' [class.is-invalid]="groupp.invalid && groupp.touched" [(ngModel)]="group.name" class="form-control">
                         <div *ngIf="groupp.errors && (groupp.valid || groupp.touched)">
                             <small class="text-danger" *ngIf="groupp.errors.required">Tên dự án không được để trống</small>
                         </div>
-                        <button type="submit" class="mt-2 btn btn-outline-primary form-control" [disabled]="addform.form.invalid">Thêm nhóm</button>
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="submit" class="mt-2 btn btn-success form-control" [disabled]="addform.form.invalid">Thêm nhóm</button>
+                            </div>
+                            <div class="col-6">
+                                <button class="mt-2 btn " (click)="hideFormAddGroup()"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                </svg></button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -164,14 +174,8 @@
                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
               </svg></button>
                             </div>
-                            <div style="float: left;" class="add-board-button mt-3">
-                                <form #addform='ngForm' (ngSubmit)="onSubmit(group.group.id)">
-                                    <input placeholder="Nhập tên bảng" [(ngModel)]="board.name" required #name='ngModel' [class.is-invalid]="name.invalid && name.touched" name="name" type="text" class="form-control" />
-                                    <div *ngIf="name.errors && (name.valid || name.touched)">
-                                        <small class="text-danger" *ngIf="name.errors.required">Tên nhóm không được để trống</small>
-                                    </div>
-                                    <button class="form-control mt-2 btn btn-outline-primary" type="submit" [disabled]="addform.form.invalid">Tạo bảng mới</button>
-                                </form>
+                            <div style="height: 80px; background-color: white; text-align: center;" class="my-board mt-3 shadow p-2 mb-2 rounded">
+                                <button id="openAddBoardDialog" style="margin-top: 4px\;" (click)="openAddBoardDialog(group.group.id)" class="btn btn-link">Tạo bảng mới</button>
                             </div>
                         </div>
                     </div>
