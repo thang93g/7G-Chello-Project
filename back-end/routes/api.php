@@ -5,6 +5,7 @@ use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
@@ -32,6 +33,8 @@ Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
 Route::get('columns/swap/{id}/{index}',[ColumnController::class,'swap']);
 Route::post('columns/comment', [CommentController::class,'commentOnTask']);
+Route::get('columns/upload',[FileController::Class,'index']);
+Route::post('columns/upload',[FileController::Class,'uploadFile']);
 
 
 Route::get('tasks',[TaskController::class,'index']);
