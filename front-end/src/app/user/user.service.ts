@@ -17,4 +17,8 @@ export class UserService {
   update(id: number , value: any): Observable<object>{
     return this.http.put(`${this.baseURL}/${id}`,value)
   }
+
+  getAllUser(): Observable<any>{
+    return this.http.get(`${this.baseURL}`);
+  }
 }

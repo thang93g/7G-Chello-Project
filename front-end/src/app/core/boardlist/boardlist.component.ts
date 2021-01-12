@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Group } from 'src/app/group/group';
@@ -7,6 +8,8 @@ import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Board } from './board';
 import { BoardService } from './board.service';
+import { MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {Inject} from '@angular/core'
 
 
 
@@ -28,10 +31,23 @@ export class BoardlistComponent implements OnInit {
     private userService: UserService,
     private boardService: BoardService,
     private toastr: ToastrService,
+    private dialog: MatDialog,
     ) {}
 
   ngOnInit(): void {
     this.loadData();
+  }
+
+  openDialog(id: number) {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {board_id: id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadData();
+    });
   }
 
   loadData(){
@@ -42,7 +58,6 @@ export class BoardlistComponent implements OnInit {
 
     this.groupService.getBoardList(this.user_id).subscribe(data => {
       this.groups = data;
-      console.log(data);
     },error => console.log(error));
 
     this.userService.getUser(this.user_id).subscribe(data => {
@@ -82,7 +97,6 @@ export class BoardlistComponent implements OnInit {
   createGroup(){
     this.groupService.createGroup(this.group).subscribe(
       (      data: any) => {
-        console.log(this.group)
         this.group = new Group();
         this.loadData();
         this.toastr.success('Tạo dự án thành công !');
@@ -97,14 +111,36 @@ export class BoardlistComponent implements OnInit {
     this.router.navigate(['board',id]);
   }
 
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    private boardService: BoardService,
+    private toastr: ToastrService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+
   deleteBoard(id: number){
-    if(window.confirm('Bạn chắc chắn muốn xóa ? ')){
       this.boardService.deleteBoard(id).subscribe(
         data => {
-          this.loadData();
           this.toastr.success('Xóa bảng thành công !');
+          this.dialogRef.close();
         }, error => console.log(error)
       )
-    }
   }
 }
+
+export interface DialogData {
+  board_id: number,
+}
+
