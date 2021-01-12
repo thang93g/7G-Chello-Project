@@ -12,6 +12,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Inject } from '@angular/core';
+import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
+import { Observable } from 'rxjs';
 
 export interface DialogData {
   task_id: any;
@@ -23,6 +25,8 @@ export interface DialogData {
   styleUrls: ['./column-list.component.css'],
 })
 export class ColumnListComponent implements OnInit {
+  title = 'cloudsSorage';
+  selectedFile!: any;
   columns!: any;
   board_id!: any;
   column!: any;
@@ -30,7 +34,6 @@ export class ColumnListComponent implements OnInit {
   task!: any;
   user!: any;
   user_id!: any;
-  downloadURL: any;
   id!: any;
   task_id!: any;
   comment!: any;
@@ -43,7 +46,6 @@ export class ColumnListComponent implements OnInit {
     private taskService: TaskService,
     private toastr: ToastrService,
     private userService: UserService,
-    private storage: AngularFireStorage,
 
     public dialog: MatDialog
   ) {}
@@ -58,6 +60,19 @@ export class ColumnListComponent implements OnInit {
     this.user_id = localStorage.getItem('id');
     this.loadData();
     this.comment = new Comment();
+  }
+  
+
+  openDialog(id: number) {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {board_id: id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadData();
+    });
   }
 
   loadData(){
@@ -194,6 +209,14 @@ export class ColumnListComponent implements OnInit {
       data : {task_id: task_id },
     });
   }
+
+  openUploadDialog(task_id:any) {
+    this.dialog.open(UploadDialog, {
+      width: "500px",
+      height: "500px",
+      // data : {task_id: task_id },
+    });
+  }
 }
 
 
@@ -223,3 +246,49 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.commentOnTask(this.comment).subscribe();
   }
 }
+
+@Component({
+  selector:'upload-dialog',
+  templateUrl:'upload-dialog.html',
+})
+export class UploadDialog implements OnInit{
+  downloadURL!: Observable<string>;
+  user!: any;
+
+  onFileSelected(event: any) {
+    
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `UserFile/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`UserFile/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe((url: any) => {
+            if (url) {
+              this.user.files = url;
+            }
+            console.log(this.user.files);
+          });
+        })
+      )
+      .subscribe((url) => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+  ngOnInit(): void {
+  }
+  constructor( public dialogRef: MatDialogRef<DialogData>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private storage: AngularFireStorage,
+    ){
+    
+  }
+  
+}
+
