@@ -76,9 +76,7 @@ import { PortalModule } from '@angular/cdk/portal';
     SingupComponent,
     ProfileComponent,
     BoardlistComponent,
-
     PasswordComponent,
-
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
