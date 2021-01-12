@@ -82,7 +82,6 @@ import { PortalModule } from '@angular/cdk/portal';
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
-    AddBoardDialog,
     
   ],
 
