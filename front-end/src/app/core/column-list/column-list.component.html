@@ -53,6 +53,7 @@
                     <mat-menu #animals="matMenu">
                         <a (click)="getInfo()" mat-menu-item>Hồ sơ cá nhân</a>
                         <a (click)="logOut()" mat-menu-item>Đăng xuất </a>
+
                     </mat-menu>
         </div>
     </nav>
@@ -105,6 +106,21 @@
                 </div>
             </div>
         </div>
+        <div class="mt-3 ml-4 add-form">
+          <div style="border: 0px;" class="shadow">
+              <div  my-column>
+                  <form (ngSubmit)="addColumn()">
+                      <div>
+                          <input class="form-control" [(ngModel)]="column.name" name="name" />
+                      </div>
+                      <div>
+                          <button class="form-control btn btn-outline-primary mt-2" type="submit">Thêm cột mới</button>
+
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
     </div>
 
 
