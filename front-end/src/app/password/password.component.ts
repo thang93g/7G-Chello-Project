@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { error } from 'protractor';
 import { NotificationService } from '../notice/notice.service';
 import { UserService } from '../user/user.service';
@@ -25,6 +26,7 @@ export class PasswordComponent implements OnInit {
   constructor(private router: Router,
     private passwordService: PasswordService,
     private userService: UserService,
+    private toastr: ToastrService,
    ) { }
 
   ngOnInit(): void {
@@ -35,19 +37,10 @@ export class PasswordComponent implements OnInit {
   updatePassword() {
     this.passwordService.changePassword(this.id, this.oldPassword, this.newPassword, this.newPasswordConfirm).subscribe(
       data => {
-       this.changePasswordSuccess(data);
+       this.toastr.success('Đổi mật khẩu thành công');
+       this.router.navigate(['/profile']);
       });
   }
-
-  changePasswordSuccess(data:string) {
-    if(data === "Đổi mật khẩu thành công") {
-      alert(data)
-    this.router.navigate(['/profile']);
-  } else {
-    alert(data);
-  }
-  }
-
 
   back() {
     this.router.navigate(['/profile']);
