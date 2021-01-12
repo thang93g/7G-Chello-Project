@@ -31,6 +31,8 @@ Route::get('columns/show/{id}',[ColumnController::class,'show']);
 Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
 Route::get('columns/swap/{id}/{index}',[ColumnController::class,'swap']);
+Route::post('columns/comment', [CommentController::class,'commentOnTask']);
+
 
 Route::get('tasks',[TaskController::class,'index']);
 Route::post('tasks/create',[TaskController::class,'create']);
@@ -63,4 +65,3 @@ Route::delete('/groups/{id}',[GroupController::class,'destroy']);
 Route::post('/groups',[GroupController::class,'store']);
 
 
-Route::post('/comment', [CommentController::class,'commentOnTask']);

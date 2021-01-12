@@ -60,7 +60,7 @@
                     <div style="text-align: center; width: 400px;" class="col-7">
                         <img style="border-radius: 50%;" width="200px" height="200px" [src]="user.image" />
                         <div class="mt-3">
-                            <input accept="image" style="left: 70px; position: relative;" type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" autocomplete="off" />
+                            <input accept="image/*" style="left: 70px; position: relative;" type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" autocomplete="off" />
                         </div>
                     </div>
                     <div class="col-5">
