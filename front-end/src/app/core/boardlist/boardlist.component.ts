@@ -33,11 +33,23 @@ export class BoardlistComponent implements OnInit {
     private userService: UserService,
     private boardService: BoardService,
     private toastr: ToastrService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
     ) {}
 
   ngOnInit(): void {
     this.loadData();
+  }
+
+  openDialog(id: number) {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {board_id: id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.loadData();
+    });
   }
 
   loadData(){
@@ -109,17 +121,6 @@ export class BoardlistComponent implements OnInit {
     this.router.navigate(['board',id]);
   }
 
-  deleteBoard(id: number){
-    if(window.confirm('Bạn chắc chắn muốn xóa ? ')){
-      this.boardService.deleteBoard(id).subscribe(
-        data => {
-          this.loadData();
-          this.toastr.success('Xóa bảng thành công !');
-        }, error => console.log(error)
-      )
-    }
-  }
-
   openAddBoardDialog(id: number) {
     const dialogRef =  this.dialog.open(AddBoardDialog, {
       width: '300px',
@@ -130,6 +131,35 @@ export class BoardlistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
      this.loadData();
     });
+  }
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: './dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    private boardService: BoardService,
+    private toastr: ToastrService,
+    public dialog: MatDialog,
+
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+
+  deleteBoard(id: number){
+      this.boardService.deleteBoard(id).subscribe(
+        data => {
+          this.toastr.success('Xóa bảng thành công !');
+          this.dialogRef.close();
+        }, error => console.log(error)
+      )
   }
 }
 
@@ -190,5 +220,7 @@ export class AddBoardDialog implements OnInit {
   }
 }
 
-
+export interface DialogData {
+  board_id: number,
+}
 
