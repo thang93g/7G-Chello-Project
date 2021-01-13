@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'password', component: PasswordComponent },
-  { path: 'task', component: TasklistComponent },
+  // { path: 'task', component: TasklistComponent },
   { path: 'group/:id', component: GroupDetailComponent },
 
 

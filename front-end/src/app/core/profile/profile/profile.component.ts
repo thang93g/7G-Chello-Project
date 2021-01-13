@@ -11,16 +11,9 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html', 
-  styleUrls: ['./profile.component.css'],
-  template: `
-  <ejs-uploader #defaultupload  [asyncSettings]='path' allowedExtensions = '.jpg,.png'></ejs-uploader>
- `
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
-    public path: Object = {
-      saveUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Save',
-      removeUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Remove' };
   title = 'cloudsSorage';
   selectedFile!: any;
   downloadURL!: Observable<string>;
