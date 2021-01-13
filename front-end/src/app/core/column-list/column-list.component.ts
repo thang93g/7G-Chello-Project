@@ -46,6 +46,7 @@ export class ColumnListComponent implements OnInit {
   user_comment!: any;
 
 
+
   constructor(
     private router : Router,
     private columnService: ColumnService,
@@ -55,14 +56,13 @@ export class ColumnListComponent implements OnInit {
     private userService: UserService,
     private storage: AngularFireStorage,
     public dialog: MatDialog,
-    private groupService: GroupService
+    private groupService: GroupService,
     private boardService: BoardService,
 
   ) {}
 
 
   ngOnInit(): void {
-    this.getToken();
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();
@@ -79,6 +79,9 @@ export class ColumnListComponent implements OnInit {
     this.comment = new Comment();
  
   }
+  
+
+ 
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -220,6 +223,7 @@ export class ColumnListComponent implements OnInit {
 
   }
 
+  
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',

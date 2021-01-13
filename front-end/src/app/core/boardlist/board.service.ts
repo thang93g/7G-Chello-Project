@@ -10,21 +10,11 @@ export class BoardService {
   constructor(private http: HttpClient) { }
 
   createBoard(id: number,value: any){
-    const auth_token = localStorage.getItem('token');
-    const reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + auth_token
-    });
-    return this.http.post(`${this.baseURL}/${id}`,value, {headers: reqHeader});
+    return this.http.post(`${this.baseURL}/${id}`,value);
   }
 
   getBoardDetail(id:number) {
-    const auth_token = localStorage.getItem('token');
-    const reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + auth_token
-    });
-    return this.http.get(`${this.baseURL}/detail/${id}`, {headers: reqHeader});
+    return this.http.get(`${this.baseURL}/detail/${id}`);
 
   }
 
