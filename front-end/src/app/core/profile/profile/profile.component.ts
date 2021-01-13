@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    this.getToken();
   }
   getToken() {
     if(localStorage.getItem('token')){

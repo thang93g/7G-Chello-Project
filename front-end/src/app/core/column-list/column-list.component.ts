@@ -72,6 +72,7 @@ export class ColumnListComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // this.getToken();
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();
@@ -92,6 +93,7 @@ export class ColumnListComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
   getToken() {
     if(localStorage.getItem('token')){
       this.router.navigate(['board/:board_id']);
