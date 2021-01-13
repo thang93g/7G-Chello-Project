@@ -41,9 +41,9 @@
                     <div class="mb-3">
                         <mat-form-field class="example-full-width">
                         <input matInput [type]="hide ? 'password' : 'text'" type="password" [(ngModel)]="user.password" name="password" required pattern="[\w]+[\w]{5,}" #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Mật khẩu">
-                        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
+                        </a>
                         </mat-form-field>
                         <div *ngIf="password.errors && (password.valid || password.touched)">
                             <small class="text-danger" *ngIf="password.errors.required">Mật khẩu không được để trống</small>
@@ -53,9 +53,9 @@
                     <div class="mb-3">
                         <mat-form-field class="example-full-width">
                         <input matInput [type]="hide2 ? 'newPasswordConfirm' : 'text'" [(ngModel)]="newPasswordConfirm"  type="password" required  #newPassAgain="ngModel" [class.is-invalid]="newPassAgain.invalid && newPassAgain.touched" id="name" name="newPassAgain" placeholder="Nhập lại mật khẩu" />
-                        <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide newPasswordConfirm'" [attr.aria-pressed]="hide">
+                        <a mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide newPasswordConfirm'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
+                        </a>
                         </mat-form-field>
                         <div *ngIf="newPassAgain.errors && (newPassAgain.valid || newPassAgain.touched)">
                             <small class="text-danger" *ngIf="newPassAgain.errors.required">Mật khẩu mới không được để trống</small>
