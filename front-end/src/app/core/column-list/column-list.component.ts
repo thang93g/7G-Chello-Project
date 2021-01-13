@@ -57,7 +57,8 @@ export class ColumnListComponent implements OnInit {
     private storage: AngularFireStorage,
     public dialog: MatDialog,
     private groupService: GroupService,
-    private boardService: BoardService
+    private boardService: BoardService,
+
   ) {}
 
 
@@ -244,6 +245,7 @@ export class ColumnListComponent implements OnInit {
     this.show = true;
   }
 
+
   openCommentDialog(task_id:any) {
     this.dialog.open(CommentOnTaskDialog, {
       width: "500px",
@@ -279,6 +281,7 @@ export class CommentOnTaskDialog implements OnInit {
   comment!: any; 
   user_comment!: any;
   show_cmt: boolean = false;
+
 
   constructor(
     public dialogRef: MatDialogRef<DialogData>,
