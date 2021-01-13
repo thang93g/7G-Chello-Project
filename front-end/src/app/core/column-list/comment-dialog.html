@@ -19,9 +19,6 @@
 
 <!-- <button (click)="getUserComment(data.task_id)" (click)="showComment()" class="btn btn-success">Xem bình luận</button> -->
 
-<div *ngIf="no_comment">
-    <p>Chưa có bình luận nào cho thẻ này..</p>
-</div> 
 <div *ngIf="show_cmt === true">
     <div class="mt-2" *ngFor="let comment of user_comment">
         <div class="container">

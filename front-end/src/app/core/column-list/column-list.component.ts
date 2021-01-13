@@ -87,7 +87,7 @@ export class ColumnListComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+
   getToken() {
     if(localStorage.getItem('token')){
       this.router.navigate(['board/:board_id']);
@@ -306,10 +306,6 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.getUserComment(task_id).subscribe(
       data => {
         this.user_comment = data
-        console.log(data);
-      },error => {
-        this.no_comment = error
-        console.log(this.no_comment);;
       }
     );
   }
@@ -321,8 +317,6 @@ export class CommentOnTaskDialog implements OnInit {
       console.log(data);
     }
     );
-    
-    
   }
   showComment() {
     this.show_cmt = true;
@@ -334,6 +328,7 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.commentOnTask(this.comment).subscribe(
       data => {
         this.getUserComment(task_id);
+        console.log(data);
       }
     );
   }
@@ -382,4 +377,3 @@ export class UploadDialog implements OnInit{
     private toastr: ToastrService,){}
 
 }
-
