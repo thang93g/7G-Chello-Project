@@ -56,10 +56,9 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::delete('boards/{id}', [BoardController::class, 'destroy']);
     Route::post('boards/{id}', [BoardController::class, 'create']);
     Route::get('boards/detail/{id}', [BoardController::class, 'getBoardById']);
-
     Route::put('changePassword/{id}', [ChangePassword::class, 'changePassword']);
 
-  
+
     Route::delete('/groups/member/{id}/{user_id}', [GroupController::class, 'deleteUser']);
     Route::post('/groups/{id}', [GroupController::class, 'addUser']);
     Route::put('/groups/{id}', [GroupController::class, 'update']);

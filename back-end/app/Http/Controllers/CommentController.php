@@ -23,9 +23,17 @@ class CommentController extends Controller
     public function getUserComment($task_id) {
         $userComment = DB::table('comments')
             ->join('users', 'comments.user_id', '=', 'users.id')
-            ->join('tasks', 'comments.user_id', '=', 'tasks.id')
+            ->join('tasks', 'comments.task_id', '=', 'tasks.id')
             ->where('comments.task_id', '=', $task_id)
             ->get();
+        $userCommentExist = DB::table('comments')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->join('tasks', 'comments.task_id', '=', 'tasks.id')
+            ->where('comments.task_id', '=', $task_id)
+            ->exists();
+        if ($userCommentExist) {
         return response()->json($userComment);
+        }
+        return response()->json(['error' => 'Không có bình luận nào'], 500);
     }
 }

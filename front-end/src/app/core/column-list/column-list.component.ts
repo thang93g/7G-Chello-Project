@@ -304,6 +304,10 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.getUserComment(task_id).subscribe(
       data => {
         this.user_comment = data
+        console.log(data);
+      },error => {
+        this.no_comment = error
+        console.log(this.no_comment);;
       }
     );
   }
@@ -315,6 +319,8 @@ export class CommentOnTaskDialog implements OnInit {
       console.log(data);
     }
     );
+    
+    
   }
   showComment() {
     this.show_cmt = true;
