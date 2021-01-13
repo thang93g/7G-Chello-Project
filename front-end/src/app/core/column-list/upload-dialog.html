@@ -7,9 +7,10 @@
         <input type="text" class="form-control" [(ngModel)]="file.name" placeholder="File name" name="name">
         <input type="text" class="form-control" [(ngModel)]="file.description" name="description" placeholder="File description">
         <button class="btn btn-success" (click)="uploadOnTask(data.task_id)" class="btn btn-success" type="submit">Add file</button>
-        <div *ngFor="let file of files">
-            <a href="{{file.link}}">{{file.link}}</a>
-        </div>
+            <p>Attached files</p>
+            <div *ngFor="let link of file.link">
+                <p>{{ file.link }}</p>
+            </div>   
 
 
 

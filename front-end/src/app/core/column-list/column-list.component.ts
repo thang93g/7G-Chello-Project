@@ -238,11 +238,11 @@ changeNameList(id : number){
     });
   }
 
-  openUploadDialog(task_id:any) {
+  openUploadDialog(task_id:any, name: any, description: any) {
     const dialogRef = this.dialog.open(UploadDialog, {
       width: "500px",
       height: "500px",
-      data: {task_id: task_id, name: this.name, description: this.description}
+      data: {task_id: task_id, name: name, description: description }
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -287,11 +287,11 @@ export class CommentOnTaskDialog implements OnInit {
 export class UploadDialog implements OnInit{
   downloadURL!: Observable<string>;
   user!: any;
-  file: File = new File();
   task_id!: any;
   name!: any;
   description!: any;
   link!: any;
+  file: File = new File;
 
   onFileSelected(event: any) {
 
@@ -324,14 +324,14 @@ export class UploadDialog implements OnInit{
 
   uploadOnTask(task_id: any){
     this.file.task_id = task_id;
-    this.file.name = this.name;
-    this.file.description = this.description;
-    this.columnService.uploadOnTask(this.file, task_id).subscribe();
+    // this.file.name = name;
+    // this.file.description = description;
+    this.columnService.uploadOnTask(task_id,this.file).subscribe();
     console.log(this.file)
   }
   
   ngOnInit(): void {
-    this.file = new File;
+    this.file = new File();
   }
   constructor( public dialogRef: MatDialogRef<DialogData>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
