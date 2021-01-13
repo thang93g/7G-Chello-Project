@@ -19,16 +19,16 @@ body {
 }
 
 .my-board {
-    width: 100%;
-    border: solid 1px white;
-    min-height: 60px;
-    display: flex;
-    flex-direction: row;
-    background: white;
-    border-radius: 4px;
-    overflow: auto;
-    float: left;
-    background-color: white;
+  width: 100%;
+  border: solid 1px white;
+  min-height: 60px;
+  display: flex;
+  flex-direction: row;
+  background: white;
+  border-radius: 4px;
+  overflow: auto;
+  float: left;
+  background-color: rgb(241, 238, 238);
 }
 
 .my-board.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
