@@ -41,6 +41,7 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::get('columns/swap/{id}/{index}', [ColumnController::class, 'swap']);
     Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
     Route::get('columns/comment/user/{task_id}', [CommentController::class, 'getUserComment']);
+    Route::get('columns/commentCount/user/{task_id}', [CommentController::class, 'getCountComment']);
     Route::get('columns/{id}/upload', [FileController::class, 'index']);
     Route::post('columns/{id}/upload', [FileController::class, 'uploadFile']);
 

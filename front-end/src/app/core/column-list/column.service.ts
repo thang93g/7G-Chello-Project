@@ -39,6 +39,10 @@ export class ColumnService {
 
   getUserComment(task_id: any) {
     return this.http.get(`${this.baseUrl}/comment/user/${task_id}`);
+  }
+
+  getCommentCount(task_id: any) {
+    return this.http.get(`${this.baseUrl}/commentCount/user/${task_id}`);
 
   }
 }

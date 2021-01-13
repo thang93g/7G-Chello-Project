@@ -44,6 +44,7 @@ export class ColumnListComponent implements OnInit {
   members!: any;
   comment!: any;
   user_comment!: any;
+  count_comment!: any;
 
 
 
@@ -79,8 +80,17 @@ export class ColumnListComponent implements OnInit {
     this.comment = new Comment();
  
   }
-  
 
+  
+  
+  getCountComment(task_id: any) {
+    console.log(100);
+      this.columnService.getCommentCount(task_id).subscribe(
+        data => {
+          this.count_comment = data
+        }
+      );
+  }
  
 
   onNoClick(): void {
@@ -280,7 +290,6 @@ export class CommentOnTaskDialog implements OnInit {
   task_id!: any;
   comment!: any; 
   user_comment!: any;
-  show_cmt: boolean = false;
   no_comment!: any;
 
 
@@ -297,7 +306,6 @@ export class CommentOnTaskDialog implements OnInit {
     this.user = new User;
     this.loadData();
     this.getUserComment(this.task_id);
-    this.showComment();
   }
 
   getUserComment(task_id:any) {
@@ -307,7 +315,7 @@ export class CommentOnTaskDialog implements OnInit {
         console.log(data);
       },error => {
         this.no_comment = error
-        console.log(this.no_comment);;
+        console.log(this.no_comment);
       }
     );
   }
@@ -322,9 +330,7 @@ export class CommentOnTaskDialog implements OnInit {
     
     
   }
-  showComment() {
-    this.show_cmt = true;
-  }
+  
  
   commentOnTask(task_id: any) {
    this.comment.user_id = localStorage.getItem('id');
@@ -332,7 +338,7 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.commentOnTask(this.comment).subscribe(
       data => {
         this.getUserComment(task_id);
-      }
+      },
     );
   }
 }

@@ -18,19 +18,17 @@
 <hr>
 
 <!-- <button (click)="getUserComment(data.task_id)" (click)="showComment()" class="btn btn-success">Xem bình luận</button> -->
-<div *ngIf="show_cmt === true">
-    <div class="mt-2" *ngFor="let comment of user_comment">
-        <div class="container">
-            <div class="row">
-                <div class="col-1">
-                    <div class="member-avater" style="width: 35px; text-align: center; background-size: cover; height: 35px; border-radius: 50%; background-image: url({{comment.image}});"></div>
-                </div>
-                <div class="col-11">
-                    <div class="float-start">
-                        <b> &nbsp;&nbsp; {{ comment.name}}</b>
-                        <div>
-                            <p class="mt-1 ml-2" style="display: inline-block;padding: 10px 10px;border: 0px; border-radius: 10px;background-color: whitesmoke;"> {{ comment.content }}</p>
-                        </div>
+<div class="mt-2" *ngFor="let comment of user_comment">
+    <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <div class="member-avater" style="width: 35px; text-align: center; background-size: cover; height: 35px; border-radius: 50%; background-image: url({{comment.image}});"></div>
+            </div>
+            <div class="col-11">
+                <div class="float-start">
+                    <b> &nbsp;&nbsp; {{ comment.name}}</b>
+                    <div>
+                        <p class="mt-1 ml-2" style="display: inline-block;padding: 10px 10px;border: 0px; border-radius: 10px;background-color: whitesmoke;"> {{ comment.content }}</p>
                     </div>
                 </div>
             </div>
