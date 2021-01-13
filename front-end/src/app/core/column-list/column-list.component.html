@@ -66,7 +66,7 @@
                     <!-- <input (keydown.enter)="changeNameList($event)" type="text" value="{{ column.column.name}}"> -->
                 </div>
                 <div>
-                    <div cdkDropList [cdkDropListData]="column.tasks" class="task-list" (cdkDropListDropped)="dropTask($event,column.column.id)">
+                    <div cdkDropList [cdkDropListData]="column.tasks" class="task-list" (cdkDropListDropped)="dropTask($event,column.column.id,column.column.name)">
                         <div style="border-radius: 2%; height: 70px;" class="my-task mt-2 shadow p-2 mb-2" *ngFor="let task of column.tasks" cdkDrag>
                             <div class="task-box">
                                 <div class="float-right">

@@ -14,6 +14,7 @@ import { finalize } from 'rxjs/operators';
 import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { Noti } from './noti';
 import { File } from 'src/app/core/column-list/file'
 import { GroupService } from 'src/app/group/group.service';
 
@@ -50,6 +51,7 @@ export class ColumnListComponent implements OnInit {
   link!: any;
   members!: any;
   comment!: any;
+  noti!: any;
   user_comment!: any;
 
 
@@ -84,11 +86,8 @@ export class ColumnListComponent implements OnInit {
     )
     this.loadData();
     this.comment = new Comment();
- 
+    this.noti = new Noti();
   }
-  
-
- 
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -105,7 +104,6 @@ export class ColumnListComponent implements OnInit {
     this.columnService.getColumnList(this.board_id).subscribe(
       (data: any) => {
         this.columns = data;
-        console.log(data)
       }, error => console.log(error)
     );
     this.userService.getUser(this.user_id).subscribe(data => {
@@ -113,11 +111,9 @@ export class ColumnListComponent implements OnInit {
       console.log(data);
     },error => console.log(error)
     );
-    
-    
   }
 
-  
+
 
   logOut() {
     localStorage.clear();
@@ -166,7 +162,7 @@ export class ColumnListComponent implements OnInit {
     }
   }
 
-  dropTask(event: CdkDragDrop<string[]>,column_id: number) {
+  dropTask(event: CdkDragDrop<string[]>,column_id: number,column_name: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       let arr = event.container.data;
@@ -188,9 +184,20 @@ export class ColumnListComponent implements OnInit {
 
       this.task = event.container.data[event.currentIndex];
       let id = this.task.id;
+
+      let str = `Đã di chuyển sang danh sách ${column_name}`
+      this.noti.task_id = this.task.id;
+      this.noti.content = str;
+      this.noti.user_id = localStorage.getItem('id');
+
+      this.userService.createNoti(this.noti).subscribe(
+        data => {
+          this.noti = new Noti();
+        },error => console.log(error)
+      )
+
       this.taskService.dropTask(id,column_id).subscribe(
         data => {
-          console.log(data)
         },error => console.log(error)
       )
 
@@ -230,7 +237,7 @@ export class ColumnListComponent implements OnInit {
 
   }
 
-  
+
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
@@ -243,7 +250,8 @@ export class ColumnListComponent implements OnInit {
     });
   }
 
-  
+
+
 
   showFormAddFile() {
     this.show = false;
@@ -286,10 +294,11 @@ export class CommentOnTaskDialog implements OnInit {
   user_id!: any;
   user!: any;
   task_id!: any;
-  comment!: any; 
+  comment!: any;
   user_comment!: any;
   show_cmt: boolean = false;
   no_comment!: any;
+  noti!: any;
 
 
   constructor(
@@ -302,7 +311,8 @@ export class CommentOnTaskDialog implements OnInit {
   ngOnInit(): void {
     this.comment = new Comment();
     this.task_id = this.data.task_id;
-    this.user = new User;
+    this.user = new User();
+    this.noti = new Noti();
     this.loadData();
     this.getUserComment(this.task_id);
     this.showComment();
@@ -327,21 +337,34 @@ export class CommentOnTaskDialog implements OnInit {
       console.log(data);
     }
     );
-    
-    
+
+
   }
   showComment() {
     this.show_cmt = true;
   }
- 
+
   commentOnTask(task_id: any) {
    this.comment.user_id = localStorage.getItem('id');
     this.comment.task_id = task_id;
     this.columnService.commentOnTask(this.comment).subscribe(
       data => {
         this.getUserComment(task_id);
+        this.saveNoti();
       }
     );
+  }
+
+  saveNoti(){
+    this.noti.task_id = this.task_id;
+    this.noti.user_id = localStorage.getItem('id');
+    this.noti.content = `Đã bình luận : ${this.comment.comment}`
+    this.userService.createNoti(this.noti).subscribe(
+      data => {
+        this.noti = new Noti();
+        this.comment = new Comment();
+      },error => console.log(error)
+    )
   }
 }
 
@@ -378,7 +401,7 @@ export class UploadDialog implements OnInit{
             console.log(url);
           });
         })
-        
+
       )
       .subscribe((url) => {
         if (url) {
@@ -392,7 +415,7 @@ export class UploadDialog implements OnInit{
     this.columnService.uploadOnTask(this.file, task_id).subscribe();
     console.log(this.file)
   }
-  
+
   ngOnInit(): void {
     this.file = new File();
   }
