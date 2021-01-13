@@ -304,6 +304,9 @@ export class CommentOnTaskDialog implements OnInit {
       data => {
         this.user_comment = data
         console.log(data);
+      },error => {
+        this.user_comment = error
+        console.log(this.user_comment.status);;
       }
     );
   }
@@ -313,7 +316,7 @@ export class CommentOnTaskDialog implements OnInit {
     this.userService.getUser(this.user_id).subscribe(data => {
       this.user = data;
       console.log(data);
-    },error => console.log(error)
+    }
     );
     
     
