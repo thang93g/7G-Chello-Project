@@ -20,13 +20,17 @@ export class PasswordService {
     // var reqHeader = new HttpHeaders({
     //   'Content-Type': 'application/json',
     // });
-  
+    const auth_token = localStorage.getItem('token');
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + auth_token
+    });
     var data = {
       "oldPassword": oldPassword,
       "newPassword": newPassword,
       "newPasswordConfirm": newPasswordConfirm
     };
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+    return this.http.put(`${this.baseUrl}/${id}`, data, {headers: reqHeader});
   }
 
 }

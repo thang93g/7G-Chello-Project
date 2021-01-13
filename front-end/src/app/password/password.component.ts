@@ -32,6 +32,14 @@ export class PasswordComponent implements OnInit {
   ngOnInit(): void {
     this.id = localStorage.getItem("id");
     this.user = this.userService.getUser(this.id);
+    this.getToken();
+  }
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['password']);
+    }else{
+      this.router.navigate(['error']);
+    }
   }
 
   updatePassword() {

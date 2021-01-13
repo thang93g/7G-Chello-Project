@@ -22,9 +22,9 @@ class FileController extends Controller
 
     public function uploadOnTask(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+//            'name' => 'required|string|max:255',
             'link' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+//            'description' => 'required|string|max:255',
             'task_id' => 'required|numeric',
         ]);
 
@@ -44,9 +44,7 @@ class FileController extends Controller
     public function update($request, $id)
     {
         $validator = Validator::make($request->all(),[
-            'name' => 'required|string|max:255',
             'link' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
             'task_id' => 'required|numeric',
         ]);
 

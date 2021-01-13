@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -11,14 +11,17 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(id: number): Observable<object>{
+ 
     return this.http.get(`${this.baseURL}/${id}`);
   }
 
   update(id: number , value: any): Observable<object>{
+
     return this.http.put(`${this.baseURL}/${id}`,value)
   }
 
   getAllUser(): Observable<any>{
+
     return this.http.get(`${this.baseURL}`);
   }
 }

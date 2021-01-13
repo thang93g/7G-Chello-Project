@@ -15,6 +15,7 @@ import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { File } from 'src/app/core/column-list/file'
+import { GroupService } from 'src/app/group/group.service';
 
 export interface DialogData {
   link: any;
@@ -43,11 +44,14 @@ export class ColumnListComponent implements OnInit {
   show!: boolean;
   dialogRef: any;
   task_id!: any;
-  comment!: any;
   downloadURL!: Observable<string>;
   description!: any;
   name!: any;
   link!: any;
+  members!: any;
+  comment!: any;
+  user_comment!: any;
+
 
 
   constructor(
@@ -57,8 +61,10 @@ export class ColumnListComponent implements OnInit {
     private taskService: TaskService,
     private toastr: ToastrService,
     private userService: UserService,
-    private boardService: BoardService,
+    private storage: AngularFireStorage,
     public dialog: MatDialog,
+    private groupService: GroupService,
+    private boardService: BoardService,
 
   ) {}
 
@@ -78,10 +84,21 @@ export class ColumnListComponent implements OnInit {
     )
     this.loadData();
     this.comment = new Comment();
+ 
   }
+  
+
+ 
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['board/:board_id']);
+    }else{
+      this.router.navigate(['error']);
+    }
   }
 
   loadData(){
@@ -90,12 +107,18 @@ export class ColumnListComponent implements OnInit {
         this.columns = data;
         console.log(data)
       }, error => console.log(error)
-    )
+    );
     this.userService.getUser(this.user_id).subscribe(data => {
       this.user = data;
+      console.log(data);
     },error => console.log(error)
-    )
+    );
+    
+    
   }
+
+  
+
   logOut() {
     localStorage.clear();
     this.router.navigate(['']);
@@ -109,7 +132,6 @@ export class ColumnListComponent implements OnInit {
   }
 
   addColumn(){
-    console.log(this.column);
     this.columnService.createColumn(this.column).subscribe(
       data => {
         this.column = new Column();
@@ -123,7 +145,6 @@ export class ColumnListComponent implements OnInit {
   addTask(id : any){
     this.newtask.column_id = id;
     this.newtask.label = 'aaa';
-    console.log(this.newtask);
     this.taskService.create(this.newtask).subscribe(
       data => {
         this.newtask = new Task();
@@ -197,7 +218,7 @@ export class ColumnListComponent implements OnInit {
     this.router.navigate(['board']);
   }
 
-changeNameList(id : number){
+  changeNameList(id : number){
     this.columnService.getColumn(id).subscribe(data => {
       this.column = data
     })
@@ -209,6 +230,7 @@ changeNameList(id : number){
 
   }
 
+  
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
@@ -221,6 +243,7 @@ changeNameList(id : number){
     });
   }
 
+  
 
   showFormAddFile() {
     this.show = false;
@@ -232,17 +255,18 @@ changeNameList(id : number){
 
   openCommentDialog(task_id:any) {
     this.dialog.open(CommentOnTaskDialog, {
-      width: "250px",
-      height: "250px",
-      data : {task_id: task_id },
-    });
+      width: "500px",
+      height: "500px",
+      data : {task_id: task_id,
+      comment: this.user_comment}
+    })
   }
 
-  openUploadDialog(task_id:any, name: any, description: any) {
+  openUploadDialog(task_id:any) {
     const dialogRef = this.dialog.open(UploadDialog, {
       width: "500px",
       height: "500px",
-      data: {task_id: task_id, name: name, description: description }
+      data: {task_id: task_id}
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
@@ -260,23 +284,64 @@ changeNameList(id : number){
 export class CommentOnTaskDialog implements OnInit {
 
   user_id!: any;
+  user!: any;
   task_id!: any;
-  comment!: any;
+  comment!: any; 
+  user_comment!: any;
+  show_cmt: boolean = false;
+  no_comment!: any;
+
 
   constructor(
     public dialogRef: MatDialogRef<DialogData>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private columnService: ColumnService
+    private columnService: ColumnService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.comment = new Comment();
+    this.task_id = this.data.task_id;
+    this.user = new User;
+    this.loadData();
+    this.getUserComment(this.task_id);
+    this.showComment();
   }
 
+  getUserComment(task_id:any) {
+    this.columnService.getUserComment(task_id).subscribe(
+      data => {
+        this.user_comment = data
+        console.log(data);
+      },error => {
+        this.no_comment = error
+        console.log(this.no_comment);;
+      }
+    );
+  }
+
+  loadData(){
+    this.user_id = localStorage.getItem('id');
+    this.userService.getUser(this.user_id).subscribe(data => {
+      this.user = data;
+      console.log(data);
+    }
+    );
+    
+    
+  }
+  showComment() {
+    this.show_cmt = true;
+  }
+ 
   commentOnTask(task_id: any) {
    this.comment.user_id = localStorage.getItem('id');
     this.comment.task_id = task_id;
-    this.columnService.commentOnTask(this.comment).subscribe();
+    this.columnService.commentOnTask(this.comment).subscribe(
+      data => {
+        this.getUserComment(task_id);
+      }
+    );
   }
 }
 
@@ -324,9 +389,7 @@ export class UploadDialog implements OnInit{
 
   uploadOnTask(task_id: any){
     this.file.task_id = task_id;
-    // this.file.name = name;
-    // this.file.description = description;
-    this.columnService.uploadOnTask(task_id,this.file).subscribe();
+    this.columnService.uploadOnTask(this.file, task_id).subscribe();
     console.log(this.file)
   }
   
@@ -340,4 +403,3 @@ export class UploadDialog implements OnInit{
     private columnService: ColumnService){}
 
 }
-

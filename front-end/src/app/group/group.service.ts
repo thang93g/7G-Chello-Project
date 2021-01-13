@@ -14,30 +14,44 @@ export class GroupService {
   }
 
   getTaskList(id: number){
-    return this.http.get(`${this.baseUrl}/${id}`);
+    const auth_token = localStorage.getItem('token');
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + auth_token
+    });
+    return this.http.get(`${this.baseUrl}/${id}`, {headers: reqHeader});
   };
 
   getGroup(id: number){
-    return this.http.get(`${this.baseUrl}/detail/${id}`);
+    const auth_token = localStorage.getItem('token');
+    const reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + auth_token
+    });
+    return this.http.get(`${this.baseUrl}/detail/${id}`, {headers: reqHeader});
   }
 
   getMember(id: number){
+   
     return this.http.get(`${this.baseUrl}/member/${id}`);
   }
 
   addMember(id: number,data: any){
+ 
     return this.http.post(`${this.baseUrl}/${id}`,data);
   }
 
   deleteMember(id: number,user_id: number){
+
     return this.http.delete(`${this.baseUrl}/member/${id}/${user_id}`);
   }
 
   deleteGroup(id:number){
-    return this.http.delete(`${this.baseUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/${id}`,);
   }
 
   createGroup(value: any){
-    return this.http.post(`${this.baseUrl}`,value);
+
+    return this.http.post(`${this.baseUrl}`,value,);
   }
 }
