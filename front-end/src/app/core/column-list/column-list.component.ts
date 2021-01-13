@@ -80,11 +80,7 @@ export class ColumnListComponent implements OnInit {
     this.loadData();
     this.comment = new Comment();
     this.noti = new Noti();
-
   }
-
-
-
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -108,8 +104,6 @@ export class ColumnListComponent implements OnInit {
       console.log(data);
     },error => console.log(error)
     );
-
-
   }
 
 
@@ -251,6 +245,7 @@ export class ColumnListComponent implements OnInit {
 
 
 
+
   showFormAddFile() {
     this.show = false;
   }
@@ -295,6 +290,7 @@ export class CommentOnTaskDialog implements OnInit {
   user_comment!: any;
   show_cmt: boolean = false;
   no_comment!: any;
+  noti!: any;
 
 
   constructor(
@@ -307,7 +303,8 @@ export class CommentOnTaskDialog implements OnInit {
   ngOnInit(): void {
     this.comment = new Comment();
     this.task_id = this.data.task_id;
-    this.user = new User;
+    this.user = new User();
+    this.noti = new Noti();
     this.loadData();
     this.getUserComment(this.task_id);
     this.showComment();
@@ -345,8 +342,21 @@ export class CommentOnTaskDialog implements OnInit {
     this.columnService.commentOnTask(this.comment).subscribe(
       data => {
         this.getUserComment(task_id);
+        this.saveNoti();
       }
     );
+  }
+
+  saveNoti(){
+    this.noti.task_id = this.task_id;
+    this.noti.user_id = localStorage.getItem('id');
+    this.noti.content = `Đã bình luận : ${this.comment.comment}`
+    this.userService.createNoti(this.noti).subscribe(
+      data => {
+        this.noti = new Noti();
+        this.comment = new Comment();
+      },error => console.log(error)
+    )
   }
 }
 
