@@ -8,12 +8,11 @@ import { Task } from './task';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { BoardService } from '../boardlist/board.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Inject } from '@angular/core';
-import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import { Observable } from 'rxjs';
 
 export interface DialogData {
@@ -35,11 +34,13 @@ export class ColumnListComponent implements OnInit {
   task!: any;
   user!: any;
   user_id!: any;
+  board!: any;
   id!: any;
   show!: boolean;
   dialogRef: any;
   task_id!: any;
   comment!: any;
+  downloadURL!: any;
 
 
   constructor(
@@ -49,8 +50,10 @@ export class ColumnListComponent implements OnInit {
     private taskService: TaskService,
     private toastr: ToastrService,
     private userService: UserService,
+    private boardService: BoardService,
+    public dialog: MatDialog,
+    private storage: AngularFireStorage,
 
-    public dialog: MatDialog
   ) {}
 
 
@@ -62,22 +65,15 @@ export class ColumnListComponent implements OnInit {
     this.task = new Task();
     this.column.board_id = this.board_id;
     this.user_id = localStorage.getItem('id');
+    this.boardService.getBoardDetail(this.board_id).subscribe(
+      data => {
+        this.board = data;
+      }
+    )
     this.loadData();
     this.comment = new Comment();
   }
-  
 
-  openDialog(id: number) {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {board_id: id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.loadData();
-    });
-  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -208,32 +204,6 @@ changeNameList(id : number){
 
   }
 
-  onFileSelected(event: any) {
-    
-    var n = Date.now();
-    const file = event.target.files[0];
-    const filePath = `UserFile/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`UserFile/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe((url: any) => {
-            if (url) {
-              this.user.image = url;
-            }
-            console.log(this.user.image);
-          });
-        })
-      )
-      .subscribe((url) => {
-        if (url) {
-          console.log(url);
-        }
-      });
-  }
 
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
@@ -254,7 +224,7 @@ changeNameList(id : number){
   hideFormAddFile() {
     this.show = true;
   }
-  
+
 
   openCommentDialog(task_id:any) {
     this.dialog.open(CommentOnTaskDialog, {
@@ -264,7 +234,7 @@ changeNameList(id : number){
     });
   }
 
-  openUploadDialog(task_id:any) {
+  openUploadDialog() {
     this.dialog.open(UploadDialog, {
       width: "500px",
       height: "500px",
@@ -282,7 +252,7 @@ export class CommentOnTaskDialog implements OnInit {
 
   user_id!: any;
   task_id!: any;
-  comment!: any; 
+  comment!: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogData>,
@@ -310,7 +280,7 @@ export class UploadDialog implements OnInit{
   user!: any;
 
   onFileSelected(event: any) {
-    
+
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `UserFile/${n}`;
@@ -341,8 +311,8 @@ export class UploadDialog implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private storage: AngularFireStorage,
     ){
-    
+
   }
-  
+
 }
 

@@ -37,7 +37,6 @@ class TaskController extends Controller
         $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
 
         return response()->json($task);
-
     }
 
     public function update(Request $request, $id)
