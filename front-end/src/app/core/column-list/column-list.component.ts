@@ -46,6 +46,7 @@ export class ColumnListComponent implements OnInit {
   user_comment!: any;
 
 
+
   constructor(
     private router : Router,
     private columnService: ColumnService,
@@ -79,6 +80,9 @@ export class ColumnListComponent implements OnInit {
     this.comment = new Comment();
  
   }
+  
+
+ 
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -220,6 +224,7 @@ export class ColumnListComponent implements OnInit {
 
   }
 
+  
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',

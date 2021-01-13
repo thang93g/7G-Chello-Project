@@ -19,7 +19,6 @@ export class ColumnService {
   //   return this.http.get(`${this.baseUrl}/${board_id}`, {headers: reqHeader});
   // }
   getColumnList(board_id: number){
-
     return this.http.get(`${this.baseUrl}/${board_id}`);
   }
 

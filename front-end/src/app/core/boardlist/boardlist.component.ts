@@ -29,12 +29,7 @@ export class BoardlistComponent implements OnInit {
   show: boolean = true;
   email !: string;
   password !: string;
-  // keyword = 'name';
-  // public countries = [
-  //   {
-  //     name: 'hello'
-  //   }
-  // ];
+
 
   constructor(
     private loginService: LoginService,
@@ -48,7 +43,6 @@ export class BoardlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    this.getToken();
   }
 
   openDialog(id: number) {

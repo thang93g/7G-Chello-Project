@@ -26,7 +26,6 @@ export class GroupDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getToken();
     this.loadData();
   }
   getToken() {

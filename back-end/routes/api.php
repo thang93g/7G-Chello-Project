@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/users', function (Request $request) {
     return $request->user();
 });
+
     Route::get('users', [UserController::class, 'index']);
     Route::post('login', [UserController::class, 'authenticate']);
     Route::post('register', [UserController::class, 'register']);
@@ -44,9 +45,10 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::get('columns/{board_id}', [ColumnController::class, 'index']);
     Route::get('columns/show/{id}', [ColumnController::class, 'show']);
     Route::get('columns/swap/{id}/{index}', [ColumnController::class, 'swap']);
+    Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
+    Route::get('columns/comment/user/{task_id}', [CommentController::class, 'getUserComment']);
     Route::get('columns/{id}/upload', [FileController::class, 'index']);
 
-Route::middleware('jwt.verify')->group(function () {
 
     Route::get('tasks', [TaskController::class, 'index']);
     Route::put('tasks/update/{id}', [TaskController::class, 'update']);
@@ -57,13 +59,12 @@ Route::middleware('jwt.verify')->group(function () {
     Route::get('boards', [BoardController::class, 'index']);
     Route::put('changePassword/{id}', [ChangePassword::class, 'changePassword']);
 
-});
-Route::get('boards/detail/{id}', [BoardController::class, 'getBoardById']);
-
-Route::post('/groups/{id}', [GroupController::class, 'addUser']);
-Route::put('/groups/{id}', [GroupController::class, 'update']);
-Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
-Route::post('/groups', [GroupController::class, 'store']);
+  
+    Route::delete('/groups/member/{id}/{user_id}', [GroupController::class, 'deleteUser']);
+    Route::post('/groups/{id}', [GroupController::class, 'addUser']);
+    Route::put('/groups/{id}', [GroupController::class, 'update']);
+    Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
+    Route::post('/groups', [GroupController::class, 'store']);
 
 Route::get('/groups/{id}', [GroupController::class, 'index']);
 Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
