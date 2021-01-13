@@ -28,6 +28,13 @@ export class GroupDetailComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['group/:id']);
+    }else{
+      this.router.navigate(['error']);
+    }
+  }
 
   loadData() {
     this.user = new User();
