@@ -11,12 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUser(id: number): Observable<object>{
-    const auth_token = localStorage.getItem('token');
-      const reqHeader = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + auth_token
-      });
-    return this.http.get(`${this.baseURL}/${id}`, {headers: reqHeader});
+    return this.http.get(`${this.baseURL}/${id}`);
   }
 
   update(id: number , value: any): Observable<object>{
@@ -27,5 +22,13 @@ export class UserService {
   getAllUser(): Observable<any>{
 
     return this.http.get(`${this.baseURL}`);
+  }
+
+  getNoti(user_id: number){
+    return this.http.get(`http://127.0.0.1:8000/api/notifications/${user_id}`);
+  }
+
+  createNoti(value: any){
+    return this.http.post(`http://127.0.0.1:8000/api/notifications`,value);
   }
 }
