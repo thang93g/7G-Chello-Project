@@ -15,9 +15,13 @@ import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Noti } from './noti';
+import { File } from 'src/app/core/column-list/file'
 import { GroupService } from 'src/app/group/group.service';
 
 export interface DialogData {
+  link: any;
+  description: any;
+  name: any;
   task_id: any;
 }
 
@@ -42,6 +46,9 @@ export class ColumnListComponent implements OnInit {
   dialogRef: any;
   task_id!: any;
   downloadURL!: Observable<string>;
+  description!: any;
+  name!: any;
+  link!: any;
   members!: any;
   comment!: any;
   noti!: any;
@@ -263,14 +270,15 @@ export class ColumnListComponent implements OnInit {
     })
   }
 
-  openUploadDialog() {
+  openUploadDialog(task_id:any) {
     const dialogRef = this.dialog.open(UploadDialog, {
       width: "500px",
       height: "500px",
+      data: {task_id: task_id}
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      this.toastr.success('The dialog was closed');
+      // this.toastr.success('The dialog was closed');
       this.loadData();
     });
   }
@@ -367,7 +375,11 @@ export class CommentOnTaskDialog implements OnInit {
 export class UploadDialog implements OnInit{
   downloadURL!: Observable<string>;
   user!: any;
-  file: any;
+  task_id!: any;
+  name!: any;
+  description!: any;
+  link!: any;
+  file: File = new File;
 
   onFileSelected(event: any) {
 
@@ -386,8 +398,10 @@ export class UploadDialog implements OnInit{
               this.file.link = url;
             }
             this.toastr.success('Upload thành công');
+            console.log(url);
           });
         })
+
       )
       .subscribe((url) => {
         if (url) {
@@ -395,11 +409,20 @@ export class UploadDialog implements OnInit{
         }
       });
   }
+
+  uploadOnTask(task_id: any){
+    this.file.task_id = task_id;
+    this.columnService.uploadOnTask(this.file, task_id).subscribe();
+    console.log(this.file)
+  }
+
   ngOnInit(): void {
+    this.file = new File();
   }
   constructor( public dialogRef: MatDialogRef<DialogData>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private storage: AngularFireStorage,
-    private toastr: ToastrService,){}
+    private toastr: ToastrService,
+    private columnService: ColumnService){}
 
 }
