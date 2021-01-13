@@ -25,7 +25,9 @@ export class ColumnService {
   swapColumn(id: number, orders: number){
     return this.http.get(`${this.baseUrl}/swap/${id}/${orders}`);
   }
-
+  updateColumn(id: number ,value :any ){
+    return this.http.put(`${this.baseUrl}/update/${id}`,value)
+  }
   commentOnTask(value: any) {
     return this.http.post(`${this.baseUrl}/comment`, value);
   }

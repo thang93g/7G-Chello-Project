@@ -27,17 +27,9 @@ class TaskController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        // $task = Task::create([
-        //     'title' => $request->get('title'),
-        //     'label' => $request->get('label'),
-        //     'column_id' => $request->get('column_id'),
-        //     'orders' => $request->get('orders'),
-        // ]);
+        $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
 
-        $task = DB::select("CALL autoIncTask('$request->title',$request->label,$request->column_id)");
-
-        return response()->json(compact('task'),201);
-
+        return response()->json($task);
     }
 
     public function update(Request $request, $id)

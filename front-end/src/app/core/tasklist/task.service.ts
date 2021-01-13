@@ -21,7 +21,7 @@ export class TaskService {
   }
 
   create(data: any): Observable<any> {
-    return this.httpClient.post(baseURL, data);
+    return this.httpClient.post(`${baseURL}/create`, data);
   }
 
   update(id: number, data: any): Observable<any> {

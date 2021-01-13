@@ -26,6 +26,12 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
+  // keyword = 'name';
+  // public countries = [
+  //   {
+  //     name: 'hello'
+  //   }
+  // ];
 
   constructor(
     private router: Router,
@@ -43,7 +49,9 @@ export class BoardlistComponent implements OnInit {
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {board_id: id}
+      data: {
+        board_id: id,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -124,8 +132,10 @@ export class BoardlistComponent implements OnInit {
   openAddBoardDialog(id: number) {
     const dialogRef =  this.dialog.open(AddBoardDialog, {
       width: '300px',
-      height: '250px',
-      data: {group_id : id},
+      height: '300px',
+      data: {
+        group_id : id,
+      },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -133,6 +143,9 @@ export class BoardlistComponent implements OnInit {
     });
   }
 }
+
+
+
 
 @Component({
   selector: 'dialog-overview-example-dialog',
@@ -175,6 +188,13 @@ export class AddBoardDialog implements OnInit {
   groups!: any;
   group_id!: any;
   board: Board = new Board();
+  backgrounds = [
+    {link: 'https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1610443462895?alt=media&token=5d06bf78-b4a3-456c-9522-f1cd4d9ef56f'},
+    {link: 'https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1610443505011?alt=media&token=847a2021-14d6-4438-8f77-9145b29fb6ee'},
+    {link: 'https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1610443531939?alt=media&token=0203a5db-945d-4dca-8d46-ee162ac0a53e'},
+    {link: 'https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1610443553865?alt=media&token=70c908a1-6d04-48ec-8920-b569d643849f'},
+    {link: 'https://firebasestorage.googleapis.com/v0/b/chello-7a341.appspot.com/o/RoomsImages%2F1610443575009?alt=media&token=d0feb2b9-e7c5-4e4a-ae18-6aad7958ddc8'},
+  ];
 
   constructor(
     private groupService: GroupService,

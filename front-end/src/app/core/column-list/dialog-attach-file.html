@@ -6,4 +6,8 @@
         <input accept="file" style="left: 70px; position: relative;" type="file" id="file" #userFile (change)="onFileSelected($event)" name="file" autocomplete="off" />
         <input class="form-control btn btn-success mt-3 " type="submit" value="Upload..." />
     </div>
+    <div class="mt-3">
+        <input type="text" class="form-control" [(ngModel)]="file.description">
+
+    </div>
 </div>

@@ -11,9 +11,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -45,7 +44,26 @@
               <span class="sr-only">(current)</span></a
             >
           </li>
+          <!-- <li >
+          <ng-autocomplete
+            [data]="countries"
+            [searchKeyword]="keyword"
+            placeholder="Tìm kiếm"
+            historyIdentifier="countries"
+            [itemTemplate]="itemTemplate"
+            [notFoundTemplate]="notFoundTemplate">
+          </ng-autocomplete>
+
+          <ng-template  #itemTemplate let-item>
+            <a [innerHTML]="item.name"></a>
+          </ng-template>
+
+          <ng-template  #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+          </ng-template>
+          </li> -->
         </ul>
+          </div>
           <a class="btn" mat-button [matMenuTriggerFor]="animals"><div
           id="avatar"
           style="background-image: url({{user.image}});"
@@ -56,7 +74,6 @@
                         <a (click)="getInfo()" mat-menu-item>Hồ sơ cá nhân</a>
                         <a (click)="logOut()" mat-menu-item>Đăng xuất </a>
                     </mat-menu>
-        </div>
     </nav>
 
     <!-- Board info bar -->
@@ -163,7 +180,7 @@
                             </div>
                         </div>
                         <div class="group-body">
-                            <div style="height: 80px;" *ngFor="let board of group.boards" class="my-board mt-3 shadow p-2 mb-2 rounded">
+                            <div style="height: 80px;background-image: url({{board.background}});background-size: cover;" *ngFor="let board of group.boards" class="my-board mt-3 shadow p-2 mb-2 rounded">
                                 <h3 style="text-align: left;float: left;width: 120px;">{{ board.name }}</h3>
                                 <button class="board-button" (click)="openDialog(board.id)"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
