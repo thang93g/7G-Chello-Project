@@ -55,14 +55,14 @@ export class ColumnListComponent implements OnInit {
     private userService: UserService,
     private storage: AngularFireStorage,
     public dialog: MatDialog,
-    private groupService: GroupService
+    private groupService: GroupService,
     private boardService: BoardService,
 
   ) {}
 
 
   ngOnInit(): void {
-    this.getToken();
+    // this.getToken();
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();

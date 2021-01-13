@@ -32,40 +32,38 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::get('/users/{id}', [UserController::class, 'show']);
 
-
-
-Route::middleware('jwt.verify')->group(function () {
-    Route::get('columns/{board_id}', [ColumnController::class, 'index']);
-    Route::get('columns/show/{id}', [ColumnController::class, 'show']);
     Route::post('columns/create', [ColumnController::class, 'create']);
     Route::put('columns/update/{id}', [ColumnController::class, 'update']);
-    Route::get('columns/swap/{id}/{index}', [ColumnController::class, 'swap']);
     Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
-    Route::get('columns/{id}/upload', [FileController::class, 'index']);
     Route::post('columns/{id}/upload', [FileController::class, 'uploadFile']);
+    Route::delete('tasks/{id}', [TaskController::class, 'delete']);
+    Route::post('tasks/create', [TaskController::class, 'create']);
+    Route::delete('boards/{id}', [BoardController::class, 'destroy']);
+    Route::post('boards/{id}', [BoardController::class, 'create']);
 
+    Route::get('columns/{board_id}', [ColumnController::class, 'index']);
+    Route::get('columns/show/{id}', [ColumnController::class, 'show']);
+    Route::get('columns/swap/{id}/{index}', [ColumnController::class, 'swap']);
+    Route::get('columns/{id}/upload', [FileController::class, 'index']);
+
+Route::middleware('jwt.verify')->group(function () {
 
     Route::get('tasks', [TaskController::class, 'index']);
-    Route::post('tasks/create', [TaskController::class, 'create']);
     Route::put('tasks/update/{id}', [TaskController::class, 'update']);
-    Route::delete('tasks/{id}', [TaskController::class, 'delete']);
+   
     Route::get('tasks/swap/{id}/{orders}', [TaskController::class, 'swap']);
     Route::get('tasks/drop/{id}/{column_id}', [TaskController::class, 'drop']);
 
     Route::get('boards', [BoardController::class, 'index']);
-    Route::delete('boards/{id}', [BoardController::class, 'destroy']);
-    Route::post('boards/{id}', [BoardController::class, 'create']);
-    Route::get('boards/detail/{id}', [BoardController::class, 'getBoardById']);
-
     Route::put('changePassword/{id}', [ChangePassword::class, 'changePassword']);
 
-  
-    Route::delete('/groups/member/{id}/{user_id}', [GroupController::class, 'deleteUser']);
-    Route::post('/groups/{id}', [GroupController::class, 'addUser']);
-    Route::put('/groups/{id}', [GroupController::class, 'update']);
-    Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
-    Route::post('/groups', [GroupController::class, 'store']);
 });
+Route::get('boards/detail/{id}', [BoardController::class, 'getBoardById']);
+
+Route::post('/groups/{id}', [GroupController::class, 'addUser']);
+Route::put('/groups/{id}', [GroupController::class, 'update']);
+Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
+Route::post('/groups', [GroupController::class, 'store']);
 
 Route::get('/groups/{id}', [GroupController::class, 'index']);
 Route::get('/groups/detail/{id}', [GroupController::class, 'show']);

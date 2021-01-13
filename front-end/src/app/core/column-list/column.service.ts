@@ -10,13 +10,17 @@ export class ColumnService {
 
   constructor(private http: HttpClient) { }
 
+  // getColumnList(board_id: number){
+  //   const auth_token = localStorage.getItem('token');
+  //   const reqHeader = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ' + auth_token
+  //   });
+  //   return this.http.get(`${this.baseUrl}/${board_id}`, {headers: reqHeader});
+  // }
   getColumnList(board_id: number){
-    const auth_token = localStorage.getItem('token');
-    const reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + auth_token
-    });
-    return this.http.get(`${this.baseUrl}/${board_id}`, {headers: reqHeader});
+
+    return this.http.get(`${this.baseUrl}/${board_id}`);
   }
 
   getColumn(id: number){
