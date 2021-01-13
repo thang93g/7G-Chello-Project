@@ -34,6 +34,6 @@ class CommentController extends Controller
         if ($userCommentExist) {
         return response()->json($userComment);
         }
-        return response()->json("Không có bình luận nào");
+        return response()->json("Không có bình luận nào", 404);
     }
 }
