@@ -65,6 +65,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -84,7 +85,9 @@ import { PortalModule } from '@angular/cdk/portal';
     
     AddBoardDialog,
     
-    CommentOnTaskDialog
+    CommentOnTaskDialog,
+    
+    ErrorComponent
   ],
 
   imports: [

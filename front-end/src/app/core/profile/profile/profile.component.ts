@@ -26,9 +26,17 @@ export class ProfileComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
   ) {}
+  
 
   ngOnInit() {
     this.loadData();
+  }
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['profile']);
+    }else{
+      this.router.navigate(['error']);
+    }
   }
 
   loadData(){

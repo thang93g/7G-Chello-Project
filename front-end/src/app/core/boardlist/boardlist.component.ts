@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Group } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
+import { LoginService } from 'src/app/login/login.service';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
 import { Board } from './board';
@@ -27,8 +28,12 @@ export class BoardlistComponent implements OnInit {
   board: Board = new Board();
   show: boolean = true;
   notis!: any;
+  email !: string;
+  password !: string;
+
 
   constructor(
+    private loginService: LoginService,
     private router: Router,
     private groupService: GroupService,
     private userService: UserService,
@@ -53,6 +58,14 @@ export class BoardlistComponent implements OnInit {
       console.log('The dialog was closed');
       this.loadData();
     });
+  }
+
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['board']);
+    }else{
+      this.router.navigate(['error']);
+    }
   }
 
   loadData(){

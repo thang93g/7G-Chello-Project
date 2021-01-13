@@ -15,7 +15,7 @@ class NotificationController extends Controller
         ->join('boards', 'columns.board_id', '=', 'boards.id')
         ->join('groups', 'boards.group_id', '=', 'groups.id')
         ->join('group_user', 'group_user.group_id', '=', 'groups.id')
-        ->join('users', 'group_user.user_id', '=', 'users.id')
+        ->join('users', 'notifications.user_id', '=', 'users.id')
         ->select('notifications.task_id',
         'users.name as user_name',
         'notifications.content',
