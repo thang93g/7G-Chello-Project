@@ -33,6 +33,7 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::get('/users/{id}', [UserController::class, 'show']);
 
 
+
 Route::middleware('jwt.verify')->group(function () {
     Route::get('columns/{board_id}', [ColumnController::class, 'index']);
     Route::get('columns/show/{id}', [ColumnController::class, 'show']);

@@ -41,4 +41,9 @@ export class ColumnService {
 
     return this.http.post(`${this.baseUrl}/comment`, value);
   }
+
+  getUserComment(task_id: any) {
+    return this.http.get(`${this.baseUrl}/comment/user/${task_id}`);
+
+  }
 }

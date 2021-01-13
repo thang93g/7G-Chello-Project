@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
@@ -17,5 +18,22 @@ class CommentController extends Controller
         $comment->task_id = $request->task_id;
         $comment->save();
         return response()->json("Bình luận thành công");
+    }
+
+    public function getUserComment($task_id) {
+        $userComment = DB::table('comments')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->join('tasks', 'comments.user_id', '=', 'tasks.id')
+            ->where('comments.task_id', '=', $task_id)
+            ->get();
+        $userCommentExist = DB::table('comments')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->join('tasks', 'comments.user_id', '=', 'tasks.id')
+            ->where('comments.task_id', '=', $task_id)
+            ->exists();
+        if ($userCommentExist) {
+        return response()->json($userComment);
+        }
+        return response()->json("Không có bình luận nào");
     }
 }
