@@ -30,6 +30,14 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::post('login', [UserController::class, 'authenticate']);
     Route::post('register', [UserController::class, 'register']);
 
+Route::get('columns/{board_id}',[ColumnController::class,'index']);
+Route::get('columns/show/{id}',[ColumnController::class,'show']);
+Route::post('columns/create',[ColumnController::class,'create']);
+Route::put('columns/update/{id}',[ColumnController::class,'update']);
+Route::get('columns/swap/{id}/{index}',[ColumnController::class,'swap']);
+Route::post('columns/comment', [CommentController::class,'commentOnTask']);
+Route::get('columns/{id}/upload',[FileController::class,'index']);
+Route::post('columns/{id}/upload',[FileController::class,'uploadOnTask']);
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::get('/users/{id}', [UserController::class, 'show']);
 
@@ -42,7 +50,7 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
     Route::get('columns/comment/user/{task_id}', [CommentController::class, 'getUserComment']);
     Route::get('columns/{id}/upload', [FileController::class, 'index']);
-    Route::post('columns/{id}/upload', [FileController::class, 'uploadFile']);
+    Route::post('columns/{id}/upload', [FileController::class, 'uploadOnTask']);
 
 
     Route::get('tasks', [TaskController::class, 'index']);
