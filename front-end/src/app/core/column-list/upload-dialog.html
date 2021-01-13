@@ -3,8 +3,15 @@
 <div style="text-align: center;">
     <h2> Thêm file mới </h2>
     <div style="text-align: center;" class=" mt-3">
-        <input accept="file" type="file" id="file" #userFile (change)="onFileSelected($event)" name="file" autocomplete="off" />
-        <input type="submit" value="Upload file..." />
+        <input accept="file" type="file" id="file" #userFile (change)="onFileSelected($event)" name="file" autocomplete="off"/>
+        <input type="text" class="form-control" [(ngModel)]="file.name" placeholder="File name" name="name">
+        <input type="text" class="form-control" [(ngModel)]="file.description" name="description" placeholder="File description">
+        <button class="btn btn-success" (click)="uploadOnTask(data.task_id)" class="btn btn-success" type="submit">Add file</button>
+        <div *ngFor="let file of files">
+            <a href="{{file.link}}">{{file.link}}</a>
+        </div>
+
+
 
     </div>
 </div>

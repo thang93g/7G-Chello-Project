@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\File;
-use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +20,7 @@ class FileController extends Controller
         $file->delete();
     }
 
-    public function uploadFile(Request $request){
+    public function uploadOnTask(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'link' => 'required|string|max:255',

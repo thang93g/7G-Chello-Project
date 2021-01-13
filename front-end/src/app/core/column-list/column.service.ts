@@ -31,4 +31,8 @@ export class ColumnService {
   commentOnTask(value: any) {
     return this.http.post(`${this.baseUrl}/comment`, value);
   }
+
+  uploadOnTask(value : any, id: any) {
+    return this.http.post(`${this.baseUrl}/${id}/upload`, value);
+  }
 }
