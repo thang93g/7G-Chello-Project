@@ -24,6 +24,7 @@ class BoardController extends Controller
         $board = Board::find($id);
         return response()->json($board);
     }
+
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -63,6 +64,7 @@ class BoardController extends Controller
 
         $board = Board::create([
             'name' => $request->get('name'),
+            'background' => $request->get('background'),
             'group_id' => $id,
         ]);
         return response()->json(compact('board'),201);
