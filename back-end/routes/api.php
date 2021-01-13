@@ -32,6 +32,7 @@ Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
 Route::get('columns/swap/{id}/{index}',[ColumnController::class,'swap']);
 Route::post('columns/comment', [CommentController::class,'commentOnTask']);
+Route::get('columns/comment/user/{task_id}', [CommentController::class, 'getUserComment']);
 
 
 Route::get('tasks',[TaskController::class,'index']);
