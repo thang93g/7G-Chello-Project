@@ -305,9 +305,6 @@ export class CommentOnTaskDialog implements OnInit {
       data => {
         this.user_comment = data
         console.log(data);
-      },error => {
-        this.user_comment = error
-        console.log(this.user_comment.status);;
       }
     );
   }

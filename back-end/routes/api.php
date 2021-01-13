@@ -33,30 +33,30 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::get('/users/{id}', [UserController::class, 'show']);
 
-    Route::post('columns/create', [ColumnController::class, 'create']);
-    Route::put('columns/update/{id}', [ColumnController::class, 'update']);
-    Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
-    Route::post('columns/{id}/upload', [FileController::class, 'uploadFile']);
-    Route::delete('tasks/{id}', [TaskController::class, 'delete']);
-    Route::post('tasks/create', [TaskController::class, 'create']);
-    Route::delete('boards/{id}', [BoardController::class, 'destroy']);
-    Route::post('boards/{id}', [BoardController::class, 'create']);
 
     Route::get('columns/{board_id}', [ColumnController::class, 'index']);
     Route::get('columns/show/{id}', [ColumnController::class, 'show']);
+    Route::post('columns/create', [ColumnController::class, 'create']);
+    Route::put('columns/update/{id}', [ColumnController::class, 'update']);
     Route::get('columns/swap/{id}/{index}', [ColumnController::class, 'swap']);
     Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
     Route::get('columns/comment/user/{task_id}', [CommentController::class, 'getUserComment']);
     Route::get('columns/{id}/upload', [FileController::class, 'index']);
+    Route::post('columns/{id}/upload', [FileController::class, 'uploadFile']);
 
 
     Route::get('tasks', [TaskController::class, 'index']);
+    Route::post('tasks/create', [TaskController::class, 'create']);
     Route::put('tasks/update/{id}', [TaskController::class, 'update']);
-   
+    Route::delete('tasks/{id}', [TaskController::class, 'delete']);
     Route::get('tasks/swap/{id}/{orders}', [TaskController::class, 'swap']);
     Route::get('tasks/drop/{id}/{column_id}', [TaskController::class, 'drop']);
 
     Route::get('boards', [BoardController::class, 'index']);
+    Route::delete('boards/{id}', [BoardController::class, 'destroy']);
+    Route::post('boards/{id}', [BoardController::class, 'create']);
+    Route::get('boards/detail/{id}', [BoardController::class, 'getBoardById']);
+
     Route::put('changePassword/{id}', [ChangePassword::class, 'changePassword']);
 
   
