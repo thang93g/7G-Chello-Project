@@ -25,6 +25,7 @@ export class TasklistComponent implements OnInit {
     private userService: UserService,) { }
 
   ngOnInit(): void {
+    this.getToken();
     this.readTasks();
     this.user = new User;
     this.user_id = localStorage.getItem('id');
@@ -37,6 +38,14 @@ export class TasklistComponent implements OnInit {
       this.user = data;
     },error => console.log(error)
     )
+  }
+  
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['task']);
+    }else{
+      this.router.navigate(['error']);
+    }
   }
 
   readTasks(): void {

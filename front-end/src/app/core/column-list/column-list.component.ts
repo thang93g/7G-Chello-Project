@@ -8,6 +8,7 @@ import { Task } from './task';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/user/user';
 import { UserService } from 'src/app/user/user.service';
+import { BoardService } from '../boardlist/board.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
@@ -33,11 +34,13 @@ export class ColumnListComponent implements OnInit {
   task!: any;
   user!: any;
   user_id!: any;
+  board!: any;
   id!: any;
   show!: boolean;
   dialogRef: any;
   task_id!: any;
   comment!: any;
+  downloadURL!: Observable<string>;
 
 
   constructor(
@@ -47,12 +50,15 @@ export class ColumnListComponent implements OnInit {
     private taskService: TaskService,
     private toastr: ToastrService,
     private userService: UserService,
+    private boardService: BoardService,
+    public dialog: MatDialog,
+    private storage: AngularFireStorage,
 
-    public dialog: MatDialog
   ) {}
 
 
   ngOnInit(): void {
+    this.getToken();
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();
@@ -60,25 +66,24 @@ export class ColumnListComponent implements OnInit {
     this.task = new Task();
     this.column.board_id = this.board_id;
     this.user_id = localStorage.getItem('id');
+    this.boardService.getBoardDetail(this.board_id).subscribe(
+      data => {
+        this.board = data;
+      }
+    )
     this.loadData();
     this.comment = new Comment();
-  }
-  
-
-  openDialog(id: number) {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {board_id: id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.loadData();
-    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['board/:board_id']);
+    }else{
+      this.router.navigate(['error']);
+    }
   }
 
   loadData(){
@@ -203,9 +208,20 @@ changeNameList(id : number){
      this.column = new Column();
      this.loadData();
    })
+
   }
 
-  
+  openDialog(id: number) {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {board_id: id}
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed');
+      this.loadData();
+    });
+  }
 
 
   showFormAddFile() {
@@ -214,7 +230,7 @@ changeNameList(id : number){
   hideFormAddFile() {
     this.show = true;
   }
-  
+
 
   openCommentDialog(task_id:any) {
     this.dialog.open(CommentOnTaskDialog, {
@@ -225,10 +241,14 @@ changeNameList(id : number){
   }
 
   openUploadDialog() {
-    this.dialog.open(UploadDialog, {
+    const dialogRef = this.dialog.open(UploadDialog, {
       width: "500px",
       height: "500px",
-      // data : {task_id: task_id },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.toastr.success('The dialog was closed');
+      this.loadData();
     });
   }
 }
@@ -242,7 +262,7 @@ export class CommentOnTaskDialog implements OnInit {
 
   user_id!: any;
   task_id!: any;
-  comment!: any; 
+  comment!: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogData>,
@@ -268,9 +288,10 @@ export class CommentOnTaskDialog implements OnInit {
 export class UploadDialog implements OnInit{
   downloadURL!: Observable<string>;
   user!: any;
+  file: any;
 
   onFileSelected(event: any) {
-    
+
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `UserFile/${n}`;
@@ -283,9 +304,9 @@ export class UploadDialog implements OnInit{
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe((url: any) => {
             if (url) {
-              this.user.files = url;
+              this.file.link = url;
             }
-            console.log(this.user.files);
+            this.toastr.success('Upload thành công');
           });
         })
       )
@@ -300,9 +321,7 @@ export class UploadDialog implements OnInit{
   constructor( public dialogRef: MatDialogRef<DialogData>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private storage: AngularFireStorage,
-    ){
-    
-  }
-  
+    private toastr: ToastrService,){}
+
 }
 

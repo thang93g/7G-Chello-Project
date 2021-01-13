@@ -13,6 +13,7 @@ import { PasswordComponent } from './password/password.component';
 import { TasklistComponent} from './core/tasklist/tasklist.component';
 import { GroupDetailComponent } from './core/group-detail/group-detail.component';
 import { ColumnListComponent } from './core/column-list/column-list.component';
+import { ErrorComponent } from './error/error.component';
 
 
 
@@ -21,13 +22,14 @@ const routes: Routes = [
   { path: '', component: NavbarComponent },
   { path: 'board', component: BoardlistComponent },
   { path: 'board/:board_id', component: ColumnListComponent },
-  { path: 'column', component: BoardpageComponent },
+  // { path: 'column', component: BoardpageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'password', component: PasswordComponent },
   // { path: 'task', component: TasklistComponent },
   { path: 'group/:id', component: GroupDetailComponent },
+  { path: 'error', component: ErrorComponent },
 
 
 ];
