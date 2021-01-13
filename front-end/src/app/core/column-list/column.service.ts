@@ -41,7 +41,7 @@ export class ColumnService {
     return this.http.put(`${this.baseUrl}/update/${id}`,value)
   }
   commentOnTask(value: any) {
-
+      console.log(value);
     return this.http.post(`${this.baseUrl}/comment`, value);
   }
 

@@ -10,7 +10,6 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   getBoardList(id: number){
-  
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 

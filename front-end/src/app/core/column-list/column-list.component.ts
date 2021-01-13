@@ -87,6 +87,7 @@ export class ColumnListComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
   getToken() {
     if(localStorage.getItem('token')){
       this.router.navigate(['board/:board_id']);
@@ -282,6 +283,7 @@ export class CommentOnTaskDialog implements OnInit {
   comment!: any; 
   user_comment!: any;
   show_cmt: boolean = false;
+  no_comment!: any;
 
 
   constructor(
@@ -305,6 +307,9 @@ export class CommentOnTaskDialog implements OnInit {
       data => {
         this.user_comment = data
         console.log(data);
+      },error => {
+        this.no_comment = error
+        console.log(this.no_comment);;
       }
     );
   }

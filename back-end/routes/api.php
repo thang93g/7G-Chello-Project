@@ -66,6 +66,6 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
     Route::post('/groups', [GroupController::class, 'store']);
 
-Route::get('/groups/{id}', [GroupController::class, 'index']);
-Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
-Route::get('/groups/member/{id}', [GroupController::class, 'getUser']);
+    Route::get('/groups/{id}', [GroupController::class, 'index']);
+    Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
+    Route::get('/groups/member/{id}', [GroupController::class, 'getUser']); 
