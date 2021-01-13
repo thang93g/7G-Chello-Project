@@ -12,8 +12,6 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Inject } from '@angular/core';
-import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import { Observable } from 'rxjs';
 
 export interface DialogData {
@@ -40,6 +38,7 @@ export class ColumnListComponent implements OnInit {
   dialogRef: any;
   task_id!: any;
   comment!: any;
+  downloadURL!: Observable<string>;
 
 
   constructor(
@@ -64,19 +63,6 @@ export class ColumnListComponent implements OnInit {
     this.user_id = localStorage.getItem('id');
     this.loadData();
     this.comment = new Comment();
-  }
-  
-
-  openDialog(id: number) {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {board_id: id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.loadData();
-    });
   }
 
   onNoClick(): void {
@@ -208,33 +194,6 @@ changeNameList(id : number){
 
   }
 
-  onFileSelected(event: any) {
-    
-    var n = Date.now();
-    const file = event.target.files[0];
-    const filePath = `UserFile/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`UserFile/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe((url: any) => {
-            if (url) {
-              this.user.image = url;
-            }
-            console.log(this.user.image);
-          });
-        })
-      )
-      .subscribe((url) => {
-        if (url) {
-          console.log(url);
-        }
-      });
-  }
-
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
@@ -264,11 +223,15 @@ changeNameList(id : number){
     });
   }
 
-  openUploadDialog(task_id:any) {
-    this.dialog.open(UploadDialog, {
+  openUploadDialog() {
+    const dialogRef = this.dialog.open(UploadDialog, {
       width: "500px",
       height: "500px",
-      // data : {task_id: task_id },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      this.toastr.success('The dialog was closed');
+      this.loadData();
     });
   }
 }
@@ -308,6 +271,7 @@ export class CommentOnTaskDialog implements OnInit {
 export class UploadDialog implements OnInit{
   downloadURL!: Observable<string>;
   user!: any;
+  file: any;
 
   onFileSelected(event: any) {
     
@@ -323,9 +287,9 @@ export class UploadDialog implements OnInit{
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe((url: any) => {
             if (url) {
-              this.user.files = url;
+              this.file.link = url;
             }
-            console.log(this.user.files);
+            this.toastr.success('Upload thành công');
           });
         })
       )
@@ -340,6 +304,8 @@ export class UploadDialog implements OnInit{
   constructor( public dialogRef: MatDialogRef<DialogData>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private storage: AngularFireStorage,
+    private toastr: ToastrService,
+
     ){
     
   }
