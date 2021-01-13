@@ -6,6 +6,7 @@ use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -64,4 +65,5 @@ Route::put('/groups/{id}',[GroupController::class,'update']);
 Route::delete('/groups/{id}',[GroupController::class,'destroy']);
 Route::post('/groups',[GroupController::class,'store']);
 
-
+Route::post('notifications',[NotificationController::class,'store']);
+Route::get('notifications/{user_id}',[NotificationController::class,'index']);

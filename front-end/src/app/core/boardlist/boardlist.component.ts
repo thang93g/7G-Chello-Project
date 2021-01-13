@@ -26,12 +26,7 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
-  // keyword = 'name';
-  // public countries = [
-  //   {
-  //     name: 'hello'
-  //   }
-  // ];
+  notis!: any;
 
   constructor(
     private router: Router,
@@ -74,6 +69,10 @@ export class BoardlistComponent implements OnInit {
       this.user = data;
     },error => console.log(error)
     )
+
+    this.userService.getNoti(this.user_id).subscribe(data => {
+      this.notis = data;
+    },error => console.log(error))
   }
 
   showFormAddGroup() {
@@ -243,3 +242,4 @@ export class AddBoardDialog implements OnInit {
 export interface DialogData {
   board_id: number,
 }
+

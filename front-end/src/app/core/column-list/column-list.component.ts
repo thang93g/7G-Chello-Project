@@ -14,6 +14,7 @@ import { finalize } from 'rxjs/operators';
 import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { Noti } from './noti';
 
 export interface DialogData {
   task_id: any;
@@ -41,6 +42,7 @@ export class ColumnListComponent implements OnInit {
   task_id!: any;
   comment!: any;
   downloadURL!: any;
+  noti!: any;
 
 
   constructor(
@@ -72,6 +74,7 @@ export class ColumnListComponent implements OnInit {
     )
     this.loadData();
     this.comment = new Comment();
+    this.noti = new Noti();
   }
 
 
@@ -83,7 +86,6 @@ export class ColumnListComponent implements OnInit {
     this.columnService.getColumnList(this.board_id).subscribe(
       (data: any) => {
         this.columns = data;
-        console.log(data)
       }, error => console.log(error)
     )
     this.userService.getUser(this.user_id).subscribe(data => {
@@ -140,7 +142,7 @@ export class ColumnListComponent implements OnInit {
     }
   }
 
-  dropTask(event: CdkDragDrop<string[]>,column_id: number) {
+  dropTask(event: CdkDragDrop<string[]>,column_id: number,column_name: string) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       let arr = event.container.data;
@@ -162,9 +164,20 @@ export class ColumnListComponent implements OnInit {
 
       this.task = event.container.data[event.currentIndex];
       let id = this.task.id;
+
+      let str = `Đã di chuyển sang danh sách ${column_name}`
+      this.noti.task_id = this.task.id;
+      this.noti.content = str;
+      this.noti.user_id = localStorage.getItem('id');
+
+      this.userService.createNoti(this.noti).subscribe(
+        data => {
+          this.noti = new Noti();
+        },error => console.log(error)
+      )
+
       this.taskService.dropTask(id,column_id).subscribe(
         data => {
-          console.log(data)
         },error => console.log(error)
       )
 
