@@ -10,12 +10,7 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   getBoardList(id: number){
-    const auth_token = localStorage.getItem('token');
-    const reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + auth_token
-    });
-    return this.http.get(`${this.baseUrl}/${id}`, {headers: reqHeader});
+    return this.http.get(`${this.baseUrl}/${id}`);
   }
 
   getTaskList(id: number){

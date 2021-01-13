@@ -281,6 +281,7 @@ export class CommentOnTaskDialog implements OnInit {
   comment!: any; 
   user_comment!: any;
   show_cmt: boolean = false;
+  no_comment!: any;
 
 
   constructor(
@@ -305,8 +306,8 @@ export class CommentOnTaskDialog implements OnInit {
         this.user_comment = data
         console.log(data);
       },error => {
-        this.user_comment = error
-        console.log(this.user_comment.status);;
+        this.no_comment = error
+        console.log(this.no_comment.status);;
       }
     );
   }

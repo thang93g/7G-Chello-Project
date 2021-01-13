@@ -19,7 +19,7 @@
 
 <!-- <button (click)="getUserComment(data.task_id)" (click)="showComment()" class="btn btn-success">Xem bình luận</button> -->
 
-<div *ngIf="user_comment.status === 404">
+<div *ngIf="no_comment.status === 500">
     <p>Chưa có bình luận nào cho thẻ này..</p>
 </div>
 <div *ngIf="show_cmt === true">
