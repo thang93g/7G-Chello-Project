@@ -4,6 +4,7 @@ use App\Http\Controllers\Account\UserController;
 use App\Http\Controllers\Account\ChangePassword;
 use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
@@ -30,6 +31,8 @@ Route::get('columns/show/{id}',[ColumnController::class,'show']);
 Route::post('columns/create',[ColumnController::class,'create']);
 Route::put('columns/update/{id}',[ColumnController::class,'update']);
 Route::get('columns/swap/{id}/{index}',[ColumnController::class,'swap']);
+Route::post('columns/comment', [CommentController::class,'commentOnTask']);
+
 
 Route::get('tasks',[TaskController::class,'index']);
 Route::post('tasks/create',[TaskController::class,'create']);
@@ -60,3 +63,5 @@ Route::post('/groups/{id}',[GroupController::class,'addUser']);
 Route::put('/groups/{id}',[GroupController::class,'update']);
 Route::delete('/groups/{id}',[GroupController::class,'destroy']);
 Route::post('/groups',[GroupController::class,'store']);
+
+

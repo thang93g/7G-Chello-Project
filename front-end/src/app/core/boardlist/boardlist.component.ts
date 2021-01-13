@@ -26,6 +26,12 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
+  // keyword = 'name';
+  // public countries = [
+  //   {
+  //     name: 'hello'
+  //   }
+  // ];
 
   constructor(
     private router: Router,
@@ -206,7 +212,6 @@ export class AddBoardDialog implements OnInit {
 
 
   onSubmit(id: number){
-    console.log(this.board);
     this.boardService.createBoard(id,this.board).subscribe((data: any) =>{
       this.board = new Board();
       this.loadData();

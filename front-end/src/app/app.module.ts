@@ -23,7 +23,8 @@ import { PasswordComponent } from './password/password.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TasklistComponent } from './core/tasklist/tasklist.component';
 import { GroupDetailComponent } from './core/group-detail/group-detail.component';
-import { ColumnListComponent } from './core/column-list/column-list.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { ColumnListComponent, CommentOnTaskDialog } from './core/column-list/column-list.component';
 
 // angular material
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -76,13 +77,14 @@ import { PortalModule } from '@angular/cdk/portal';
     SingupComponent,
     ProfileComponent,
     BoardlistComponent,
-
     PasswordComponent,
-
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
-    AddBoardDialog
+    
+    AddBoardDialog,
+    
+    CommentOnTaskDialog
   ],
 
   imports: [
@@ -95,7 +97,16 @@ import { PortalModule } from '@angular/cdk/portal';
     AngularFireModule.initializeApp(environment.firebaseConfig, "cloud"),
     HttpClientModule,
     DragDropModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 2000,
+        progressBar: true,
+        progressAnimation: 'increasing',
+        positionClass: 'toast-top-left',
+
+
+      }
+    ),
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -135,7 +146,7 @@ import { PortalModule } from '@angular/cdk/portal';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-
+    AutocompleteLibModule
   ],
   providers: [],
   bootstrap: [AppComponent],

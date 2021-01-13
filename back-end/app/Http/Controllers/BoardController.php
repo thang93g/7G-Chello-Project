@@ -127,4 +127,5 @@ class BoardController extends Controller
         $board = Board::find($id);
         $board->delete();
     }
+
 }
