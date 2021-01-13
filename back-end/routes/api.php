@@ -32,6 +32,7 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
 
     Route::put('/users/{id}', [UserController::class, 'update']);
     Route::get('/users/{id}', [UserController::class, 'show']);
+    // token
 
 
     Route::get('columns/{board_id}', [ColumnController::class, 'index']);
@@ -53,13 +54,15 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::get('tasks/drop/{id}/{column_id}', [TaskController::class, 'drop']);
 
     Route::get('boards', [BoardController::class, 'index']);
+    // tkoen
     Route::delete('boards/{id}', [BoardController::class, 'destroy']);
     Route::post('boards/{id}', [BoardController::class, 'create']);
     Route::get('boards/detail/{id}', [BoardController::class, 'getBoardById']);
-
+    // token
     Route::put('changePassword/{id}', [ChangePassword::class, 'changePassword']);
+    // token
 
-  
+
     Route::delete('/groups/member/{id}/{user_id}', [GroupController::class, 'deleteUser']);
     Route::post('/groups/{id}', [GroupController::class, 'addUser']);
     Route::put('/groups/{id}', [GroupController::class, 'update']);
@@ -67,5 +70,6 @@ Route::middleware('auth:api')->get('/users', function (Request $request) {
     Route::post('/groups', [GroupController::class, 'store']);
 
     Route::get('/groups/{id}', [GroupController::class, 'index']);
+    //token
     Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
     Route::get('/groups/member/{id}', [GroupController::class, 'getUser']); 
