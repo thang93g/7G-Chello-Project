@@ -4,4 +4,5 @@ export class Task{
   label!: string;
   column_id!: number;
   orders!: number;
+  cmtCount!: number;
 }
