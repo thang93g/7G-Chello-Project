@@ -7,6 +7,10 @@ import { User } from 'src/app/user/user';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'; 
 import { FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { PasswordService } from 'src/app/password/password.service';
+import { error } from 'protractor';
+
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +29,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private toastr: ToastrService,
+    public dialog: MatDialog
   ) {}
   
 
@@ -101,5 +106,61 @@ export class ProfileComponent implements OnInit {
 
   changePassword() {
     this.router.navigate(['password']);
+  }
+
+  openChangPasswordDialog() {
+    this.dialog.open(ChangePasswordDialog,{
+      width: "400px",
+      height: "470px"
+    });
+  
+}
+}
+
+
+@Component({
+  selector: 'changepass-dialog',
+  templateUrl: 'changepass-dialog.html',
+})
+export class ChangePasswordDialog implements OnInit {
+  user!: any;
+  id!: any;
+  oldPassword!: any;
+  newPassword!: any;
+  newPasswordConfirm!: any;
+  value!: any
+  hide = true;
+  hide2 = true;
+  hide3 = true ;
+
+  constructor(private router: Router,
+    private passwordService: PasswordService,
+    private userService: UserService,
+    private toastr: ToastrService,
+    public dialog: MatDialog
+   ) { }
+
+   ngOnInit(): void {
+    this.id = localStorage.getItem("id");
+    this.user = this.userService.getUser(this.id);
+    this.getToken();
+  }
+
+   getToken() {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['password']);
+    }else{
+      this.router.navigate(['error']);
+    }
+  }
+
+  updatePassword() {
+    this.passwordService.changePassword(this.id, this.oldPassword, this.newPassword, this.newPasswordConfirm).subscribe(
+      data => {
+       this.toastr.success('Đổi mật khẩu thành công');
+       this.dialog.closeAll();
+      },
+      error => 
+      this.toastr.error('Mật khẩu hiện tại không chính xác'));
   }
 }

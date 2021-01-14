@@ -2,9 +2,9 @@ import { LoginService } from './login.service';
 import { User } from '../user/user';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
 import {ToastrService} from 'ngx-toastr'
+
 
 @Component({
   selector: 'app-login',
@@ -49,4 +49,8 @@ export class LoginComponent implements OnInit {
     this.router.navigate([''])
   }
 
-}
+
+  }
+
+
+

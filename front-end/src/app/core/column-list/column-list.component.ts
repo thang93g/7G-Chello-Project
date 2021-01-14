@@ -61,7 +61,7 @@ export class ColumnListComponent implements OnInit {
   task_title!: any;
   searchTerm!: string;
   items!: Item[];
-  term!: string;
+  term!: any;
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
@@ -328,23 +328,9 @@ export class ColumnListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      // this.toastr.success('The dialog was closed');
       this.loadData();
     });
   }
-
-  // openUploadDialog(task_id:any) {
-  //   const dialogRef = this.dialog.open(UploadDialog, {
-  //     width: "500px",
-  //     height: "500px",
-  //     data: {task_id: task_id}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result: any) => {
-  //     // this.toastr.success('The dialog was closed');
-  //     this.loadData();
-  //   });
-  // }
 }
 
 
