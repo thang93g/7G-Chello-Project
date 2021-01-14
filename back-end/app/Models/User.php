@@ -71,4 +71,8 @@ class User extends Authenticatable implements JWTSubject
     public function groups(){
         return $this->belongsToMany(Group::class,'group_user','user_id','group_id');
     }
+
+    public function tasks(){
+        return $this->belongsToMany(Task::class,'task_user');
+    }
 }
