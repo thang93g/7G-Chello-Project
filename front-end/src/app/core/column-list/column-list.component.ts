@@ -17,6 +17,7 @@ import { Observable } from 'rxjs';
 import { Noti } from './noti';
 import { File } from 'src/app/core/column-list/file'
 import { GroupService } from 'src/app/group/group.service';
+import { HttpClient } from '@angular/common/http';
 
 export interface DialogData {
   link: any;
@@ -58,7 +59,13 @@ export class ColumnListComponent implements OnInit {
   myColumn!: any;
   count_comment!: any;
   task_title!: any;
+  searchTerm!: string;
+  items!: Item[];
+  term!: string;
+  showSearch: boolean = false;
 
+  toggle() {
+    this.showSearch = !this.showSearch;}
 
 
   constructor(
@@ -72,12 +79,12 @@ export class ColumnListComponent implements OnInit {
     public dialog: MatDialog,
     private groupService: GroupService,
     private boardService: BoardService,
+    private http: HttpClient
 
   ) {}
 
 
   ngOnInit(): void {
-    // this.getToken();
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();
@@ -95,6 +102,12 @@ export class ColumnListComponent implements OnInit {
     this.loadData();
     this.comment = new Comment();
     this.noti = new Noti();
+    this.http.get<Item[]>('http://127.0.0.1:8000/api/tasks')
+      .subscribe((data: Item[]) => {
+        this.items = data;
+        console.log(data);
+      });
+    
   }
 
   showEditNameInput(id: number){
@@ -475,4 +488,13 @@ export class UploadDialog implements OnInit{
     private toastr: ToastrService,
     private columnService: ColumnService){}
 
+
+
 }
+
+interface Item{
+  title: string;
+  label: string;
+}
+
+
