@@ -64,6 +64,8 @@ export class ColumnListComponent implements OnInit {
   term!: string;
   showSearch: boolean = false;
   notis! : any
+  add_column: boolean = false;
+
   toggle() {
     this.showSearch = !this.showSearch;}
 
@@ -132,9 +134,6 @@ export class ColumnListComponent implements OnInit {
     this.showAddTask = column_id;
   }
 
-  clickColumnButton(board_id: number){
-    this.showAddColumn
-  }
 
   closeForm(){
     this.showAddTask = null;
@@ -142,6 +141,13 @@ export class ColumnListComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  openAddColumn() {
+    this.add_column = true;
+  }
+  closedAddColumn() {
+    this.add_column = false;
   }
 
   getToken() {
