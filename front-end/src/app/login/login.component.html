@@ -34,10 +34,10 @@
                     <div class="mb-3">
                         <mat-form-field class="example-full-width">
                             <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required pattern="[\w]+[\w]{5,}" type="password"  #pass='ngModel' [class.is-invalid]="pass.invalid && pass.touched">
-                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                            </button>
-                          </mat-form-field>
+                            </a>
+                        </mat-form-field>
                           <div *ngIf="pass.errors && (pass.valid || pass.touched)">
                             <small class="text-danger" *ngIf="pass.errors.required">Mật khẩu không được để trống</small>
                             <small class="text-danger" *ngIf="pass.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký tự đặc biệt</small>

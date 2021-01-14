@@ -21,6 +21,7 @@ class CommentController extends Controller
     }
 
     public function getUserComment($task_id) {
+        
         $userComment = DB::table('comments')
             ->join('users', 'comments.user_id', '=', 'users.id')
             ->join('tasks', 'comments.task_id', '=', 'tasks.id')
@@ -36,5 +37,12 @@ class CommentController extends Controller
         return response()->json($userComment);
         }
         return response()->json(['error' => 'Không có bình luận nào'], 500);
+    }
+
+    public function getCountComment($task_id)
+    {
+        $countComment = DB::table('comments')->select('content')->where('task_id', '=', $task_id)->count();
+        return response()->json($countComment);
+
     }
 }

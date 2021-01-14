@@ -27,6 +27,7 @@ export class GroupDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    // this.getToken();
   }
   getToken() {
     if(localStorage.getItem('token')){

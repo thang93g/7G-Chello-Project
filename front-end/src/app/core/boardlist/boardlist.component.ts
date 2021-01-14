@@ -44,6 +44,7 @@ export class BoardlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    this.getToken();
   }
 
   openDialog(id: number) {
