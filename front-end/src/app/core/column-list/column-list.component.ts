@@ -103,7 +103,7 @@ export class ColumnListComponent implements OnInit {
     this.loadData();
     this.comment = new Comment();
     this.noti = new Noti();
-    this.http.get<Item[]>('http://127.0.0.1:8000/api/tasks')
+    this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/${this.user_id}`)
       .subscribe((data: Item[]) => {
         this.items = data;
         console.log(data);

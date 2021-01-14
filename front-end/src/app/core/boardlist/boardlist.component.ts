@@ -239,3 +239,8 @@ export interface DialogData {
   board_id: number,
 }
 
+interface BoardResult {
+  name: string;
+  image: string;
+}
+

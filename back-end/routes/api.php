@@ -8,6 +8,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,7 +47,7 @@ Route::get('columns/{id}/upload', [FileController::class, 'index']);
 Route::post('columns/{id}/upload', [FileController::class, 'uploadOnTask']);
 
 
-Route::get('tasks', [TaskController::class, 'index']);
+Route::get('tasks/', [SearchController::class, 'search']);
 Route::post('tasks/create', [TaskController::class, 'create']);
 Route::post('tasks/update/{id}', [TaskController::class, 'update']);
 Route::post('tasks/update/label/{id}', [TaskController::class, 'updateLabel']);
