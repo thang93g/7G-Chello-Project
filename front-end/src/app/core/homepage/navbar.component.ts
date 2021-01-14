@@ -22,5 +22,7 @@ export class NavbarComponent implements OnInit {
   gotoLogin() {
     this.route.navigate(['login'])
   }
-
+  
 }
+
+
