@@ -62,5 +62,6 @@ interface Item {
   name: string;
   id: number;
   background: string;
-  
+  title: string;
+  label: string;
 }

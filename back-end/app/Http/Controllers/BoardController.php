@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Models\Board;
 use App\Models\User;
@@ -45,6 +46,7 @@ class BoardController extends Controller
     {
         $boards = Board::all();
         return response()->json($boards);
+
     }
 
     /**

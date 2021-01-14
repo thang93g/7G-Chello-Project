@@ -27,7 +27,7 @@ class SearchController extends Controller
             ->join('boards', 'columns.board_id', '=', 'boards.id')
             ->join('groups', 'boards.group_id', '=', 'groups.id')
             ->join('group_user', 'group_user.group_id', '=', 'groups.id')
-            ->select("tasks.title","boards.name AS board_name","groups.name AS group_name","tasks.label")
+            ->select("tasks.id as id","tasks.title","boards.name AS board_name","groups.name AS group_name","tasks.label")
             ->where("title", "LIKE", "%{$request->get('query')}%")
             ->get();
 
