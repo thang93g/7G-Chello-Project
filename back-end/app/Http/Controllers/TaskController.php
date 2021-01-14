@@ -79,4 +79,12 @@ class TaskController extends Controller
         $task = Task::find($id);
         return response()->json($task);
     }
+
+    public function updateLabel(Request $request,$id)
+    {
+        $task = Task::find($id);
+        $task->label = $request->label;
+        $task->save();
+        return response()->json($task);
+    }
 }
