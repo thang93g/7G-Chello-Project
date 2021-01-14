@@ -426,6 +426,19 @@ export class CommentOnTaskDialog implements OnInit {
     )
   }
 
+  deleteTask() {
+    this.taskService.delete(this.task_id).subscribe(
+      data=>{
+        this.onNoClick();
+        this.loadData();
+      }
+    )
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   editTaskLabel() {
     this.task.label = this.task_label_edit;
     console.log(this.task_label_edit);

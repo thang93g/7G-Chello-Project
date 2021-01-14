@@ -33,6 +33,13 @@
         </mat-select>
     </mat-form-field>
 </div>
+<br>
+<div style="float: right;">
+    <button class="btn btn-danger" (click)="deleteTask(data.task_id)">Xoá thẻ</button>
+</div>
+<br>
+<br>
+<br>
 <hr>
 
 <a class="btn" (click)="openUploadDialog(data.task_id)"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-paperclip" viewBox="0 0 16 16">
