@@ -63,6 +63,7 @@ export class ColumnListComponent implements OnInit {
   items!: Item[];
   term!: string;
   showSearch: boolean = false;
+  notis! : any
   add_column: boolean = false;
 
   toggle() {
@@ -109,7 +110,17 @@ export class ColumnListComponent implements OnInit {
         this.items = data;
         console.log(data);
       });
-    
+
+      this.user_id = localStorage.getItem('id');
+  
+      this.userService.getNoti(this.user_id).subscribe(data => {
+        this.notis = data;
+      },error => console.log(error))
+  
+      this.userService.getUser(this.user_id).subscribe(data => {
+        this.user = data;
+      },error => console.log(error)
+      )
   }
 
   showEditNameInput(id: number){
@@ -122,6 +133,7 @@ export class ColumnListComponent implements OnInit {
   clickTaskButton(column_id: number){
     this.showAddTask = column_id;
   }
+
 
   closeForm(){
     this.showAddTask = null;
@@ -375,6 +387,7 @@ export class CommentOnTaskDialog implements OnInit {
     this.loadData();
     this.getUserComment(this.task_id);
     this.getTaskById(this.task_id);
+   
   }
 
   getUserComment(task_id:any) {
