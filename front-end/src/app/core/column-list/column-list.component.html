@@ -69,18 +69,15 @@
               </div>
           </mat-menu>
         </ul>
-
         <div class="wrap">
             <div class="search" style="border-radius: 5px;">
                 <input mat-button [matMenuTriggerFor]="menu" type="text" [(ngModel)]="term" class="search-menu" placeholder="Nhập để tìm kiếm">
             </div>
             <mat-menu #menu="matMenu" class="search-menu">
-                <div *ngFor="let item of items | filter:term" style="border: solid 1px black; height: 50px; margin-left: 5px; margin-right: 5px; ">
-                    <label style="background-color:{{item.label}};">
-                        &nbsp;&nbsp;
-                    </label>
-                    <p style="color:black;">{{ item.title }} </p>
-                    
+                <div class="btn" *ngFor="let item of items | filter:term" style="border: solid 1px black;text-align: justify; height: 100px; width: 400px; margin-left: 5px; margin-right: 5px; background-color:{{item.label}};" (click)="openCommentDialog(item.id)">
+                    <b><p style="size: 12px;">{{ item.board_name }}</p></b>
+                    <p>{{ item.group_name }}</p>
+                    <i><p>{{ item.title }}</p></i>
                 </div>
             </mat-menu>
         </div>
@@ -147,7 +144,6 @@
                                   </svg></button>
                                 </div>
                             </div>
-
                         </form>
                         <!-- 
                         <div class="wrap">

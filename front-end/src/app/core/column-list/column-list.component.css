@@ -1,6 +1,6 @@
-::ng-deep .searchTerm {
+::ng-deep .mat-menu-panel {
     background: white;
-    width: fit-content;
+    width: 400px;
 }
 
 ::ng-deep .search-menu {

@@ -47,7 +47,7 @@ Route::get('columns/{id}/upload', [FileController::class, 'index']);
 Route::post('columns/{id}/upload', [FileController::class, 'uploadOnTask']);
 
 
-Route::get('tasks/', [SearchController::class, 'search']);
+Route::get('tasks', [SearchController::class, 'search']);
 Route::post('tasks/create', [TaskController::class, 'create']);
 Route::post('tasks/update/{id}', [TaskController::class, 'update']);
 Route::post('tasks/update/label/{id}', [TaskController::class, 'updateLabel']);
