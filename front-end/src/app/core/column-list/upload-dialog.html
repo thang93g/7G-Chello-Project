@@ -6,7 +6,7 @@
         <input accept="file" type="file" id="file" #userFile (change)="onFileSelected($event)" name="file" autocomplete="off"/>
         <button class="btn btn-success" (click)="uploadOnTask(data.task_id)" class="btn btn-success" type="submit">Add file</button>
             <p>Attached files</p>
-            <div *ngFor="let link of file.link">
+            <div *ngFor="let link of file.link" >
                 <p>{{ file.link }}</p>
             </div>   
 
