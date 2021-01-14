@@ -26,6 +26,6 @@ class ChangePassword extends Controller
                 return response()->json('Nhập lại mật khẩu không đúng');
             }
         }
-        return response()->json('Mật khẩu hiện tại không chính xác');
+        return response()->json('Mật khẩu hiện tại không chính xác', 400);
     }
 }
