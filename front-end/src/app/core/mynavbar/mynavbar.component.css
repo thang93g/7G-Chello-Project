@@ -1,15 +1,16 @@
-
 .small-avatar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  float: left;
-  background-size: cover;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float: left;
+    background-size: cover;
 }
 
 #openAddBoardDialog {
-  margin-top: 15px !important;
+    margin-top: 15px !important;
 }
+
+
 /* .ng-autocomplete {
     width:100%;
     max-width: 600px;
@@ -19,77 +20,90 @@
    */
 
 .noti-group {
-  width: 255px;
-  background-color: rgb(126, 119, 230);
-  padding: 5px;
-  color: white;
-  display: inline-block;
+    width: 255px;
+    background-color: rgb(126, 119, 230);
+    padding: 5px;
+    color: white;
+    display: inline-block;
 }
 
-.noti-task{
-  background-color: white;
-  width: 245px;
-  height: 60px;
-  border-radius: 3px;
-  color: black;
-  padding: 5px;
+.noti-task {
+    background-color: white;
+    width: 245px;
+    height: 60px;
+    border-radius: 3px;
+    color: black;
+    padding: 5px;
 }
 
-.small-image{
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  float: left;
-  background-size: cover;
+.small-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    float: left;
+    background-size: cover;
 }
 
-.comment{
-  margin-top: 5px;
-  width: 235px;
-  display: inline-block;
-  border-radius: 3px;
-  padding: 10px;
+.comment {
+    margin-top: 5px;
+    width: 235px;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 10px;
 }
 
-.noti-comment{
-  width: 255px;
-  padding: 7px;
-  background-color: rgb(206, 196, 196);
-
+.noti-comment {
+    width: 255px;
+    padding: 7px;
+    background-color: rgb(206, 196, 196);
 }
 
-.noti-box{
-  padding: 10px;
-  border-radius: 3px;
+.noti-box {
+    padding: 10px;
+    border-radius: 3px;
 }
 
 .navbar {
-  background-color: #3399ff;
+    background-color: #3399ff;
 }
 
 .navbar-brand {
-  font-size: 32px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  color: white;
+    font-size: 32px!important;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    color: white!important;
 }
 
 .navbar-brand:hover {
-  color: grey;
+    color: grey!important;
 }
 
+#noti {
+    color: white!important;
+}
+
+#noti:hover {
+    color: grey!important;
+}
+
+#home {
+    color: white;
+}
+
+#home:hover {
+    color: grey;
+}
 
 #avatar {
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  background-size: cover;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-size: cover;
 }
 
 #getInfo:hover {
-  color: grey !important;
+    color: grey !important;
 }
 
 #logout:hover {
-  color: white !important;
+    color: white !important;
 }
