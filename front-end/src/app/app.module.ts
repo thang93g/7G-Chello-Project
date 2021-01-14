@@ -66,6 +66,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
 import { ErrorComponent } from './error/error.component';
+import { MynavbarComponent } from './core/mynavbar/mynavbar.component';
 
 
 
@@ -87,7 +88,9 @@ import { ErrorComponent } from './error/error.component';
     
     CommentOnTaskDialog,
     
-    ErrorComponent
+    ErrorComponent,
+    
+    MynavbarComponent
   ],
 
   imports: [

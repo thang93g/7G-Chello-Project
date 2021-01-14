@@ -94,6 +94,8 @@ body {
     /* cursor: move; */
     background: white;
     font-size: 14px;
+    height: 60px;
+    max-height: 100%;
 }
 
 .add-form {
@@ -103,4 +105,13 @@ body {
 
 .my-task:hover {
     background-color: whitesmoke;
+}
+
+.example-box{
+  width: 350px;
+}
+
+.task-box{
+  height: 100px;
+  max-height: 100%;
 }
