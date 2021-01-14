@@ -73,7 +73,7 @@ class TaskController extends Controller
         $task = Task::find($name);
         $task->board_id = $board_id;
     }
-        
+
     public function getTaskById($id)
     {
         $task = Task::find($id);
@@ -85,6 +85,18 @@ class TaskController extends Controller
         $task = Task::find($id);
         $task->label = $request->label;
         $task->save();
+        return response()->json($task);
+    }
+
+    public function addUser($task_id,$user_id){
+        $task = Task::find($task_id);
+        $task->users()->attach($user_id);
+        return response()->json($task);
+    }
+
+    public function deleteUser($task_id,$user_id){
+        $task = Task::find($task_id);
+        $task->users()->detach($user_id);
         return response()->json($task);
     }
 }
