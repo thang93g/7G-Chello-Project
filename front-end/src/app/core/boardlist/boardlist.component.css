@@ -48,5 +48,16 @@
   color: white;
 }
 
+::ng-deep .searchTerm{
+  background:white;
+  width: fit-content;
+}
+
+::ng-deep .search-menu {
+  background:white;
+  width: 250px;
+}
+
+
 
 

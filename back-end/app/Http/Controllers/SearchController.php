@@ -27,9 +27,8 @@ class SearchController extends Controller
             ->join('boards', 'columns.board_id', '=', 'boards.id')
             ->join('groups', 'boards.group_id', '=', 'groups.id')
             ->join('group_user', 'group_user.group_id', '=', 'groups.id')
-            ->join('users', 'group_user.user_id', '=', 'users.id')
-            ->where("user_id", "LIKE", "%{$request->get('query')}%")
-            ->get('title');
+            ->where("title", "LIKE", "%{$request->get('query')}%")
+            ->get();
 
         return response()->json($data);
     }

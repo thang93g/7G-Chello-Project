@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/user/user';
@@ -12,13 +13,23 @@ export class MynavbarComponent implements OnInit {
   user!: any;
   notis!: any;
   user_id!: any;
+  items!: Item[];
+  term!: string;
+
 
   constructor(
     private router: Router,
     private userService: UserService,
+    private http: HttpClient
+
     ) { }
 
   ngOnInit(): void {
+    this.http.get<Item[]>(`http://127.0.0.1:8000/api/boards/`)
+    .subscribe((data: Item[]) => {
+      this.items = data;
+      console.log(data);
+    });
     this.user = new User();
 
     this.user_id = localStorage.getItem('id');
@@ -46,4 +57,9 @@ export class MynavbarComponent implements OnInit {
   goHome() {
     this.router.navigate(['board']);
   }
+}
+interface Item {
+  name: string;
+  id: number;
+  background: string;
 }

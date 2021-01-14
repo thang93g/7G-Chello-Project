@@ -61,7 +61,6 @@ export class ColumnListComponent implements OnInit {
   task_title!: any;
   searchTerm!: string;
   items!: Item[];
-  term!: string;
   showSearch: boolean = false;
 
   toggle() {
@@ -100,15 +99,24 @@ export class ColumnListComponent implements OnInit {
         this.board = data;
       }
     )
+    this.getTaskById(this.task_id);
     this.loadData();
     this.comment = new Comment();
     this.noti = new Noti();
-    this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/${this.user_id}`)
+    this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/`)
       .subscribe((data: Item[]) => {
         this.items = data;
         console.log(data);
       });
     
+  }
+
+  getTaskById(task_id: any) {
+    this.taskService.getTaskById(task_id).subscribe(
+      data => {
+        this.task_title = data;
+      }
+    )
   }
 
   showEditNameInput(id: number){
@@ -511,6 +519,7 @@ export class UploadDialog implements OnInit{
 interface Item{
   title: string;
   label: string;
+  id: number;
 }
 
 
