@@ -313,18 +313,18 @@ export class ColumnListComponent implements OnInit {
     });
   }
 
-  openUploadDialog(task_id:any) {
-    const dialogRef = this.dialog.open(UploadDialog, {
-      width: "500px",
-      height: "500px",
-      data: {task_id: task_id}
-    });
+  // openUploadDialog(task_id:any) {
+  //   const dialogRef = this.dialog.open(UploadDialog, {
+  //     width: "500px",
+  //     height: "500px",
+  //     data: {task_id: task_id}
+  //   });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      // this.toastr.success('The dialog was closed');
-      this.loadData();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result: any) => {
+  //     // this.toastr.success('The dialog was closed');
+  //     this.loadData();
+  //   });
+  // }
 }
 
 
@@ -353,7 +353,9 @@ export class CommentOnTaskDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private columnService: ColumnService,
     private userService: UserService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    public dialog: MatDialog,
+
   ) {}
 
   ngOnInit(): void {
@@ -405,6 +407,7 @@ export class CommentOnTaskDialog implements OnInit {
 
   editTaskLabel() {
     this.task.label = this.task_label_edit;
+    console.log(this.task_label_edit);
     this.taskService.updateTaskLabel(this.task_id,this.task).subscribe(
       data=> {
         this.loadData();
@@ -441,6 +444,19 @@ export class CommentOnTaskDialog implements OnInit {
         this.comment = new Comment();
       },error => console.log(error)
     )
+  }
+
+  openUploadDialog(task_id:any) {
+    const dialogRef = this.dialog.open(UploadDialog, {
+      width: "500px",
+      height: "250px",
+      data: {task_id: task_id}
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      // this.toastr.success('The dialog was closed');
+      this.loadData();
+    });
   }
 }
 
