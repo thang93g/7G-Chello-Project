@@ -24,28 +24,26 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a (click)="goHome()" class="nav-link"><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="25"
-                height="25"
-                fill="currentColor"
-                class="bi bi-house"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fill-rule="evenodd"
-                  d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
-                />
-                <path
-                  fill-rule="evenodd"
-                  d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
-                />
-              </svg></a
-            >
-          </li>
-          <button mat-button [matMenuTriggerFor]="notifications"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <a (click)="goHome()" class="nav-link">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            width="25"
+                            height="25"
+                            fill="currentColor"
+                            class="bi bi-house"
+                            viewBox="0 0 16 16">
+                            <path
+                            fill-rule="evenodd"
+                            d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                            <path
+                            fill-rule="evenodd"
+                            d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                        </svg>
+                    </a>
+                </li>
+            <button mat-button [matMenuTriggerFor]="notifications"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
-          </svg></button>
+          </svg>
+            </button>
           <mat-menu #notifications="matMenu">
               <div class="noti-menu">
                 <div *ngFor="let noti of notis" class="noti-box">
@@ -68,7 +66,8 @@
                 </div>
               </div>
           </mat-menu>
-        </ul>
+            </ul>
+        </div>
 
         <div class="wrap">
             <div class="search" style="border-radius: 5px;">
@@ -85,7 +84,7 @@
             </mat-menu>
         </div>
 
-          </div>
+        
           <a class="btn" mat-button [matMenuTriggerFor]="animals"><div
           id="avatar"
           style="background-image: url({{user.image}});"
@@ -97,7 +96,7 @@
                         <a (click)="logOut()" mat-menu-item>Đăng xuất </a>
                     </mat-menu>
       </nav>
-          <div>
+    <div>
         <div style="background-color: #1273ac; border: 0px; margin-top: 100px;" cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="my-board" (cdkDropListDropped)="dropColumn($event)">
             <div style="background-color: gainsboro; border-radius: 5px;" class="mt-3 ml-4 shadow p-2 mb-2 example-box" *ngFor="let column of columns" cdkDrag>
                 <div class="title">
@@ -130,7 +129,8 @@
                         <button id="addColumn" style="background-color: gainsboro; color: black;" (click)="openAddColumn()" class="form-control btn mt-2 " type="submit ">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                              </svg> Thêm cột mới</button>
+                            </svg> Thêm cột mới
+                        </button>
                     </div>
                     <div *ngIf="add_column === true" my-column>
                         <form (ngSubmit)="addColumn() ">
@@ -167,6 +167,7 @@
             </div>
         </div>
     </div>
+    
 
 
     <!-- Optional JavaScript -->
