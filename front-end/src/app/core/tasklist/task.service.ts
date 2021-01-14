@@ -57,4 +57,8 @@ export class TaskService {
   getTaskById(id: any) {
     return this.httpClient.get(`${baseURL}/get/${id}`);
   }
+
+  updateTaskLabel(id: any, data:any) {
+    return this.httpClient.post(`${baseURL}/update/label/${id}`, data);
+  }
 }

@@ -49,6 +49,7 @@ Route::post('columns/{id}/upload', [FileController::class, 'uploadOnTask']);
 Route::get('tasks', [TaskController::class, 'index']);
 Route::post('tasks/create', [TaskController::class, 'create']);
 Route::post('tasks/update/{id}', [TaskController::class, 'update']);
+Route::post('tasks/update/label/{id}', [TaskController::class, 'updateLabel']);
 Route::delete('tasks/{id}', [TaskController::class, 'delete']);
 Route::get('tasks/get/{id}', [TaskController::class, 'getTaskById']);
 Route::get('tasks/swap/{id}/{orders}', [TaskController::class, 'swap']);
@@ -69,7 +70,8 @@ Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
 Route::post('/groups', [GroupController::class, 'store']);
 
-    Route::get('/groups/{id}', [GroupController::class, 'index']);
-    //token
-    Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
-    Route::get('/groups/member/{id}', [GroupController::class, 'getUser']);
+Route::get('/groups/{id}', [GroupController::class, 'index']);
+//token
+Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
+Route::get('/groups/member/{id}', [GroupController::class, 'getUser']);
+

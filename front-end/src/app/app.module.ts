@@ -67,6 +67,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
 import { ErrorComponent } from './error/error.component';
 import { MynavbarComponent } from './core/mynavbar/mynavbar.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -83,13 +84,13 @@ import { MynavbarComponent } from './core/mynavbar/mynavbar.component';
     TasklistComponent,
     GroupDetailComponent,
     ColumnListComponent,
-    
+
     AddBoardDialog,
-    
+
     CommentOnTaskDialog,
-    
+
     ErrorComponent,
-    
+
     MynavbarComponent
   ],
 
@@ -152,7 +153,8 @@ import { MynavbarComponent } from './core/mynavbar/mynavbar.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

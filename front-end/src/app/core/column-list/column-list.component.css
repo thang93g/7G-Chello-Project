@@ -1,3 +1,14 @@
+::ng-deep .searchTerm{
+    background:white;
+    width: fit-content;
+}
+
+::ng-deep .search-menu {
+    background:white;
+    width: 400px;
+  }
+
+
 body {
     background-color: #1273ac;
 }
