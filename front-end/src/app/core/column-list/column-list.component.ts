@@ -404,6 +404,7 @@ export class CommentOnTaskDialog implements OnInit {
 
   editTaskLabel() {
     this.task.label = this.task_label_edit;
+    console.log(this.task_label_edit);
     this.taskService.updateTaskLabel(this.task_id,this.task).subscribe(
       data=> {
         this.loadData();

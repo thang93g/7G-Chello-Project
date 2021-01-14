@@ -23,9 +23,11 @@
     <mat-form-field appearance="fill">
         <mat-label>Chọn màu</mat-label>
         <mat-select [(ngModel)]="task_label_edit" matNativeControl required>
-            <mat-option (click)="editTaskLabel()" style="background-color:#e6e600 ;" value="#e6e600">Yellow</mat-option>
+            <mat-option (click)="editTaskLabel()" style="background-color: #e6e600;" value="#e6e600">Yellow</mat-option>
             <mat-option (click)="editTaskLabel()" style="background-color: #ff3300;" value="#ff3300">Red</mat-option>
             <mat-option (click)="editTaskLabel()" style="background-color: #2db300;" value="#2db300">Green</mat-option>
+            <mat-option (click)="editTaskLabel()" style="background-color: #0750d8;" value="#0750d8">Blue</mat-option>
+            <mat-option (click)="editTaskLabel()" style="background-color: #e67308;" value="#e67308">Orange</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
