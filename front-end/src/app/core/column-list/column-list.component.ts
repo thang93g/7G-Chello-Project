@@ -63,7 +63,7 @@ export class ColumnListComponent implements OnInit {
   items!: Item[];
   term!: string;
   showSearch: boolean = false;
-
+  notis! : any
   toggle() {
     this.showSearch = !this.showSearch;}
 
@@ -108,7 +108,17 @@ export class ColumnListComponent implements OnInit {
         this.items = data;
         console.log(data);
       });
-    
+
+      this.user_id = localStorage.getItem('id');
+  
+      this.userService.getNoti(this.user_id).subscribe(data => {
+        this.notis = data;
+      },error => console.log(error))
+  
+      this.userService.getUser(this.user_id).subscribe(data => {
+        this.user = data;
+      },error => console.log(error)
+      )
   }
 
   showEditNameInput(id: number){
@@ -142,6 +152,7 @@ export class ColumnListComponent implements OnInit {
     this.columnService.getColumnList(this.board_id).subscribe(
       (data: any) => {
         this.columns = data;
+        console.log(data)
       }, error => console.log(error)
     );
     this.userService.getUser(this.user_id).subscribe(data => {
@@ -171,7 +182,7 @@ export class ColumnListComponent implements OnInit {
         this.column.board_id = this.board_id;
         this.loadData();
         this.toastr.success('Thêm cột thành công');
-      }, error => {this.toastr.error('Thêm cột không thành công')}
+      }, error => {this.toastr.error('Vui lòng nhập tên cột ')}
     )
   }
 
@@ -364,6 +375,7 @@ export class CommentOnTaskDialog implements OnInit {
     this.loadData();
     this.getUserComment(this.task_id);
     this.getTaskById(this.task_id);
+   
   }
 
   getUserComment(task_id:any) {

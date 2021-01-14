@@ -34,7 +34,7 @@ body {
     border: solid 1px white;
     min-height: 60px;
     display: flex;
-    flex-direction: row;
+    flex-direction:row;
     background: white;
     border-radius: 4px;
     overflow: auto;
@@ -102,9 +102,10 @@ body {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    /* cursor: move; */
     background: white;
     font-size: 14px;
+    height: 60px;
+    max-height: 100%;
 }
 
 .add-form {
@@ -114,4 +115,58 @@ body {
 
 .my-task:hover {
     background-color: whitesmoke;
+}
+
+.example-box{
+  width: 350px;
+}
+
+.task-box{
+    overflow: hidden;
+  height: 100px;
+  max-height: 100%;
+}
+.noti-group {
+  width: 255px;
+  background-color: rgb(126, 119, 230);
+  padding: 5px;
+  color: white;
+  display: inline-block;
+}
+
+.noti-task{
+  background-color: white;
+  width: 245px;
+  height: 60px;
+  border-radius: 3px;
+  color: black;
+  padding: 5px;
+}
+
+.small-image{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  float: left;
+  background-size: cover;
+}
+
+.comment{
+  margin-top: 5px;
+  width: 235px;
+  display: inline-block;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.noti-comment{
+  width: 255px;
+  padding: 7px;
+  background-color: rgb(206, 196, 196);
+
+}
+
+.noti-box{
+  padding: 10px;
+  border-radius: 3px;
 }
