@@ -45,6 +45,27 @@
     background-color: transparent;
     color: white;
 }
+#avatar {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background-size: cover;
+}
+
+.small-image {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  float: left;
+  background-size: cover;
+}
+.small-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  float: left;
+  background-size: cover;
+}
 
 
 ::ng-deep .searchTerm{

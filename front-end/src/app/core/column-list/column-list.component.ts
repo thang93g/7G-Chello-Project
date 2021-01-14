@@ -64,6 +64,7 @@ export class ColumnListComponent implements OnInit {
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
+  term! : string;
 
   toggle() {
     this.showSearch = !this.showSearch;}
