@@ -12,7 +12,7 @@ import { BoardService } from '../boardlist/board.service';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { DialogOverviewExampleDialog } from '../boardlist/boardlist.component';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Noti } from './noti';
 import { File } from 'src/app/core/column-list/file'
@@ -53,6 +53,8 @@ export class ColumnListComponent implements OnInit {
   comment!: any;
   noti!: any;
   user_comment!: any;
+  count_comment!: any;
+  task_title!: any;
 
 
 
@@ -78,6 +80,7 @@ export class ColumnListComponent implements OnInit {
     this.column = new Column();
     this.newtask = new Task();
     this.task = new Task();
+    this.task_title = new Task();
     this.column.board_id = this.board_id;
     this.user_id = localStorage.getItem('id');
     this.boardService.getBoardDetail(this.board_id).subscribe(
@@ -110,7 +113,6 @@ export class ColumnListComponent implements OnInit {
     );
     this.userService.getUser(this.user_id).subscribe(data => {
       this.user = data;
-      console.log(data);
     },error => console.log(error)
     );
   }
@@ -239,6 +241,8 @@ export class ColumnListComponent implements OnInit {
 
   }
 
+  
+
 
   openDialog(id: number) {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
@@ -251,8 +255,6 @@ export class ColumnListComponent implements OnInit {
       this.loadData();
     });
   }
-
-
 
 
   showFormAddFile() {
@@ -268,7 +270,8 @@ export class ColumnListComponent implements OnInit {
       width: "500px",
       height: "500px",
       data : {task_id: task_id,
-      comment: this.user_comment}
+      comment: this.user_comment,
+      title: this.task_title}
     })
   }
 
@@ -298,16 +301,20 @@ export class CommentOnTaskDialog implements OnInit {
   task_id!: any;
   comment!: any;
   user_comment!: any;
-  show_cmt: boolean = false;
   no_comment!: any;
   noti!: any;
+  task!: any;
+  task_title!: any;
+  edit_title: boolean = false;
+  task_title_edit!: any;
 
 
   constructor(
     public dialogRef: MatDialogRef<DialogData>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private columnService: ColumnService,
-    private userService: UserService
+    private userService: UserService,
+    private taskService: TaskService
   ) {}
 
   ngOnInit(): void {
@@ -315,19 +322,18 @@ export class CommentOnTaskDialog implements OnInit {
     this.task_id = this.data.task_id;
     this.user = new User();
     this.noti = new Noti();
+    this.task = new Task();
     this.loadData();
     this.getUserComment(this.task_id);
-    this.showComment();
+    this.getTaskById(this.task_id);
   }
 
   getUserComment(task_id:any) {
     this.columnService.getUserComment(task_id).subscribe(
       data => {
         this.user_comment = data
-        console.log(data);
       },error => {
         this.no_comment = error
-        console.log(this.no_comment);;
       }
     );
   }
@@ -336,16 +342,37 @@ export class CommentOnTaskDialog implements OnInit {
     this.user_id = localStorage.getItem('id');
     this.userService.getUser(this.user_id).subscribe(data => {
       this.user = data;
-      console.log(data);
     }
     );
-
-
   }
-  showComment() {
-    this.show_cmt = true;
+  
+  editTitle() {
+    this.edit_title = true;
+  }
+  cancleEditTitle() {
+    this.edit_title = false;
   }
 
+  editTitleConfirm() {
+    this.task.title = this.task_title_edit;
+    this.taskService.update(this.task_id,this.task).subscribe(
+      data => {
+        this.task_title_edit = new Task();
+        this.getTaskById(this.task_id);
+        this.cancleEditTitle();
+      }
+    )
+  }
+
+  getTaskById(task_id: any) {
+    this.taskService.getTaskById(task_id).subscribe(
+      data => {
+        this.task_title = data;
+        console.log(this.task_title);
+      }
+    )
+  }
+ 
   commentOnTask(task_id: any) {
    this.comment.user_id = localStorage.getItem('id');
     this.comment.task_id = task_id;
