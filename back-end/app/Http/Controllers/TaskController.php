@@ -99,4 +99,23 @@ class TaskController extends Controller
         $task->users()->detach($user_id);
         return response()->json($task);
     }
+
+    public function getUser($id){
+       $task = Task::find($id);
+       $users = $task->users;
+       return response()->json($users);
+    }
+
+    public function getGroupUser($id){
+        $groupUsers = DB::table('tasks')
+        ->join('columns', 'tasks.column_id', '=', 'columns.id')
+        ->join('boards', 'columns.board_id', '=', 'boards.id')
+        ->join('groups', 'boards.group_id', '=', 'groups.id')
+        ->join('group_user', 'group_user.group_id', '=', 'groups.id')
+        ->join('users', 'group_user.user_id', '=', 'users.id')
+        ->select('users.*')
+        ->where('tasks.id','=',$id)
+        ->get();
+        return response()->json($groupUsers);
+    }
 }

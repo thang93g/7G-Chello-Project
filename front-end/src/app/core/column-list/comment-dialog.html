@@ -19,7 +19,9 @@
     </div>
 </div>
 <br>
-<div>
+<div style="height:110px;">
+  <div style="width: 50%; float: left;">
+    NHÃN
     <mat-form-field appearance="fill">
         <mat-label>Chọn màu</mat-label>
         <mat-select [(ngModel)]="task_label_edit" matNativeControl required>
@@ -28,9 +30,40 @@
             <mat-option (click)="editTaskLabel()" style="background-color: #2db300;" value="#2db300">Green</mat-option>
         </mat-select>
     </mat-form-field>
+  </div>
+  <div style="width: 50%; float: right;height: 100px;">
+    THÀNH VIÊN
+    <br>
+    <div *ngFor="let user of users" style="float: left;margin-right: 5px;">
+      <a [matMenuTriggerFor]="menu"><div style="border-radius: 50%;background-size: cover;width: 40px;height: 40px;background-image: url({{user.image}});"></div></a>
+      <mat-menu #menu="matMenu" style="padding: 5px;">
+        <div style="padding: 5px;">
+          <div style="float: left;width: 50px;height: 50px;border-radius: 50%;background-size: cover;background-image: url({{user.image}});"></div>
+          <div style="float: right;margin-left: 10px;">
+            <div class="font-weight-bold">{{ user.name }}</div>
+          <div style="margin-top: 5px;">{{ user.email }}</div>
+          </div>
+          <div style="margin-top: 50px;text-align: center;">
+            <button (click)="deleteUser(user.id)" mat-button color="primary">Gỡ bỏ khỏi thẻ</button>
+          </div>
+        </div>
+      </mat-menu>
+    </div>
+    <button [matMenuTriggerFor]="menu2" style="border-radius: 50%;width: 40px;height: 40px;border: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+    </svg></button>
+    <mat-menu #menu2="matMenu">
+      THÀNH VIÊN
+      <hr>
+      <button (click)="addUser(user.id)" *ngFor="let user of groupUsers" style="width: 260px;height: 50px;border: 0px;">
+        <div style="float: left;width: 40px;height: 40px;border-radius: 50%;background-size: cover;background-image: url({{user.image}});"></div>
+        <div class="font-weight-bold" style="float: left;margin-left: 10px;">{{ user.name }}</div>
+      </button>
+    </mat-menu>
+</div>
 </div>
 <br>
-<br>
+<hr>
 <h3> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-square-text" viewBox="0 0 16 16">
     <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
     <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>

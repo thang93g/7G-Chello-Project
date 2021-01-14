@@ -55,7 +55,9 @@ Route::get('tasks/get/{id}', [TaskController::class, 'getTaskById']);
 Route::get('tasks/swap/{id}/{orders}', [TaskController::class, 'swap']);
 Route::get('tasks/drop/{id}/{column_id}', [TaskController::class, 'drop']);
 Route::get('tasks/user/{task_id}/{user_id}', [TaskController::class, 'addUser']);
+Route::get('tasks/user/{id}', [TaskController::class, 'getUser']);
 Route::delete('tasks/user/{task_id}/{user_id}', [TaskController::class, 'deleteUser']);
+Route::get('tasks/user-group/{id}', [TaskController::class, 'getGroupUser']);
 
 Route::get('boards', [BoardController::class, 'index']);
 Route::delete('boards/{id}', [BoardController::class, 'destroy']);

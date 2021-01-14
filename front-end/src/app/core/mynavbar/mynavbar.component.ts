@@ -46,4 +46,8 @@ export class MynavbarComponent implements OnInit {
   goHome() {
     this.router.navigate(['board']);
   }
+
+  gotoBoard(id: number){
+    this.router.navigate(['board',id]);
+  }
 }

@@ -18,6 +18,7 @@ import { Noti } from './noti';
 import { File } from 'src/app/core/column-list/file'
 import { GroupService } from 'src/app/group/group.service';
 import { HttpClient } from '@angular/common/http';
+import { NotificationService } from 'src/app/notice/notice.service';
 
 export interface DialogData {
   link: any;
@@ -108,7 +109,7 @@ export class ColumnListComponent implements OnInit {
         this.items = data;
         console.log(data);
       });
-    
+
   }
 
   showEditNameInput(id: number){
@@ -346,6 +347,9 @@ export class CommentOnTaskDialog implements OnInit {
   edit_title: boolean = false;
   task_title_edit!: any;
   task_label_edit!: any;
+  users!: any;
+  groupUsers!: any;
+  myuser!: any;
 
 
   constructor(
@@ -353,7 +357,8 @@ export class CommentOnTaskDialog implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private columnService: ColumnService,
     private userService: UserService,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private taostr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -365,6 +370,12 @@ export class CommentOnTaskDialog implements OnInit {
     this.loadData();
     this.getUserComment(this.task_id);
     this.getTaskById(this.task_id);
+
+    this.taskService.getUserGroup(this.task_id).subscribe(
+      data => {
+        this.groupUsers = data;
+      },error => error
+    )
   }
 
   getUserComment(task_id:any) {
@@ -383,6 +394,45 @@ export class CommentOnTaskDialog implements OnInit {
       this.user = data;
     }
     );
+    this.taskService.getUser(this.task_id).subscribe(
+      data => {
+        this.users = data;
+      },error => console.log(error)
+    )
+  }
+
+  deleteUser(id: number){
+    this.taskService.deleteUser(this.task_id,id).subscribe(data=> {
+      this.taostr.success('Xóa thành viên thành công');
+      this.loadData();
+    })
+  }
+
+  addUser(id: number){
+    this.userService.getUser(id).subscribe(
+      data => {
+        this.myuser = data;
+      },error => console.log(error)
+    )
+
+    let str = 'Đã thêm ' + this.myuser.name
+      this.noti.task_id = this.task_id;
+      this.noti.content = str;
+      this.noti.user_id = localStorage.getItem('id');
+
+      console.log(this.noti)
+
+    this.userService.createNoti(this.noti).subscribe(
+      data => {
+        this.noti = new Noti();
+        this.myuser = new User();
+      }
+    )
+
+    this.taskService.addUser(this.task_id,id).subscribe(data=> {
+      this.taostr.success('Thêm thành viên thành công');
+      this.loadData();
+    })
   }
 
   editTitle() {
