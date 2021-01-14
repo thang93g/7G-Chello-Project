@@ -70,7 +70,8 @@ Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
 Route::post('/groups', [GroupController::class, 'store']);
 
-    Route::get('/groups/{id}', [GroupController::class, 'index']);
-    //token
-    Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
-    Route::get('/groups/member/{id}', [GroupController::class, 'getUser']);
+Route::get('/groups/{id}', [GroupController::class, 'index']);
+//token
+Route::get('/groups/detail/{id}', [GroupController::class, 'show']);
+Route::get('/groups/member/{id}', [GroupController::class, 'getUser']);
+

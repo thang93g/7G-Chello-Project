@@ -69,6 +69,11 @@ class TaskController extends Controller
         return response()->json($task);
     }
 
+    public function searchByName($name, $board_id){
+        $task = Task::find($name);
+        $task->board_id = $board_id;
+    }
+        
     public function getTaskById($id)
     {
         $task = Task::find($id);
