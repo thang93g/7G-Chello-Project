@@ -27,7 +27,6 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
-  notis!: any;
   email !: string;
   password !: string;
 
@@ -83,10 +82,6 @@ export class BoardlistComponent implements OnInit {
       this.user = data;
     },error => console.log(error)
     )
-
-    this.userService.getNoti(this.user_id).subscribe(data => {
-      this.notis = data;
-    },error => console.log(error))
   }
 
   showFormAddGroup() {
@@ -94,19 +89,6 @@ export class BoardlistComponent implements OnInit {
   }
   hideFormAddGroup() {
     this.show = true;
-  }
-
-  logOut() {
-    localStorage.clear();
-    this.router.navigate(['']);
-  }
-
-  goHome() {
-    this.router.navigate(['board']);
-  }
-
-  getInfo() {
-    this.router.navigate(['profile']);
   }
 
   onSubmit(id: number){
