@@ -52,6 +52,9 @@ class TaskController extends Controller
     public function delete($id)
     {
         $task = Task::findOrFail($id);
+        $task->users()->detach();
+        DB::table('comments')->where('task_id','=',$id)->delete();
+        DB::table('files')->where('task_id','=',$id)->delete();
         $task->delete();
     }
 

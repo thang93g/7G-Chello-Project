@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller
 {
@@ -18,10 +19,16 @@ class SearchController extends Controller
         return response()->json($task);
     }
 
-    public function search(Request $request)
+    public function search(Request $request, $user_id)
     {
-        $data = Task::select("name")
-            ->where("name", "LIKE", "%{$request->query}%")
+
+        $data = DB::table("tasks")
+            ->join('columns', 'tasks.column_id', '=', 'columns.id')
+            ->join('boards', 'columns.board_id', '=', 'boards.id')
+            ->join('groups', 'boards.group_id', '=', 'groups.id')
+            ->join('group_user', 'group_user.group_id', '=', 'groups.id')
+            ->where('group_user.user_id','=',$user_id)
+            ->where("title", "LIKE", "%{$request->get('query')}%")
             ->get();
 
         return response()->json($data);

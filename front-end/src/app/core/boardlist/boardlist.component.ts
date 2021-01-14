@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -27,8 +28,9 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
-  email !: string;
+  email!: string;
   password !: string;
+
 
 
   constructor(
@@ -39,11 +41,13 @@ export class BoardlistComponent implements OnInit {
     private boardService: BoardService,
     private toastr: ToastrService,
     public dialog: MatDialog,
+
     ) {}
 
   ngOnInit(): void {
     this.loadData();
     this.getToken();
+   
   }
 
   openDialog(id: number) {
@@ -238,4 +242,6 @@ export class AddBoardDialog implements OnInit {
 export interface DialogData {
   board_id: number,
 }
+
+
 

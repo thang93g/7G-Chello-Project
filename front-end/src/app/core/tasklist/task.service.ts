@@ -32,7 +32,6 @@ export class TaskService {
   }
 
   delete(id: number): Observable<any> {
-
     return this.httpClient.delete(`${baseURL}/${id}`);
   }
 

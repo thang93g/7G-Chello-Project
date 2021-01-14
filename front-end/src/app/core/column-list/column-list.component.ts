@@ -62,8 +62,10 @@ export class ColumnListComponent implements OnInit {
   task_title!: any;
   searchTerm!: string;
   items!: Item[];
-  term!: string;
   showSearch: boolean = false;
+  notis! : any
+  add_column: boolean = false;
+  term! : string;
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -101,15 +103,34 @@ export class ColumnListComponent implements OnInit {
         this.board = data;
       }
     )
+    this.getTaskById(this.task_id);
     this.loadData();
     this.comment = new Comment();
     this.noti = new Noti();
-    this.http.get<Item[]>('http://127.0.0.1:8000/api/tasks')
+    this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/`)
       .subscribe((data: Item[]) => {
         this.items = data;
         console.log(data);
       });
 
+      this.user_id = localStorage.getItem('id');
+
+      this.userService.getNoti(this.user_id).subscribe(data => {
+        this.notis = data;
+      },error => console.log(error))
+
+      this.userService.getUser(this.user_id).subscribe(data => {
+        this.user = data;
+      },error => console.log(error)
+      )
+  }
+
+  getTaskById(task_id: any) {
+    this.taskService.getTaskById(task_id).subscribe(
+      data => {
+        this.task_title = data;
+      }
+    )
   }
 
   showEditNameInput(id: number){
@@ -123,12 +144,20 @@ export class ColumnListComponent implements OnInit {
     this.showAddTask = column_id;
   }
 
+
   closeForm(){
     this.showAddTask = null;
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  openAddColumn() {
+    this.add_column = true;
+  }
+  closedAddColumn() {
+    this.add_column = false;
   }
 
   getToken() {
@@ -179,7 +208,7 @@ export class ColumnListComponent implements OnInit {
 
   addTask(id : any){
     this.newtask.column_id = id;
-    this.newtask.label = '#ffff00';
+    this.newtask.label = '#e4e405';
     this.taskService.create(this.newtask).subscribe(
       data => {
         this.newtask = new Task();
@@ -314,18 +343,18 @@ export class ColumnListComponent implements OnInit {
     });
   }
 
-  openUploadDialog(task_id:any) {
-    const dialogRef = this.dialog.open(UploadDialog, {
-      width: "500px",
-      height: "500px",
-      data: {task_id: task_id}
-    });
+  // openUploadDialog(task_id:any) {
+  //   const dialogRef = this.dialog.open(UploadDialog, {
+  //     width: "500px",
+  //     height: "500px",
+  //     data: {task_id: task_id}
+  //   });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      // this.toastr.success('The dialog was closed');
-      this.loadData();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result: any) => {
+  //     // this.toastr.success('The dialog was closed');
+  //     this.loadData();
+  //   });
+  // }
 }
 
 
@@ -359,6 +388,8 @@ export class CommentOnTaskDialog implements OnInit {
     private userService: UserService,
     private taskService: TaskService,
     private taostr: ToastrService,
+    public dialog: MatDialog,
+
   ) {}
 
   ngOnInit(): void {
@@ -370,12 +401,14 @@ export class CommentOnTaskDialog implements OnInit {
     this.loadData();
     this.getUserComment(this.task_id);
     this.getTaskById(this.task_id);
+    this.user_id = localStorage.getItem('id');
 
     this.taskService.getUserGroup(this.task_id).subscribe(
       data => {
         this.groupUsers = data;
       },error => error
     )
+
   }
 
   getUserComment(task_id:any) {
@@ -389,7 +422,6 @@ export class CommentOnTaskDialog implements OnInit {
   }
 
   loadData(){
-    this.user_id = localStorage.getItem('id');
     this.userService.getUser(this.user_id).subscribe(data => {
       this.user = data;
     }
@@ -399,6 +431,7 @@ export class CommentOnTaskDialog implements OnInit {
         this.users = data;
       },error => console.log(error)
     )
+    this.myuser = new User();
   }
 
   deleteUser(id: number){
@@ -408,29 +441,21 @@ export class CommentOnTaskDialog implements OnInit {
     })
   }
 
-  addUser(id: number){
-    this.userService.getUser(id).subscribe(
-      data => {
-        this.myuser = data;
-      },error => console.log(error)
-    )
-
-    let str = 'Đã thêm ' + this.myuser.name
+  addUser(name: string,id: number){
+      var str = 'Đã thêm ' + name
       this.noti.task_id = this.task_id;
       this.noti.content = str;
       this.noti.user_id = localStorage.getItem('id');
 
       console.log(this.noti)
 
-    this.userService.createNoti(this.noti).subscribe(
-      data => {
-        this.noti = new Noti();
-        this.myuser = new User();
-      }
-    )
-
     this.taskService.addUser(this.task_id,id).subscribe(data=> {
       this.taostr.success('Thêm thành viên thành công');
+      this.userService.createNoti(this.noti).subscribe(
+        data => {
+          this.noti = new Noti();
+        }
+      )
       this.loadData();
     })
   }
@@ -453,8 +478,22 @@ export class CommentOnTaskDialog implements OnInit {
     )
   }
 
+  deleteTask() {
+    this.taskService.delete(this.task_id).subscribe(
+      data=>{
+        this.onNoClick();
+        this.loadData();
+      }
+    )
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   editTaskLabel() {
     this.task.label = this.task_label_edit;
+    console.log(this.task_label_edit);
     this.taskService.updateTaskLabel(this.task_id,this.task).subscribe(
       data=> {
         this.loadData();
@@ -491,6 +530,19 @@ export class CommentOnTaskDialog implements OnInit {
         this.comment = new Comment();
       },error => console.log(error)
     )
+  }
+
+  openUploadDialog(task_id:any) {
+    const dialogRef = this.dialog.open(UploadDialog, {
+      width: "500px",
+      height: "250px",
+      data: {task_id: task_id}
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      // this.toastr.success('The dialog was closed');
+      this.loadData();
+    });
   }
 }
 
@@ -561,6 +613,7 @@ export class UploadDialog implements OnInit{
 interface Item{
   title: string;
   label: string;
+  id: number;
 }
 
 
