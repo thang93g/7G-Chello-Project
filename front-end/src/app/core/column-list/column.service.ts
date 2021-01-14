@@ -10,6 +10,14 @@ export class ColumnService {
 
   constructor(private http: HttpClient) { }
 
+  // getColumnList(board_id: number){
+  //   const auth_token = localStorage.getItem('token');
+  //   const reqHeader = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': 'Bearer ' + auth_token
+  //   });
+  //   return this.http.get(`${this.baseUrl}/${board_id}`, {headers: reqHeader});
+  // }
   getColumnList(board_id: number){
     return this.http.get(`${this.baseUrl}/${board_id}`);
   }
@@ -33,16 +41,14 @@ export class ColumnService {
     return this.http.put(`${this.baseUrl}/update/${id}`,value)
   }
   commentOnTask(value: any) {
-
+      console.log(value);
     return this.http.post(`${this.baseUrl}/comment`, value);
   }
 
+  uploadOnTask(value : any, id: any) {
+    return this.http.post(`${this.baseUrl}/${id}/upload`, value);}
+    
   getUserComment(task_id: any) {
     return this.http.get(`${this.baseUrl}/comment/user/${task_id}`);
-  }
-
-  getCommentCount(task_id: any) {
-    return this.http.get(`${this.baseUrl}/commentCount/user/${task_id}`);
-
   }
 }
