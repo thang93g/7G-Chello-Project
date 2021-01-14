@@ -54,6 +54,9 @@ export class ColumnListComponent implements OnInit {
   comment!: any;
   noti!: any;
   user_comment!: any;
+  showAddTask!: any;
+  showInput!: any;
+  myColumn!: any;
   count_comment!: any;
   task_title!: any;
   searchTerm!: string;
@@ -85,6 +88,7 @@ export class ColumnListComponent implements OnInit {
     this.board_id = this.route.snapshot.params['board_id'];
     this.user = new User;
     this.column = new Column();
+    this.myColumn = new Column();
     this.newtask = new Task();
     this.task = new Task();
     this.task_title = new Task();
@@ -104,6 +108,21 @@ export class ColumnListComponent implements OnInit {
         console.log(data);
       });
     
+  }
+
+  showEditNameInput(id: number){
+    this.showInput = id;
+    this.columnService.getColumn(id).subscribe(data => {
+      this.myColumn = data
+    },error => console.log(error))
+  }
+
+  clickTaskButton(column_id: number){
+    this.showAddTask = column_id;
+  }
+
+  closeForm(){
+    this.showAddTask = null;
   }
 
   onNoClick(): void {
@@ -161,6 +180,7 @@ export class ColumnListComponent implements OnInit {
     this.taskService.create(this.newtask).subscribe(
       data => {
         this.newtask = new Task();
+        this.showAddTask = null;
         this.loadData();
       }
     )
@@ -243,18 +263,16 @@ export class ColumnListComponent implements OnInit {
   }
 
   changeNameList(id : number){
-    this.columnService.getColumn(id).subscribe(data => {
-      this.column = data
-    })
-   this.columnService.updateColumn(id,this.column)
+   this.columnService.updateColumn(id,this.myColumn)
    .subscribe(data =>{
-     this.column = new Column();
+     this.myColumn = new Column();
+     this.showInput = null;
      this.loadData();
-   })
+   },error => console.log(error))
 
   }
 
-  
+
 
 
   openDialog(id: number) {
@@ -358,7 +376,7 @@ export class CommentOnTaskDialog implements OnInit {
     }
     );
   }
-  
+
   editTitle() {
     this.edit_title = true;
   }
@@ -385,7 +403,7 @@ export class CommentOnTaskDialog implements OnInit {
       }
     )
   }
- 
+
   commentOnTask(task_id: any) {
    this.comment.user_id = localStorage.getItem('id');
     this.comment.task_id = task_id;
@@ -421,7 +439,7 @@ export class UploadDialog implements OnInit{
   name!: any;
   description!: any;
   link!: any;
-  file: File = new File;
+  file: any;
 
   onFileSelected(event: any) {
 
@@ -439,7 +457,6 @@ export class UploadDialog implements OnInit{
             if (url) {
               this.file.link = url;
             }
-            this.toastr.success('Upload thành công');
             console.log(url);
           });
         })
@@ -454,7 +471,11 @@ export class UploadDialog implements OnInit{
 
   uploadOnTask(task_id: any){
     this.file.task_id = task_id;
-    this.columnService.uploadOnTask(this.file, task_id).subscribe();
+    this.columnService.uploadOnTask(this.file, task_id).subscribe(
+      data => {
+        this.toastr.success('Upload thành công');
+      }
+    );
     console.log(this.file)
   }
 

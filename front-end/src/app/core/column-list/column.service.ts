@@ -37,7 +37,6 @@ export class ColumnService {
     return this.http.get(`${this.baseUrl}/swap/${id}/${orders}`);
   }
   updateColumn(id: number ,value :any ){
-
     return this.http.put(`${this.baseUrl}/update/${id}`,value)
   }
   commentOnTask(value: any) {
@@ -47,7 +46,7 @@ export class ColumnService {
 
   uploadOnTask(value : any, id: any) {
     return this.http.post(`${this.baseUrl}/${id}/upload`, value);}
-    
+
   getUserComment(task_id: any) {
     return this.http.get(`${this.baseUrl}/comment/user/${task_id}`);
   }
