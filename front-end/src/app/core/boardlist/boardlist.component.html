@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
+
 <body>
     <app-mynavbar></app-mynavbar>
 
@@ -47,7 +48,7 @@
                     </div>
                 </section>
                 <div class="container mt-3">
-                    <div style="width: 83%;" *ngFor="let group of groups" class="my-group mt-3 shadow p-2 mb-2 rounded">
+                    <div style="width: 83%; background-color: whitesmoke;" *ngFor="let group of groups" class="my-group mt-3 shadow p-2 mb-2 rounded">
                         <div class="group-header row">
                             <div *ngIf="group.group.name === 'Bảng cá nhân'">
                                 <div class="col md-5">
@@ -126,8 +127,10 @@
                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
               </svg></button>
                             </div>
-                            <div style="height: 80px; background-color: white; text-align: center;" class="my-board mt-3 shadow p-2 mb-2 rounded">
-                                <button id="openAddBoardDialog" style="margin-top: 4px\;" (click)="openAddBoardDialog(group.group.id)" class="btn btn-link">Tạo bảng mới</button>
+                            <div id="addBoard" (click)="openAddBoardDialog(group.group.id)" style="height: 80px; background-color: white; text-align: center;" class="my-board mt-3 shadow p-2 mb-2 rounded">
+                                <button id="openAddBoardDialog" style="margin-top: 9px;" class="btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                  </svg> thêm bảng mới</button>
                             </div>
                         </div>
                     </div>
