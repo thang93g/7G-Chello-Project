@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -13,6 +14,7 @@ import { BoardService } from './board.service';
 
 export interface DialogData {
   group_id: any;
+  group: any;
 }
 
 @Component({
@@ -27,23 +29,25 @@ export class BoardlistComponent implements OnInit {
   groups!: any;
   board: Board = new Board();
   show: boolean = true;
-  email !: string;
+  email!: string;
   password !: string;
 
 
+
   constructor(
-    private loginService: LoginService,
     private router: Router,
     private groupService: GroupService,
     private userService: UserService,
     private boardService: BoardService,
     private toastr: ToastrService,
     public dialog: MatDialog,
+
     ) {}
 
   ngOnInit(): void {
     this.loadData();
     this.getToken();
+   
   }
 
   openDialog(id: number) {
@@ -137,6 +141,16 @@ export class BoardlistComponent implements OnInit {
      this.loadData();
     });
   }
+
+  openGroupDetailDialog(group_id:any) {
+    const dialogRef = this.dialog.open(GroupDetaiDialog, {
+      width: "500px",
+      height: "500px",
+      data : { group: group_id }
+    });
+  }
+
+  
 }
 
 
@@ -237,5 +251,35 @@ export class AddBoardDialog implements OnInit {
 
 export interface DialogData {
   board_id: number,
+}
+
+
+@Component({
+  selector: 'dialog-groupdetail',
+  templateUrl: 'dialog-groupdetail.html',
+})
+export class GroupDetaiDialog  implements OnInit{
+  group_id!: any; 
+  group!: any;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private boardService: BoardService,
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.group_id = this.data.group;
+    this.getGroupById(this.group_id);
+  }
+
+  getGroupById(group_id:any) {
+    this.boardService.getBoardDetail(group_id).subscribe(
+      data=> {
+        this.group = data;
+      }
+    );
+  }
 }
 

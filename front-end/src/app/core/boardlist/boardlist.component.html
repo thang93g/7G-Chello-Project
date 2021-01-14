@@ -38,7 +38,9 @@
                         </div>
                     </form>
                 </div>
+
             </div>
+
             <div class="col-9">
                 <section class="board-info-bar">
                     <div class="board-controls">
@@ -91,7 +93,7 @@
                                             </div>
                                             <div class="col-1">
 
-                                                <button mat-button style="background-color: lightgray;width: 100px;" (click)="viewGroup(group.group.id)" *ngIf="group.group.user_id == user_id" class="buttonn">
+                                                <button mat-button style="background-color: lightgray;width: 100px;" (click)="openGroupDetailDialog(group.group.id)" *ngIf="group.group.user_id == user_id" class="buttonn">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
