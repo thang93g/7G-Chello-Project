@@ -12,6 +12,7 @@
 </head>
 
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-dark">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -74,12 +75,10 @@
                 <input mat-button [matMenuTriggerFor]="menu" type="text" [(ngModel)]="term" class="search-menu" placeholder="Nhập để tìm kiếm">
             </div>
             <mat-menu #menu="matMenu" class="search-menu">
-                <div *ngFor="let item of items | filter:term" style="border: solid 1px black; height: 50px; margin-left: 5px; margin-right: 5px; ">
-                    <label style="background-color:{{item.label}};">
-                        &nbsp;&nbsp;
-                    </label>
-                    <p style="color:black;">{{ item.title }} </p>
-                    
+
+                <div *ngFor="let item of items | filter:term" style="border: solid 1px black;text-align: center; height: 50px; margin-left: 5px; margin-right: 5px; background-color:{{item.label}};">
+                    <button style="color:white; background-color: transparent; border: none;" (click)="openCommentDialog(item.id)">{{ item.title }} </button>
+
                 </div>
             </mat-menu>
         </div>
@@ -90,6 +89,7 @@
           style="background-image: url({{user.image}});"
           title="{{ user.name }} ( {{ user.email }} )"
         ></div></a>
+
                     <!-- #docregion sub-menu -->
                     <mat-menu #animals="matMenu">
                         <a (click)="getInfo()" mat-menu-item>Hồ sơ cá nhân</a>
@@ -147,7 +147,6 @@
                                   </svg></button>
                                 </div>
                             </div>
-
                         </form>
                         <!-- 
                         <div class="wrap">
