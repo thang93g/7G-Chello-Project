@@ -63,6 +63,7 @@ export class ColumnListComponent implements OnInit {
   items!: Item[];
   term!: string;
   showSearch: boolean = false;
+  add_column: boolean = false;
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -130,6 +131,13 @@ export class ColumnListComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  openAddColumn() {
+    this.add_column = true;
+  }
+  closedAddColumn() {
+    this.add_column = false;
+  }
+
   getToken() {
     if(localStorage.getItem('token')){
       this.router.navigate(['board/:board_id']);
@@ -178,7 +186,7 @@ export class ColumnListComponent implements OnInit {
 
   addTask(id : any){
     this.newtask.column_id = id;
-    this.newtask.label = '#ffff00';
+    this.newtask.label = '#e4e405';
     this.taskService.create(this.newtask).subscribe(
       data => {
         this.newtask = new Task();
