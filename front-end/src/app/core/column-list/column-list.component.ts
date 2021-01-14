@@ -58,6 +58,7 @@ export class ColumnListComponent implements OnInit {
 
 
 
+
   constructor(
     private router : Router,
     private columnService: ColumnService,
@@ -91,6 +92,7 @@ export class ColumnListComponent implements OnInit {
     this.loadData();
     this.comment = new Comment();
     this.noti = new Noti();
+
   }
 
   onNoClick(): void {
@@ -144,7 +146,7 @@ export class ColumnListComponent implements OnInit {
 
   addTask(id : any){
     this.newtask.column_id = id;
-    this.newtask.label = 'aaa';
+    this.newtask.label = '#ffff00';
     this.taskService.create(this.newtask).subscribe(
       data => {
         this.newtask = new Task();
@@ -266,13 +268,18 @@ export class ColumnListComponent implements OnInit {
 
 
   openCommentDialog(task_id:any) {
-    this.dialog.open(CommentOnTaskDialog, {
+    const dialogRef = this.dialog.open(CommentOnTaskDialog, {
       width: "500px",
       height: "500px",
       data : {task_id: task_id,
       comment: this.user_comment,
       title: this.task_title}
-    })
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      // this.toastr.success('The dialog was closed');
+      this.loadData();
+    });
   }
 
   openUploadDialog(task_id:any) {
@@ -307,6 +314,7 @@ export class CommentOnTaskDialog implements OnInit {
   task_title!: any;
   edit_title: boolean = false;
   task_title_edit!: any;
+  task_label_edit!: any;
 
 
   constructor(
@@ -364,11 +372,19 @@ export class CommentOnTaskDialog implements OnInit {
     )
   }
 
+  editTaskLabel() {
+    this.task.label = this.task_label_edit;
+    this.taskService.updateTaskLabel(this.task_id,this.task).subscribe(
+      data=> {
+        this.loadData();
+      }
+    )
+  }
+
   getTaskById(task_id: any) {
     this.taskService.getTaskById(task_id).subscribe(
       data => {
         this.task_title = data;
-        console.log(this.task_title);
       }
     )
   }

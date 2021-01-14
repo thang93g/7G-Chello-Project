@@ -49,6 +49,7 @@ Route::post('columns/{id}/upload', [FileController::class, 'uploadOnTask']);
 Route::get('tasks', [TaskController::class, 'index']);
 Route::post('tasks/create', [TaskController::class, 'create']);
 Route::post('tasks/update/{id}', [TaskController::class, 'update']);
+Route::post('tasks/update/label/{id}', [TaskController::class, 'updateLabel']);
 Route::delete('tasks/{id}', [TaskController::class, 'delete']);
 Route::get('tasks/get/{id}', [TaskController::class, 'getTaskById']);
 Route::get('tasks/swap/{id}/{orders}', [TaskController::class, 'swap']);
