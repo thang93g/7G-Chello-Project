@@ -66,6 +66,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PortalModule } from '@angular/cdk/portal';
 import { ErrorComponent } from './error/error.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -149,7 +150,8 @@ import { ErrorComponent } from './error/error.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
