@@ -28,8 +28,7 @@ export class TaskService {
   }
 
   update(id: number, data: any): Observable<any> {
-
-    return this.httpClient.put(`${baseURL}/${id}`, data);
+    return this.httpClient.post(`${baseURL}/update/${id}`, data);
   }
 
   delete(id: number): Observable<any> {
@@ -53,5 +52,9 @@ export class TaskService {
 
   dropTask(id: number,column_id: number){
     return this.httpClient.get(`${baseURL}/drop/${id}/${column_id}`);
+  }
+
+  getTaskById(id: any) {
+    return this.httpClient.get(`${baseURL}/get/${id}`);
   }
 }

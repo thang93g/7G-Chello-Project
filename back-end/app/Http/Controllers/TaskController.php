@@ -34,18 +34,17 @@ class TaskController extends Controller
 
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),[
-            'title' => 'required|string|max:255',
-            'label' => 'required|string|max:255',
-        ]);
-
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
+//        $validator = Validator::make($request->all(),[
+//            'title' => 'required|string|max:255',
+//        ]);
+//
+//
+//        if($validator->fails()){
+//            return response()->json($validator->errors()->toJson(), 400);
+//        }
 
         $task = Task::find($id);
-        $task->fill($request->all());
+        $task->title = $request->title;
         $task->save();
         return response()->json($task);
     }
@@ -67,6 +66,12 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->column_id = $column_id;
         $task->save();
+        return response()->json($task);
+    }
+
+    public function getTaskById($id)
+    {
+        $task = Task::find($id);
         return response()->json($task);
     }
 }
