@@ -19,6 +19,7 @@ import { File } from 'src/app/core/column-list/file'
 import { GroupService } from 'src/app/group/group.service';
 import { HttpClient } from '@angular/common/http';
 
+
 export interface DialogData {
   link: any;
   description: any;
@@ -64,6 +65,7 @@ export class ColumnListComponent implements OnInit {
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
+  files!: Files[];
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -108,6 +110,12 @@ export class ColumnListComponent implements OnInit {
     this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/`)
       .subscribe((data: Item[]) => {
         this.items = data;
+        console.log(data);
+      });
+
+      this.http.get<Files[]>(`http://127.0.0.1:8000/api/files/`)
+      .subscribe((data: Files[]) => {
+        this.files = data;
         console.log(data);
       });
 
@@ -564,6 +572,10 @@ export class UploadDialog implements OnInit{
 
 
 
+}
+
+interface Files{
+  link: string;
 }
 
 interface Item{
