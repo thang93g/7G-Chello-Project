@@ -336,23 +336,9 @@ export class ColumnListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      // this.toastr.success('The dialog was closed');
       this.loadData();
     });
   }
-
-  // openUploadDialog(task_id:any) {
-  //   const dialogRef = this.dialog.open(UploadDialog, {
-  //     width: "500px",
-  //     height: "500px",
-  //     data: {task_id: task_id}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result: any) => {
-  //     // this.toastr.success('The dialog was closed');
-  //     this.loadData();
-  //   });
-  // }
 }
 
 
