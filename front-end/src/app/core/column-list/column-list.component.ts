@@ -416,6 +416,7 @@ export class CommentOnTaskDialog implements OnInit {
   }
 
   loadData(){
+    this.getUserComment(this.task_id);
     this.taskService.getTaskById(this.task_id).subscribe(
       data => {
         this.task = data;
