@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class FileController extends Controller
@@ -20,7 +21,8 @@ class FileController extends Controller
         $file->delete();
     }
 
-    public function uploadOnTask(Request $request){
+    public function uploadOnTask(Request $request)
+    {
         $validator = Validator::make($request->all(), [
 //            'name' => 'required|string|max:255',
             'link' => 'required|string|max:255',
@@ -28,7 +30,7 @@ class FileController extends Controller
             'task_id' => 'required|numeric',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -38,18 +40,18 @@ class FileController extends Controller
         $file->description = $request->description;
         $file->task_id = $request->task_id;
         $file->save();
-        return response()->json(compact('file'),201);
+        return response()->json(compact('file'), 201);
     }
 
     public function update($request, $id)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'link' => 'required|string|max:255',
             'task_id' => 'required|numeric',
         ]);
 
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -57,5 +59,21 @@ class FileController extends Controller
         $file->fill($request->all());
         $file->save();
         return response()->json($file);
+    }
+
+    public function getUserUpload($task_id) {
+
+        $userUpload = DB::table('files')
+            ->join('tasks', 'files.task_id', '=', 'tasks.id')
+            ->where('files.task_id', '=', $task_id)
+            ->get();
+        $userFileExist = DB::table('files')
+            ->join('tasks', 'files.task_id', '=', 'tasks.id')
+            ->where('files.task_id', '=', $task_id)
+            ->exists();
+        if ($userFileExist) {
+        return response()->json($userUpload);
+        }
+        return response()->json(['error' => 'Không có file nào'], 500);
     }
 }

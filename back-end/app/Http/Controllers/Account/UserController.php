@@ -21,16 +21,16 @@ class UserController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if(Auth::attempt($credentials)) {
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+        if (Auth::attempt($credentials)) {
+            try {
+                if (!$token = JWTAuth::attempt($credentials)) {
+                    return response()->json(['error' => 'invalid_credentials'], 400);
+                }
+            } catch (JWTException $e) {
+                return response()->json(['error' => 'could_not_create_token'], 500);
             }
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
-        }
 
-        return response()->json([Auth::user(), $token]);
+            return response()->json([Auth::user(), $token]);
         }
     }
 
@@ -43,7 +43,7 @@ class UserController extends Controller
             'phone' => 'required|string|min:6|max:20'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -64,7 +64,7 @@ class UserController extends Controller
         $group->save();
         $group->users()->attach($user->id);
 
-        return response()->json(compact('user','token'),201);
+        return response()->json(compact('user', 'token'), 201);
     }
 
     /*
@@ -74,7 +74,7 @@ class UserController extends Controller
     {
         try {
 
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
+            if (!$user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
 
@@ -120,7 +120,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -131,7 +131,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -143,7 +143,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -154,8 +154,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -166,7 +166,7 @@ class UserController extends Controller
             'phone' => 'required|string|min:6|max:20',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -179,7 +179,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
