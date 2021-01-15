@@ -27,8 +27,13 @@ class TaskController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
-
+        // $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
+        $task = new Task();
+        $task->title = $request->title;
+        $task->label = $request->label;
+        $task->column_id = $request->column_id;
+        $task->orders = 9999;
+        $task->save();
         return response()->json($task);
     }
 
@@ -52,6 +57,10 @@ class TaskController extends Controller
     public function delete($id)
     {
         $task = Task::findOrFail($id);
+        $task->users()->detach();
+        DB::table('comments')->where('task_id','=',$id)->delete();
+        DB::table('notifications')->where('task_id','=',$id)->delete();
+        DB::table('files')->where('task_id','=',$id)->delete();
         $task->delete();
     }
 
@@ -98,5 +107,29 @@ class TaskController extends Controller
         $task = Task::find($task_id);
         $task->users()->detach($user_id);
         return response()->json($task);
+    }
+
+    public function getUser($id){
+       $users = DB::table('users')
+       ->join('task_user','task_user.user_id','=','users.id')
+       ->join('tasks','task_user.task_id','=','tasks.id')
+       ->select('users.*')
+       ->where('tasks.id','=',$id)
+       ->distinct()
+       ->get();
+       return response()->json($users);
+    }
+
+    public function getGroupUser($id){
+        $groupUsers = DB::table('tasks')
+        ->join('columns', 'tasks.column_id', '=', 'columns.id')
+        ->join('boards', 'columns.board_id', '=', 'boards.id')
+        ->join('groups', 'boards.group_id', '=', 'groups.id')
+        ->join('group_user', 'group_user.group_id', '=', 'groups.id')
+        ->join('users', 'group_user.user_id', '=', 'users.id')
+        ->select('users.*')
+        ->where('tasks.id','=',$id)
+        ->get();
+        return response()->json($groupUsers);
     }
 }

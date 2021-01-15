@@ -40,7 +40,7 @@
         <div class="noti-menu">
           <div *ngFor="let noti of notis" class="noti-box">
             <div class="noti-group">
-              <div class="noti-task">
+              <div class="noti-task" (click)=" gotoBoard(noti.board_id)">
                 {{ noti.task }}
               </div>
               <div>
