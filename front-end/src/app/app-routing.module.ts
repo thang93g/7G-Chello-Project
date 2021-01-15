@@ -25,7 +25,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'password', component: PasswordComponent },
   { path: 'group/:id', component: GroupDetailComponent },
   { path: 'error', component: ErrorComponent },
 

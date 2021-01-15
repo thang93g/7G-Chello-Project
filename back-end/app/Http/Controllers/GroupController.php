@@ -140,4 +140,6 @@ class GroupController extends Controller
         $group = Group::find($id);
         $group->users()->detach($user_id);
     }
+
+
 }

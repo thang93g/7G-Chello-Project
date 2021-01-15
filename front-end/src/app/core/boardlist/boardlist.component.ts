@@ -14,6 +14,7 @@ import { BoardService } from './board.service';
 
 export interface DialogData {
   group_id: any;
+  group: any;
 }
 
 @Component({
@@ -34,7 +35,6 @@ export class BoardlistComponent implements OnInit {
 
 
   constructor(
-    private loginService: LoginService,
     private router: Router,
     private groupService: GroupService,
     private userService: UserService,
@@ -141,6 +141,16 @@ export class BoardlistComponent implements OnInit {
      this.loadData();
     });
   }
+
+  openGroupDetailDialog(group_id:any) {
+    const dialogRef = this.dialog.open(GroupDetaiDialog, {
+      width: "500px",
+      height: "500px",
+      data : { group: group_id }
+    });
+  }
+
+  
 }
 
 
@@ -244,4 +254,32 @@ export interface DialogData {
 }
 
 
+@Component({
+  selector: 'dialog-groupdetail',
+  templateUrl: 'dialog-groupdetail.html',
+})
+export class GroupDetaiDialog  implements OnInit{
+  group_id!: any; 
+  group!: any;
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private boardService: BoardService,
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.group_id = this.data.group;
+    this.getGroupById(this.group_id);
+  }
+
+  getGroupById(group_id:any) {
+    this.boardService.getBoardDetail(group_id).subscribe(
+      data=> {
+        this.group = data;
+      }
+    );
+  }
+}
 
