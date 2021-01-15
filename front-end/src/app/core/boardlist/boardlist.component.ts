@@ -2,8 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { error } from 'console';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Group } from 'src/app/group/group';
 import { GroupService } from 'src/app/group/group.service';
@@ -147,7 +146,7 @@ export class BoardlistComponent implements OnInit {
     const dialogRef = this.dialog.open(GroupDetaiDialog, {
       width: "500px",
       height: "500px",
-      data : { group_id: group_id }
+      data : { group: group_id }
     });
   }
 
@@ -259,181 +258,27 @@ export interface DialogData {
   templateUrl: 'dialog-groupdetail.html',
 })
 export class GroupDetaiDialog  implements OnInit{
-  id!: number;
+  group_id!: any; 
   group!: any;
-  members!: any;
-  user!: any;
-  add_member: boolean = false;
 
-  
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private groupService: GroupService,
-    private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toastr: ToastrService,
-    public dialog: MatDialog,
-  ) {}
+    private boardService: BoardService,
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.id = this.data.group_id;
-    this.loadData();
-
-
-    // this.getToken();
-  }
-  getToken() {
-    if(localStorage.getItem('token')){
-      this.router.navigate(['group/:id']);
-    }else{
-      this.router.navigate(['error']);
-    }
+    this.group_id = this.data.group;
+    this.getGroupById(this.group_id);
   }
 
-  loadData() {
-    this.user = new User();
-    this.group = new Group();
-    this.groupService.getGroup(this.id).subscribe(
-      (data) => {
+  getGroupById(group_id:any) {
+    this.boardService.getBoardDetail(group_id).subscribe(
+      data=> {
         this.group = data;
-      },
-      (error) => console.log(error)
-    );
-
-    
-
-    this.groupService.getMember(this.id).subscribe(
-      (data) => {
-        this.members = data;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  onSubmit() {
-    this.groupService.addMember(this.id, this.user).subscribe(
-      (data) => {
-        this.user = new User();
-        this.loadData();
-        this.toastr.success('Thêm thành viên thành công !');
-      },
-      error => {
-        console.log(error);
-        this.toastr.error('Thêm thành viên không thành công !');
       }
     );
   }
-
-  addMember() {
-    this.add_member = true;
-  }
-
-  cancelAddMember() {
-    this.add_member = false;
-  }
-
-  openDialogDeleteGroup(){
-    const dialogRef = this.dialog.open(DeleteGrouppDialog, {
-      width: '250px',
-      data: {id: this.id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.dialog.closeAll();
-      this.loadData();
-    });
-  }
-
-  openDialogDeleteMember(id: number,group_id: number){
-    const dialogRef = this.dialog.open(DeleteMemberDialog, {
-      width: '250px',
-      data: {id: id,group_id: group_id}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadData();
-    });
-  }  
-}
-
-@Component({
-  selector: 'delete-group-dialog',
-  templateUrl: 'delete-group.html',
-})
-export class DeleteGrouppDialog implements OnInit {
-
-  user_id!: any;
-  group!: any;
-
-  constructor(
-    private groupService: GroupService,
-    private toastr: ToastrService,
-    private router: Router,
-    public dialogRef: MatDialogRef<DeleteGrouppDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-
-  ngOnInit(): void {
-    this.user_id = localStorage.getItem('id');
-    this.group = new Group();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  deleteGroup(id: number) {
-      this.groupService.deleteGroup(id).subscribe((data) => {
-        this.dialogRef.close();
-        this.toastr.success('Xóa dự án thành công !');
-        // this.loadData();
-        window.location.reload();
-      });
-    }
-
-  loadData(){
-    this.groupService.getBoardList(this.user_id).subscribe(
-      data => {
-        this.group = data;
-      }, 
-      error => console.log(error)
-    );
-  }
-}
-
-@Component({
-  selector: 'delete-member-dialog',
-  templateUrl: 'delete-member.html',
-})
-export class DeleteMemberDialog {
-
-  constructor(
-    private groupService: GroupService,
-    private toastr: ToastrService,
-    public dialogRef: MatDialogRef<DeleteGrouppDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: MemberData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-
-  deleteMember() {
-    console.log(this.data)
-    this.groupService.deleteMember(this.data.group_id,this.data.id).subscribe((data) => {
-      this.dialogRef.close();
-      this.toastr.success('Xóa thành viên thành công !');
-    });
-}
-}
-
-export interface MemberData {
-  id: number;
-  group_id: number;
-}
-
-export interface DialogData {
-  id: number;
 }
 
