@@ -20,6 +20,7 @@ import { GroupService } from 'src/app/group/group.service';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/notice/notice.service';
 
+
 export interface DialogData {
   link: any;
   description: any;
@@ -65,6 +66,7 @@ export class ColumnListComponent implements OnInit {
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
+  files!: File[];
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -109,6 +111,12 @@ export class ColumnListComponent implements OnInit {
     this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/`)
       .subscribe((data: Item[]) => {
         this.items = data;
+      });
+
+      this.http.get<File[]>(`http://127.0.0.1:8000/api/files/`)
+      .subscribe((data: File[]) => {
+        this.files = data;
+        console.log(data);
       });
 
       this.user_id = localStorage.getItem('id');
@@ -346,6 +354,8 @@ export class ColumnListComponent implements OnInit {
       this.loadData();
     });
   }
+
+
 }
 
 
@@ -366,6 +376,8 @@ export class CommentOnTaskDialog implements OnInit {
   task_title!: any;
   edit_title: boolean = false;
   task_label_edit!: any;
+  files!: any;
+  link: any;
   users!: any;
   groupUsers!: any;
 
@@ -378,6 +390,7 @@ export class CommentOnTaskDialog implements OnInit {
     private taskService: TaskService,
     private taostr: ToastrService,
     public dialog: MatDialog,
+    public http: HttpClient
 
   ) {}
 
@@ -389,6 +402,11 @@ export class CommentOnTaskDialog implements OnInit {
     this.task = new Task();
     this.loadData();
     this.getTaskById(this.task_id);
+    this.http.get<File[]>(`http://127.0.0.1:8000/api/files/${this.task_id}`)
+    .subscribe((data: File[]) => {
+      this.files = data;
+      console.log(data);
+    });
     this.user_id = localStorage.getItem('id');
 
     this.taskService.getUserGroup(this.task_id).subscribe(
@@ -409,6 +427,16 @@ export class CommentOnTaskDialog implements OnInit {
         this.user_comment = data
       },error => {
         this.no_comment = error
+      }
+    );
+  }
+
+  getUserUpload(task_id:any) {
+    this.columnService.getUserUpload(task_id).subscribe(
+      data => {
+        this.link = data
+      },error => {
+        this.link = error
       }
     );
   }
@@ -598,6 +626,7 @@ export class UploadDialog implements OnInit{
 
 
 }
+
 
 interface Item{
   title: string;
