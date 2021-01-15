@@ -73,10 +73,14 @@ class GroupController extends Controller
     }
 
     public function addUser($id,Request $request){
+
         $group = Group::find($id);
         $user_id = User::where('email','=',$request->email)->get('id');
+        if($user_id) {
         $group->users()->attach($user_id);
         return response()->json($group);
+        }
+        return response()->json("Không có tài khoản trên", 400);
     }
 
     /**
@@ -139,6 +143,8 @@ class GroupController extends Controller
     public function deleteUser($id,$user_id){
         $group = Group::find($id);
         $group->users()->detach($user_id);
+        $user = User::find($user_id);
+        $user->tasks()->detach();
     }
 
 

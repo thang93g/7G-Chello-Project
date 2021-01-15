@@ -75,21 +75,19 @@
                 <input mat-button [matMenuTriggerFor]="menu" type="text" [(ngModel)]="term" class="search-menu" placeholder="Nhập để tìm kiếm">
             </div>
             <mat-menu #menu="matMenu" class="search-menu">
-
-                <div *ngFor="let item of items | filter:term" style="border: solid 1px black;text-align: center; height: 50px; margin-left: 5px; margin-right: 5px; background-color:{{item.label}};">
-                    <button style="color:white; background-color: transparent; border: none;" (click)="openCommentDialog(item.id)">{{ item.title }} </button>
-
+                <div class="btn" *ngFor="let item of items | filter:term" style="border: solid 1px black;text-align: justify; height: 100px; width: 400px; margin-left: 5px; margin-right: 5px; background-color:{{item.label}};" (click)="openCommentDialog(item.id)">
+                    <b><p style="size: 12px;">{{ item.board_name }}</p></b>
+                    <p>{{ item.group_name }}</p>
+                    <i><p>{{ item.title }}</p></i>
                 </div>
             </mat-menu>
         </div>
 
-        
           <a class="btn" mat-button [matMenuTriggerFor]="animals"><div
           id="avatar"
           style="background-image: url({{user.image}});"
           title="{{ user.name }} ( {{ user.email }} )"
         ></div></a>
-
                     <!-- #docregion sub-menu -->
                     <mat-menu #animals="matMenu">
                         <a (click)="getInfo()" mat-menu-item>Hồ sơ cá nhân</a>
@@ -148,7 +146,7 @@
                                 </div>
                             </div>
                         </form>
-                        <!-- 
+                        <!--
                         <div class="wrap">
                             <div class="search" style="border-radius: 5px;">
                                 <input mat-button [matMenuTriggerFor]="menu" type="text" [(ngModel)]="term" class="search-menu" placeholder="Nhập để tìm kiếm">
@@ -166,7 +164,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <!-- Optional JavaScript -->

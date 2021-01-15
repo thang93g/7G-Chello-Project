@@ -78,6 +78,17 @@
   width: 250px;
 }
 
+
+::ng-deep .searchTerm{
+  background:white;
+  width: fit-content;
+}
+
+::ng-deep .search-menu {
+  background:white;
+  width: 250px;
+}
+
 #addBoard:hover {
     background-color: rgb(178, 185, 178)!important;
 }

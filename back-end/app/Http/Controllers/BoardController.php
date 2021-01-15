@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Models\Board;
+use App\Models\Column;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -45,6 +48,7 @@ class BoardController extends Controller
     {
         $boards = Board::all();
         return response()->json($boards);
+
     }
 
     /**
@@ -125,6 +129,7 @@ class BoardController extends Controller
     public function destroy($id)
     {
         $board = Board::find($id);
+        Column::where('board_id','=',$id)->delete();
         $board->delete();
     }
 

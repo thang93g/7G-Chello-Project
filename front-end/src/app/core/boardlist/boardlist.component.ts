@@ -254,7 +254,6 @@ export interface DialogData {
   board_id: number,
 }
 
-
 @Component({
   selector: 'dialog-groupdetail',
   templateUrl: 'dialog-groupdetail.html',
@@ -319,8 +318,8 @@ export class GroupDetaiDialog  implements OnInit{
         this.loadData();
         this.toastr.success('Thêm thành viên thành công !');
       },
-      (error: any) => {
-        console.log(error)
+      error => {
+        console.log(error);
         this.toastr.error('Thêm thành viên không thành công !');
       }
     );

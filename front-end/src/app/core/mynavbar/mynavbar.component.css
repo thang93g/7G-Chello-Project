@@ -9,6 +9,23 @@
 #openAddBoardDialog {
     margin-top: 15px !important;
 }
+::ng-deep .mat-menu-panel {
+    min-width: 112px;
+    max-width: 407px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px ;
+    outline: 0;
+    min-height: 64px;
+}
+
+::ng-deep .search-menu {
+    background: white;
+    width: 400px;
+    border-radius: 10px !important;
+    border: none !important;
+}
 
 
 /* .ng-autocomplete {

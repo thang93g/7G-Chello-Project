@@ -40,7 +40,7 @@
         <div class="noti-menu">
           <div *ngFor="let noti of notis" class="noti-box">
             <div class="noti-group">
-              <div class="noti-task">
+              <div class="noti-task" (click)=" gotoBoard(noti.board_id)">
                 {{ noti.task }}
               </div>
               <div>
@@ -64,8 +64,9 @@
         <input mat-button [matMenuTriggerFor]="menu" type="text" [(ngModel)]="term" class="search-menu" placeholder="Nhập để tìm kiếm bảng">
     </div>
     <mat-menu #menu="matMenu" class="search-menu">
-        <div *ngFor="let item of items | filter:term" style="border: solid 1px black; height: 50px; margin-left: 5px; margin-right: 5px; background-color:white; background-image: url('{{item.background}}');">
-            <a href="http://localhost:4200/board/{{item.id}}" style="color:white;">{{ item.name }} </a>
+        <div *ngFor="let item of items | filter:term" style="border: solid 1px black; height: 50px; margin-left: 5px; margin-right: 5px; background-image: url('{{item.background}}');">
+            <a href="http://localhost:4200/board/{{item.id}}" style="color:black; text-shadow: wheat;">{{ item.name }}
+            </a>
         </div>
     </mat-menu>
 </div>
