@@ -43,8 +43,10 @@ Route::put('columns/update/{id}', [ColumnController::class, 'update']);
 Route::get('columns/swap/{id}/{index}', [ColumnController::class, 'swap']);
 Route::post('columns/comment', [CommentController::class, 'commentOnTask']);
 Route::get('columns/comment/user/{task_id}', [CommentController::class, 'getUserComment']);
-Route::get('columns/{id}/upload', [FileController::class, 'index']);
+Route::get('files/{task_id}', [FileController::class, 'getUserUpload']);
 Route::post('columns/{id}/upload', [FileController::class, 'uploadOnTask']);
+Route::get('files', [FileController::class, 'index']);
+
 
 
 Route::get('tasks', [SearchController::class, 'search']);

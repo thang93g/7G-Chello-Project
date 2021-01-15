@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class FileController extends Controller
@@ -58,5 +59,21 @@ class FileController extends Controller
         $file->fill($request->all());
         $file->save();
         return response()->json($file);
+    }
+
+    public function getUserUpload($task_id) {
+
+        $userUpload = DB::table('files')
+            ->join('tasks', 'files.task_id', '=', 'tasks.id')
+            ->where('files.task_id', '=', $task_id)
+            ->get();
+        $userFileExist = DB::table('files')
+            ->join('tasks', 'files.task_id', '=', 'tasks.id')
+            ->where('files.task_id', '=', $task_id)
+            ->exists();
+        if ($userFileExist) {
+        return response()->json($userUpload);
+        }
+        return response()->json(['error' => 'Không có file nào'], 500);
     }
 }
