@@ -28,7 +28,7 @@ class NotificationController extends Controller
         )
         ->where('group_user.user_id','=',$user_id)
         ->orderByRaw('notifications.id DESC')
-        ->limit(10)
+        ->limit(20)
         ->get();
 
         return response()->json($notifications);

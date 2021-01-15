@@ -139,5 +139,7 @@ class GroupController extends Controller
     public function deleteUser($id,$user_id){
         $group = Group::find($id);
         $group->users()->detach($user_id);
+        $user = User::find($user_id);
+        $user->tasks()->detach();
     }
 }

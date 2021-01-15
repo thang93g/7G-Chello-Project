@@ -27,8 +27,13 @@ class TaskController extends Controller
             return response()->json($validator->errors()->toJson(), 400);
         }
 
-        $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
-
+        // $task = DB::select("CALL autoIncTask('$request->title','$request->label',$request->column_id)");
+        $task = new Task();
+        $task->title = $request->title;
+        $task->label = $request->label;
+        $task->column_id = $request->column_id;
+        $task->orders = 9999;
+        $task->save();
         return response()->json($task);
     }
 
@@ -54,6 +59,7 @@ class TaskController extends Controller
         $task = Task::findOrFail($id);
         $task->users()->detach();
         DB::table('comments')->where('task_id','=',$id)->delete();
+        DB::table('notifications')->where('task_id','=',$id)->delete();
         DB::table('files')->where('task_id','=',$id)->delete();
         $task->delete();
     }
@@ -104,8 +110,13 @@ class TaskController extends Controller
     }
 
     public function getUser($id){
-       $task = Task::find($id);
-       $users = $task->users;
+       $users = DB::table('users')
+       ->join('task_user','task_user.user_id','=','users.id')
+       ->join('tasks','task_user.task_id','=','tasks.id')
+       ->select('users.*')
+       ->where('tasks.id','=',$id)
+       ->distinct()
+       ->get();
        return response()->json($users);
     }
 

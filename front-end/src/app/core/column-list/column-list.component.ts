@@ -175,10 +175,6 @@ export class ColumnListComponent implements OnInit {
         console.log(data)
       }, error => console.log(error)
     );
-    this.userService.getUser(this.user_id).subscribe(data => {
-      this.user = data;
-    },error => console.log(error)
-    );
   }
 
 
@@ -211,9 +207,21 @@ export class ColumnListComponent implements OnInit {
     this.newtask.label = '#e4e405';
     this.taskService.create(this.newtask).subscribe(
       data => {
-        this.newtask = new Task();
         this.showAddTask = null;
         this.loadData();
+        this.newtask = data;
+        let str = `Đã thêm task`
+    this.noti.task_id = this.newtask.id;
+      this.noti.content = str;
+      this.noti.user_id = localStorage.getItem('id');
+      console.log(this.noti);
+
+      this.userService.createNoti(this.noti).subscribe(
+        data => {
+          this.noti = new Noti();
+          this.newtask = new Task();
+        },error => console.log(error)
+      )
       }
     )
   }
@@ -374,11 +382,9 @@ export class CommentOnTaskDialog implements OnInit {
   task!: any;
   task_title!: any;
   edit_title: boolean = false;
-  task_title_edit!: any;
   task_label_edit!: any;
   users!: any;
   groupUsers!: any;
-  myuser!: any;
 
 
   constructor(
@@ -399,7 +405,6 @@ export class CommentOnTaskDialog implements OnInit {
     this.noti = new Noti();
     this.task = new Task();
     this.loadData();
-    this.getUserComment(this.task_id);
     this.getTaskById(this.task_id);
     this.user_id = localStorage.getItem('id');
 
@@ -409,6 +414,10 @@ export class CommentOnTaskDialog implements OnInit {
       },error => error
     )
 
+    this.userService.getUser(this.user_id).subscribe(data => {
+      this.user = data;
+    }
+    );
   }
 
   getUserComment(task_id:any) {
@@ -422,16 +431,16 @@ export class CommentOnTaskDialog implements OnInit {
   }
 
   loadData(){
-    this.userService.getUser(this.user_id).subscribe(data => {
-      this.user = data;
-    }
-    );
+    this.taskService.getTaskById(this.task_id).subscribe(
+      data => {
+        this.task = data;
+      }
+    )
     this.taskService.getUser(this.task_id).subscribe(
       data => {
         this.users = data;
       },error => console.log(error)
     )
-    this.myuser = new User();
   }
 
   deleteUser(id: number){
@@ -446,8 +455,6 @@ export class CommentOnTaskDialog implements OnInit {
       this.noti.task_id = this.task_id;
       this.noti.content = str;
       this.noti.user_id = localStorage.getItem('id');
-
-      console.log(this.noti)
 
     this.taskService.addUser(this.task_id,id).subscribe(data=> {
       this.taostr.success('Thêm thành viên thành công');
@@ -468,11 +475,9 @@ export class CommentOnTaskDialog implements OnInit {
   }
 
   editTitleConfirm() {
-    this.task.title = this.task_title_edit;
     this.taskService.update(this.task_id,this.task).subscribe(
       data => {
-        this.task_title_edit = new Task();
-        this.getTaskById(this.task_id);
+        this.loadData();
         this.cancleEditTitle();
       }
     )
