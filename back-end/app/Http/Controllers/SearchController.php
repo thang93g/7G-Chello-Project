@@ -19,7 +19,7 @@ class SearchController extends Controller
         return response()->json($task);
     }
 
-    public function search(Request $request, $user_id)
+    public function search(Request $request)
     {
 
         $data = DB::table("tasks")
