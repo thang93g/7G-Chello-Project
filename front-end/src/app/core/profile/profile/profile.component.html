@@ -13,23 +13,20 @@
 </head>
 
 <body>
-    <header>
-      <app-mynavbar></app-mynavbar>
-
-    </header>
+    <app-mynavbar></app-mynavbar>
     <div>
-        <h1 class="mt-5" style="text-align: center; font-size: 50px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Hồ sơ cá nhân</h1>
+        <h1 class="mt-5" style="text-align: center; font-size: 50px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Thông tin tài khoản</h1>
         <br>
         <form (ngSubmit)="updateUser()" #profile="ngForm">
             <div class="container mt-5">
                 <div class="row justify-content-center mt-5">
-                    <div style="text-align: center; width: 400px;" class="col-7">
+                    <div style="text-align: center; width: 400px;" class="col-5">
                         <img style="border-radius: 50%;" width="200px" height="200px" [src]="user.image" />
                         <div class="mt-3">
                             <input accept="image/*" style="left: 70px; position: relative;" type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" autocomplete="off" />
                         </div>
                     </div>
-                    <div class="col-5">
+                    <div class="col-7">
                         <div style="width: 400px;">
                             <div class=" mb-3 ">
                                 <label>Tên người dùng</label>
@@ -44,12 +41,7 @@
                             </div>
                             <div class="mb-3 ">
                                 <label>Mật khẩu</label>
-                                <div class="input-group ">
-                                    <input disabled class="form-control " type="password " required value="*********** " id="password " name="password " />
-                                    <span class="input-group-text " id="basic-addon2 "><button  class="btn btn-link " (click)="changePassword() ">Đổi mật khẩu</button>
-                            </span>
-                                </div>
-
+                                <input disabled type="password" class="form-control" value="***********">
                             </div>
                             <div class="mb-3 ">
                                 <label>Phone</label>
@@ -61,6 +53,9 @@
                             </div>
                             <div class="mb-3 ">
                                 <input class="form-control btn btn-success mt-3 " [disabled]="profile.form.invalid" type="submit" value="Cập nhập thông tin " />
+                            </div>
+                            <div style="text-align: center; " class="mb-1 ">
+                                <a class="btn" id="changePass" (click)="openChangPasswordDialog() ">Đổi mật khẩu</a>
                             </div>
                             <div style="text-align: center; " class="mb-3 ">
                                 <button class="btn btn-link " (click)="back() ">Quay lại</button>
