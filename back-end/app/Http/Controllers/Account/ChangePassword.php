@@ -17,11 +17,11 @@ class ChangePassword extends Controller
         $userPassword = $account->password;
         $correctPassword = Hash::check($request->oldPassword, $userPassword);
         $correctPasswordConfirm = $request->newPassword === $request->newPasswordConfirm;
-        if($correctPassword) {
-            if( $correctPasswordConfirm ) {
-            $account->password = Hash::make($request->newPassword);
-            $account->save();
-            return response()->json('Đổi mật khẩu thành công');
+        if ($correctPassword) {
+            if ($correctPasswordConfirm) {
+                $account->password = Hash::make($request->newPassword);
+                $account->save();
+                return response()->json('Đổi mật khẩu thành công');
             } else {
                 return response()->json('Nhập lại mật khẩu không đúng');
             }

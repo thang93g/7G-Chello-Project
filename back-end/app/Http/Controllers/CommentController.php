@@ -20,8 +20,9 @@ class CommentController extends Controller
         return response()->json("Bình luận thành công");
     }
 
-    public function getUserComment($task_id) {
-        
+    public function getUserComment($task_id)
+    {
+
         $userComment = DB::table('comments')
             ->join('users', 'comments.user_id', '=', 'users.id')
             ->join('tasks', 'comments.task_id', '=', 'tasks.id')
@@ -34,7 +35,7 @@ class CommentController extends Controller
             ->where('comments.task_id', '=', $task_id)
             ->exists();
         if ($userCommentExist) {
-        return response()->json($userComment);
+            return response()->json($userComment);
         }
         return response()->json(['error' => 'Không có bình luận nào'], 500);
     }

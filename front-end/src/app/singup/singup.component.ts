@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { User } from '../user/user';
-import { UserService } from '../user/user.service';
-import { SingupService } from './singup.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {User} from '../user/user';
+import {UserService} from '../user/user.service';
+import {SingupService} from './singup.service';
 import {ToastrService} from 'ngx-toastr'
 
 
@@ -15,14 +15,15 @@ export class SingupComponent implements OnInit {
 
   user: User = new User();
   submitted = false;
-  newPasswordConfirm!:any;
+  newPasswordConfirm!: any;
   hide = true;
   hide2 = true;
 
   constructor(private UserService: SingupService,
-    private router : Router,
-    private toastr: ToastrService,
-    ) { }
+              private router: Router,
+              private toastr: ToastrService,
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -31,16 +32,17 @@ export class SingupComponent implements OnInit {
     this.submitted = false;
     this.user = new User();
   }
+
   save() {
     this.UserService
       .register(this.user).subscribe((data: any) => {
-        if(data) {
+        if (data) {
           this.toastr.success("Đăng ký thành công")
-        this.user = new User();
-        this.gotoLogin();
-      } 
+          this.user = new User();
+          this.gotoLogin();
+        }
       },
-        (error: any) => this.toastr.error("Đăng ký thất bại, tài khoản đã tồn tại"));
+      (error: any) => this.toastr.error("Đăng ký thất bại, tài khoản đã tồn tại"));
   }
 
   onSubmit() {
@@ -51,10 +53,10 @@ export class SingupComponent implements OnInit {
   gotoLogin() {
     this.router.navigate(['login'])
   }
+
   gobackHomePage() {
     this.router.navigate([''])
   }
-  
-  
+
 
 }

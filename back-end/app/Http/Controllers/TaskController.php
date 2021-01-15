@@ -58,27 +58,30 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
         $task->users()->detach();
-        DB::table('comments')->where('task_id','=',$id)->delete();
-        DB::table('notifications')->where('task_id','=',$id)->delete();
-        DB::table('files')->where('task_id','=',$id)->delete();
+        DB::table('comments')->where('task_id', '=', $id)->delete();
+        DB::table('notifications')->where('task_id', '=', $id)->delete();
+        DB::table('files')->where('task_id', '=', $id)->delete();
         $task->delete();
     }
 
-    public function swap($id,$orders){
+    public function swap($id, $orders)
+    {
         $task = Task::findOrFail($id);
         $task->orders = $orders;
         $task->save();
         return response()->json($task);
     }
 
-    public function drop($id,$column_id){
+    public function drop($id, $column_id)
+    {
         $task = Task::findOrFail($id);
         $task->column_id = $column_id;
         $task->save();
         return response()->json($task);
     }
 
-    public function searchByName($name, $board_id){
+    public function searchByName($name, $board_id)
+    {
         $task = Task::find($name);
         $task->board_id = $board_id;
     }
@@ -89,7 +92,7 @@ class TaskController extends Controller
         return response()->json($task);
     }
 
-    public function updateLabel(Request $request,$id)
+    public function updateLabel(Request $request, $id)
     {
         $task = Task::find($id);
         $task->label = $request->label;
@@ -97,39 +100,43 @@ class TaskController extends Controller
         return response()->json($task);
     }
 
-    public function addUser($task_id,$user_id){
+    public function addUser($task_id, $user_id)
+    {
         $task = Task::find($task_id);
         $task->users()->attach($user_id);
         return response()->json($task);
     }
 
-    public function deleteUser($task_id,$user_id){
+    public function deleteUser($task_id, $user_id)
+    {
         $task = Task::find($task_id);
         $task->users()->detach($user_id);
         return response()->json($task);
     }
 
-    public function getUser($id){
-       $users = DB::table('users')
-       ->join('task_user','task_user.user_id','=','users.id')
-       ->join('tasks','task_user.task_id','=','tasks.id')
-       ->select('users.*')
-       ->where('tasks.id','=',$id)
-       ->distinct()
-       ->get();
-       return response()->json($users);
+    public function getUser($id)
+    {
+        $users = DB::table('users')
+            ->join('task_user', 'task_user.user_id', '=', 'users.id')
+            ->join('tasks', 'task_user.task_id', '=', 'tasks.id')
+            ->select('users.*')
+            ->where('tasks.id', '=', $id)
+            ->distinct()
+            ->get();
+        return response()->json($users);
     }
 
-    public function getGroupUser($id){
+    public function getGroupUser($id)
+    {
         $groupUsers = DB::table('tasks')
-        ->join('columns', 'tasks.column_id', '=', 'columns.id')
-        ->join('boards', 'columns.board_id', '=', 'boards.id')
-        ->join('groups', 'boards.group_id', '=', 'groups.id')
-        ->join('group_user', 'group_user.group_id', '=', 'groups.id')
-        ->join('users', 'group_user.user_id', '=', 'users.id')
-        ->select('users.*')
-        ->where('tasks.id','=',$id)
-        ->get();
+            ->join('columns', 'tasks.column_id', '=', 'columns.id')
+            ->join('boards', 'columns.board_id', '=', 'boards.id')
+            ->join('groups', 'boards.group_id', '=', 'groups.id')
+            ->join('group_user', 'group_user.group_id', '=', 'groups.id')
+            ->join('users', 'group_user.user_id', '=', 'users.id')
+            ->select('users.*')
+            ->where('tasks.id', '=', $id)
+            ->get();
         return response()->json($groupUsers);
     }
 }

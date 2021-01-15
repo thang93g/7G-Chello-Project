@@ -23,15 +23,15 @@ class ColumnController extends Controller
 
     public function index($board_id)
     {
-        $cols = Column::where("board_id","=",$board_id)->orderBy('orders')->get();
+        $cols = Column::where("board_id", "=", $board_id)->orderBy('orders')->get();
         $array = [];
-        foreach($cols as $col){
-            $tasks = Task::where("column_id","=",$col->id)->orderBy('orders')->get();
+        foreach ($cols as $col) {
+            $tasks = Task::where("column_id", "=", $col->id)->orderBy('orders')->get();
             $column = [
                 "column" => $col,
                 "tasks" => $tasks,
             ];
-            array_push($array,$column);
+            array_push($array, $column);
         }
 
 
@@ -51,7 +51,7 @@ class ColumnController extends Controller
             'board_id' => 'required|numeric|min:1',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -62,14 +62,14 @@ class ColumnController extends Controller
 
         $col = DB::select("CALL autoInc('$request->name',$request->board_id)");
 
-        return response()->json(compact('col'),201);
+        return response()->json(compact('col'), 201);
     }
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -80,7 +80,7 @@ class ColumnController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -92,7 +92,7 @@ class ColumnController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -103,8 +103,8 @@ class ColumnController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -114,7 +114,7 @@ class ColumnController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -127,7 +127,7 @@ class ColumnController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -135,7 +135,8 @@ class ColumnController extends Controller
         //
     }
 
-    public function swap($id,$index){
+    public function swap($id, $index)
+    {
         $column = Column::find($id);
         $column->orders = $index;
         $column->save();

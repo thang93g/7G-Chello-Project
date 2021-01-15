@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-error',
@@ -8,14 +8,15 @@ import { Router } from '@angular/router';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor( private router: Router,) { }
+  constructor(private router: Router,) {
+  }
 
   ngOnInit(): void {
   }
 
-  comBackHome(){
+  comBackHome() {
     localStorage.clear();
-    this.router.navigate(['']); 
-   }
+    this.router.navigate(['']);
+  }
 
 }
