@@ -22,12 +22,10 @@ const routes: Routes = [
   { path: '', component: NavbarComponent },
   { path: 'board', component: BoardlistComponent },
   { path: 'board/:board_id', component: ColumnListComponent },
-  { path: 'column', component: BoardpageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'singup', component: SingupComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'password', component: PasswordComponent },
-  { path: 'task', component: TasklistComponent },
   { path: 'group/:id', component: GroupDetailComponent },
   { path: 'error', component: ErrorComponent },
 
