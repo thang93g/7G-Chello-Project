@@ -16,7 +16,7 @@ class NotificationController extends Controller
         ->join('groups', 'boards.group_id', '=', 'groups.id')
         ->join('group_user', 'group_user.group_id', '=', 'groups.id')
         ->join('users', 'notifications.user_id', '=', 'users.id')
-        ->select('notifications.task_id',
+        ->select('notifications.task_id AS task_id',
         'users.name as user_name',
         'notifications.content',
         'groups.name AS group',
@@ -24,10 +24,11 @@ class NotificationController extends Controller
         'columns.name AS column',
         'tasks.title AS task',
         'users.image AS image',
+        'boards.id AS board_id'
         )
         ->where('group_user.user_id','=',$user_id)
         ->orderByRaw('notifications.id DESC')
-        ->limit(10)
+        ->limit(20)
         ->get();
 
         return response()->json($notifications);

@@ -82,13 +82,12 @@
                 </div>
             </mat-menu>
         </div>
-        
+
           <a class="btn" mat-button [matMenuTriggerFor]="animals"><div
           id="avatar"
           style="background-image: url({{user.image}});"
           title="{{ user.name }} ( {{ user.email }} )"
         ></div></a>
-
                     <!-- #docregion sub-menu -->
                     <mat-menu #animals="matMenu">
                         <a (click)="getInfo()" mat-menu-item>Hồ sơ cá nhân</a>
@@ -149,7 +148,7 @@
                                 </div>
                             </div>
                         </form>
-                        <!-- 
+                        <!--
                         <div class="wrap">
                             <div class="search" style="border-radius: 5px;">
                                 <input mat-button [matMenuTriggerFor]="menu" type="text" [(ngModel)]="term" class="search-menu" placeholder="Nhập để tìm kiếm">
@@ -167,7 +166,7 @@
             </div>
         </div>
     </div>
-    
+
 
 
     <!-- Optional JavaScript -->
