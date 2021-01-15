@@ -59,9 +59,8 @@ export class ColumnListComponent implements OnInit {
   myColumn!: any;
   count_comment!: any;
   task_title!: any;
-  searchTerm!: string;
+  term!: string;
   items!: Item[];
-  term!: any;
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
@@ -557,6 +556,8 @@ interface Item{
   title: string;
   label: string;
   id: number;
+  board_name: string;
+  group_name: string;
 }
 
 

@@ -1,6 +1,12 @@
-::ng-deep .searchTerm {
-    background: white;
-    width: fit-content;
+::ng-deep .mat-menu-panel {
+    min-width: 112px;
+    max-width: 407px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px;
+    outline: 0;
+    min-height: 64px;
 }
 
 ::ng-deep .search-menu {
