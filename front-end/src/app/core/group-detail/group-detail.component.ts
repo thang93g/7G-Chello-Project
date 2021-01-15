@@ -72,86 +72,86 @@ export class GroupDetailComponent implements OnInit {
     );
   }
 
-  openDialogDeleteGroup(){
-    const dialogRef = this.dialog.open(DeleteGrouppDialog, {
-      width: '250px',
-      data: {id: this.id}
-    });
+  // openDialogDeleteGroup(){
+  //   const dialogRef = this.dialog.open(DeleteGrouppDialog, {
+  //     width: '250px',
+  //     data: {id: this.id}
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadData();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.loadData();
+  //   });
+  // }
 
-  openDialogDeleteMember(id: number,group_id: number){
-    const dialogRef = this.dialog.open(DeleteMemberDialog, {
-      width: '250px',
-      data: {id: id,group_id: group_id}
-    });
+  // openDialogDeleteMember(id: number,group_id: number){
+  //   const dialogRef = this.dialog.open(DeleteMemberDialog, {
+  //     width: '250px',
+  //     data: {id: id,group_id: group_id}
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadData();
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.loadData();
+  //   });
+  // }
 }
 
-@Component({
-  selector: 'delete-group-dialog',
-  templateUrl: 'delete-group.html',
-})
-export class DeleteGrouppDialog {
+// @Component({
+//   selector: 'delete-group-dialog',
+//   templateUrl: 'delete-group.html',
+// })
+// export class DeleteGrouppDialog {
 
-  constructor(
-    private groupService: GroupService,
-    private toastr: ToastrService,
-    private router: Router,
-    public dialogRef: MatDialogRef<DeleteGrouppDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+//   constructor(
+//     private groupService: GroupService,
+//     private toastr: ToastrService,
+//     private router: Router,
+//     public dialogRef: MatDialogRef<DeleteGrouppDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
 
-  deleteGroup(id: number) {
-      this.groupService.deleteGroup(id).subscribe((data) => {
-        this.dialogRef.close();
-        this.router.navigate(['board']);
-        this.toastr.success('Xóa dự án thành công !');
-      });
-    }
-}
+//   deleteGroup(id: number) {
+//       this.groupService.deleteGroup(id).subscribe((data) => {
+//         this.dialogRef.close();
+//         this.router.navigate(['board']);
+//         this.toastr.success('Xóa dự án thành công !');
+//       });
+//     }
+// }
 
-@Component({
-  selector: 'delete-member-dialog',
-  templateUrl: 'delete-member.html',
-})
-export class DeleteMemberDialog {
+// @Component({
+//   selector: 'delete-member-dialog',
+//   templateUrl: 'delete-member.html',
+// })
+// export class DeleteMemberDialog {
 
-  constructor(
-    private groupService: GroupService,
-    private toastr: ToastrService,
-    public dialogRef: MatDialogRef<DeleteGrouppDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: MemberData) {}
+//   constructor(
+//     private groupService: GroupService,
+//     private toastr: ToastrService,
+//     public dialogRef: MatDialogRef<DeleteGrouppDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: MemberData) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
 
 
-  deleteMember() {
-    console.log(this.data)
-    this.groupService.deleteMember(this.data.group_id,this.data.id).subscribe((data) => {
-      this.dialogRef.close();
-      this.toastr.success('Xóa thành viên thành công !');
-    });
-}
-}
+//   deleteMember() {
+//     console.log(this.data)
+//     this.groupService.deleteMember(this.data.group_id,this.data.id).subscribe((data) => {
+//       this.dialogRef.close();
+//       this.toastr.success('Xóa thành viên thành công !');
+//     });
+// }
+// }
 
-export interface MemberData {
-  id: number;
-  group_id: number;
-}
+// export interface MemberData {
+//   id: number;
+//   group_id: number;
+// }
 
-export interface DialogData {
-  id: number;
-}
+// export interface DialogData {
+//   id: number;
+// }
