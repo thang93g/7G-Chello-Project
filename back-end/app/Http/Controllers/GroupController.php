@@ -22,17 +22,17 @@ class GroupController extends Controller
         $user = User::find($id);
         $groups = $user->groups;
         $array = [];
-        foreach($groups as $group){
-            $boards = Board::where('group_id','=',$group->id)->get();
+        foreach ($groups as $group) {
+            $boards = Board::where('group_id', '=', $group->id)->get();
             $users = $group->users;
-            $total = DB::table('group_user')->select(DB::raw('COUNT(user_id) as total'))->where('group_id','=',$group->id)->get();
+            $total = DB::table('group_user')->select(DB::raw('COUNT(user_id) as total'))->where('group_id', '=', $group->id)->get();
             $gr = [
                 "users" => $users,
                 "total" => $total,
                 "group" => $group,
                 "boards" => $boards,
             ];
-            array_push($array,$gr);
+            array_push($array, $gr);
         }
 
         return response()->json($array);
@@ -51,7 +51,7 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -60,7 +60,7 @@ class GroupController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors()->toJson(), 400);
         }
 
@@ -86,7 +86,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -98,7 +98,7 @@ class GroupController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -109,8 +109,8 @@ class GroupController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -124,7 +124,7 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -134,13 +134,15 @@ class GroupController extends Controller
         $group->delete();
     }
 
-    public function getUser($id){
+    public function getUser($id)
+    {
         $group = Group::find($id);
         $users = $group->users;
         return response()->json($users);
     }
 
-    public function deleteUser($id,$user_id){
+    public function deleteUser($id, $user_id)
+    {
         $group = Group::find($id);
         $group->users()->detach($user_id);
         $user = User::find($user_id);

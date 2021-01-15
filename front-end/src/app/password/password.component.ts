@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { error } from 'protractor';
-import { NotificationService } from '../notice/notice.service';
-import { UserService } from '../user/user.service';
-import { PasswordService } from './password.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {error} from 'protractor';
+import {NotificationService} from '../notice/notice.service';
+import {UserService} from '../user/user.service';
+import {PasswordService} from './password.service';
 
 
 @Component({
@@ -21,23 +21,25 @@ export class PasswordComponent implements OnInit {
   value!: any
   hide = true;
   hide2 = true;
-  hide3 = true ;
+  hide3 = true;
 
   constructor(private router: Router,
-    private passwordService: PasswordService,
-    private userService: UserService,
-    private toastr: ToastrService,
-   ) { }
+              private passwordService: PasswordService,
+              private userService: UserService,
+              private toastr: ToastrService,
+  ) {
+  }
 
   ngOnInit(): void {
     this.id = localStorage.getItem("id");
     this.user = this.userService.getUser(this.id);
     this.getToken();
   }
+
   getToken() {
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('token')) {
       this.router.navigate(['password']);
-    }else{
+    } else {
       this.router.navigate(['error']);
     }
   }
@@ -45,8 +47,8 @@ export class PasswordComponent implements OnInit {
   updatePassword() {
     this.passwordService.changePassword(this.id, this.oldPassword, this.newPassword, this.newPasswordConfirm).subscribe(
       data => {
-       this.toastr.success('Đổi mật khẩu thành công');
-       this.router.navigate(['/profile']);
+        this.toastr.success('Đổi mật khẩu thành công');
+        this.router.navigate(['/profile']);
       });
   }
 
@@ -54,7 +56,7 @@ export class PasswordComponent implements OnInit {
     this.router.navigate(['/profile']);
   }
 
-  goHome(){
+  goHome() {
     this.router.navigate(['board'])
   }
 

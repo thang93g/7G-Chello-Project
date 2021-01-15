@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,44 +7,45 @@ import { Injectable } from '@angular/core';
 export class GroupService {
   private baseUrl = "http://127.0.0.1:8000/api/groups";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  getBoardList(id: number){
-  
+  getBoardList(id: number) {
+
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  getTaskList(id: number){
-  
+  getTaskList(id: number) {
+
     return this.http.get(`${this.baseUrl}/${id}`);
   };
 
-  getGroup(id: number){
- 
+  getGroup(id: number) {
+
     return this.http.get(`${this.baseUrl}/detail/${id}`);
   }
 
-  getMember(id: number){
-   
+  getMember(id: number) {
+
     return this.http.get(`${this.baseUrl}/member/${id}`);
   }
 
-  addMember(id: number,data: any){
- 
-    return this.http.post(`${this.baseUrl}/${id}`,data);
+  addMember(id: number, data: any) {
+
+    return this.http.post(`${this.baseUrl}/${id}`, data);
   }
 
-  deleteMember(id: number,user_id: number){
+  deleteMember(id: number, user_id: number) {
 
     return this.http.delete(`${this.baseUrl}/member/${id}/${user_id}`);
   }
 
-  deleteGroup(id:number){
+  deleteGroup(id: number) {
     return this.http.delete(`${this.baseUrl}/${id}`,);
   }
 
-  createGroup(value: any){
+  createGroup(value: any) {
 
-    return this.http.post(`${this.baseUrl}`,value,);
+    return this.http.post(`${this.baseUrl}`, value,);
   }
 }

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import {Observable, BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,8 @@ export class LoginService {
 
   private baseUrl = 'http://127.0.0.1:8000/api/login';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   login(email: string, password: string): Observable<any> {
     var reqHeader = new HttpHeaders({
@@ -21,9 +22,8 @@ export class LoginService {
       "email": email,
       "password": password
     };
-    return this.http.post(`${this.baseUrl}`, data, { headers: reqHeader, responseType: 'json' });
+    return this.http.post(`${this.baseUrl}`, data, {headers: reqHeader, responseType: 'json'});
   }
-
 
 
 }
