@@ -60,12 +60,11 @@ export class ColumnListComponent implements OnInit {
   myColumn!: any;
   count_comment!: any;
   task_title!: any;
-  searchTerm!: string;
+  term!: string;
   items!: Item[];
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
-  term! : string;
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -346,23 +345,9 @@ export class ColumnListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {
-      // this.toastr.success('The dialog was closed');
       this.loadData();
     });
   }
-
-  // openUploadDialog(task_id:any) {
-  //   const dialogRef = this.dialog.open(UploadDialog, {
-  //     width: "500px",
-  //     height: "500px",
-  //     data: {task_id: task_id}
-  //   });
-
-  //   dialogRef.afterClosed().subscribe((result: any) => {
-  //     // this.toastr.success('The dialog was closed');
-  //     this.loadData();
-  //   });
-  // }
 }
 
 
@@ -619,6 +604,6 @@ interface Item{
   title: string;
   label: string;
   id: number;
+  board_name: string;
+  group_name: string;
 }
-
-

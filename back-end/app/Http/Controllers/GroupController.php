@@ -142,4 +142,6 @@ class GroupController extends Controller
         $user = User::find($user_id);
         $user->tasks()->detach();
     }
+
+
 }
