@@ -28,7 +28,6 @@ export class MynavbarComponent implements OnInit {
     this.http.get<Item[]>(`http://127.0.0.1:8000/api/boards/`)
     .subscribe((data: Item[]) => {
       this.items = data;
-      console.log(data);
     });
     this.user = new User();
 
@@ -56,6 +55,10 @@ export class MynavbarComponent implements OnInit {
 
   goHome() {
     this.router.navigate(['board']);
+  }
+
+  gotoBoard(id: number){
+    this.router.navigate(['board',id]);
   }
 }
 interface Item {

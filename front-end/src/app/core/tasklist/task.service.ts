@@ -60,4 +60,20 @@ export class TaskService {
   updateTaskLabel(id: any, data:any) {
     return this.httpClient.post(`${baseURL}/update/label/${id}`, data);
   }
+
+  addUser(task_id: number,user_id: number){
+    return this.httpClient.get(`${baseURL}/user/${task_id}/${user_id}`);
+  }
+
+  deleteUser(task_id: number,user_id: number){
+    return this.httpClient.delete(`${baseURL}/user/${task_id}/${user_id}`);
+  }
+
+  getUser(id: number){
+    return this.httpClient.get(`${baseURL}/user/${id}`);
+  }
+
+  getUserGroup(id: number){
+    return this.httpClient.get(`${baseURL}/user-group/${id}`);
+  }
 }
