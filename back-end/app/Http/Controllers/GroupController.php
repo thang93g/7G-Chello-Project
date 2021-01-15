@@ -131,7 +131,7 @@ class GroupController extends Controller
     {
         $group = Group::find($id);
         $group->users()->detach();
-        DB::table('boards')->where('group_id')->delete();
+        DB::table('boards')->where('group_id','=',$id)->delete();
         $group->delete();
     }
 
