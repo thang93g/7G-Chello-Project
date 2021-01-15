@@ -14,6 +14,8 @@ export class ErrorComponent implements OnInit {
   }
 
   comBackHome(){
-    this.router.navigate(['']);  }
+    localStorage.clear();
+    this.router.navigate(['']); 
+   }
 
 }

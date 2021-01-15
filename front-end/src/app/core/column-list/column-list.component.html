@@ -97,7 +97,8 @@
     </nav>
     <div>
         <div style="background-color: #1273ac; border: 0px; margin-top: 100px;" cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="my-board" (cdkDropListDropped)="dropColumn($event)">
-            <div style="background-color: gainsboro; border-radius: 5px;" class="mt-3 ml-4 shadow p-2 mb-2 example-box" *ngFor="let column of columns" cdkDrag>
+            <div style="background-color: gainsboro; border-radius: 5px; max-height: 500px !important;
+            overflow: auto !important;" class="mt-3 ml-4 shadow p-2 mb-2 example-box" *ngFor="let column of columns" cdkDrag>
                 <div class="title">
                     <button *ngIf="showInput !== column.column.id" class="btn form-control" style="border: 0px; text-align: left;" (click)="showEditNameInput(column.column.id)"> <b style="font-size: 20px;">{{ column.column.name }}</b> </button>
                     <form [hidden]="showInput !== column.column.id">
@@ -110,7 +111,8 @@
                     </div>
                     <button id="addTask" style="background-color: gainsboro;" (click)="clickTaskButton(column.column.id)" *ngIf="showAddTask !== column.column.id" class="btn  form-control"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                           <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                        </svg> Thêm thẻ mới </button>
+                        </svg> Thêm thẻ mới 
+                    </button>
                     <div *ngIf="showAddTask == column.column.id" class="mt-2">
                         <form (ngSubmit)="addTask(column.column.id)">
                             <input placeholder="Nhập tên thẻ.." [(ngModel)]="newtask.title" name="title" class="form-control" type="text">
