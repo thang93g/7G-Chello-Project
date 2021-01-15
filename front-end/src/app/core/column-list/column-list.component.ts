@@ -65,7 +65,7 @@ export class ColumnListComponent implements OnInit {
   showSearch: boolean = false;
   notis! : any
   add_column: boolean = false;
-  files!: Files[];
+  files!: File[];
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -113,8 +113,8 @@ export class ColumnListComponent implements OnInit {
         console.log(data);
       });
 
-      this.http.get<Files[]>(`http://127.0.0.1:8000/api/files/`)
-      .subscribe((data: Files[]) => {
+      this.http.get<File[]>(`http://127.0.0.1:8000/api/files/`)
+      .subscribe((data: File[]) => {
         this.files = data;
         console.log(data);
       });
@@ -347,6 +347,8 @@ export class ColumnListComponent implements OnInit {
       this.loadData();
     });
   }
+
+
 }
 
 
@@ -368,6 +370,8 @@ export class CommentOnTaskDialog implements OnInit {
   edit_title: boolean = false;
   task_title_edit!: any;
   task_label_edit!: any;
+  files!: any;
+  link: any;
 
 
   constructor(
@@ -377,6 +381,7 @@ export class CommentOnTaskDialog implements OnInit {
     private userService: UserService,
     private taskService: TaskService,
     public dialog: MatDialog,
+    public http: HttpClient
 
   ) {}
 
@@ -389,7 +394,12 @@ export class CommentOnTaskDialog implements OnInit {
     this.loadData();
     this.getUserComment(this.task_id);
     this.getTaskById(this.task_id);
-   
+    this.http.get<File[]>(`http://127.0.0.1:8000/api/files/${this.task_id}`)
+    .subscribe((data: File[]) => {
+      this.files = data;
+      console.log(data);
+    });
+
   }
 
   getUserComment(task_id:any) {
@@ -398,6 +408,16 @@ export class CommentOnTaskDialog implements OnInit {
         this.user_comment = data
       },error => {
         this.no_comment = error
+      }
+    );
+  }
+
+  getUserUpload(task_id:any) {
+    this.columnService.getUserUpload(task_id).subscribe(
+      data => {
+        this.link = data
+      },error => {
+        this.link = error
       }
     );
   }
@@ -560,9 +580,6 @@ export class UploadDialog implements OnInit{
 
 }
 
-interface Files{
-  link: string;
-}
 
 interface Item{
   title: string;
