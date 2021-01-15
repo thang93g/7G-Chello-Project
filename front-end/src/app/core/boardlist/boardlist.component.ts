@@ -253,7 +253,6 @@ export interface DialogData {
   board_id: number,
 }
 
-
 @Component({
   selector: 'dialog-groupdetail',
   templateUrl: 'dialog-groupdetail.html',
