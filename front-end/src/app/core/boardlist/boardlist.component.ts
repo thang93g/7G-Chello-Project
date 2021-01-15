@@ -436,4 +436,3 @@ export interface MemberData {
 export interface DialogData {
   id: number;
 }
-
