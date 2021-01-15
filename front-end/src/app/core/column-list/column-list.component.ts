@@ -109,7 +109,6 @@ export class ColumnListComponent implements OnInit {
     this.http.get<Item[]>(`http://127.0.0.1:8000/api/tasks/`)
       .subscribe((data: Item[]) => {
         this.items = data;
-        console.log(data);
       });
 
       this.user_id = localStorage.getItem('id');
@@ -171,7 +170,6 @@ export class ColumnListComponent implements OnInit {
     this.columnService.getColumnList(this.board_id).subscribe(
       (data: any) => {
         this.columns = data;
-        console.log(data)
       }, error => console.log(error)
     );
   }

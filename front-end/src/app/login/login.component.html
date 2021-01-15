@@ -9,11 +9,7 @@
 </head>
 
 <body>
-    <div style="text-align: center; color:#3399ff;"> <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-menu-button" viewBox="0 0 16 16">
-        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h8A1.5 1.5 0 0 1 11 1.5v2A1.5 1.5 0 0 1 9.5 5h-8A1.5 1.5 0 0 1 0 3.5v-2zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-8z"/>
-        <path d="M7.823 2.823l-.396-.396A.25.25 0 0 1 7.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
-    </svg> <i style="font-size: 40px;"> SevenG </i></div>
-    <br>
+    <div style="text-align: center; color:#3399ff;"> <i style="font-family: Comic Sans ;font-size: 100px;text-shadow: 2px 5px 6px #3399ff !important;"> SevenG </i></div>
     <br>
     <div class="row justify-content-center">
         <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 25rem; height: 35rem;">
@@ -24,7 +20,7 @@
                     <br>
                     <div class="mb-3">
                         <mat-form-field class="example-full-width">
-                        <input matInput [(ngModel)]="email" name="email" required email type="text"  #emails='ngModel' [class.is-invalid]="emails.invalid && emails.touched"  placeholder="Nhập email">
+                            <input matInput [(ngModel)]="email" name="email" required email type="text" #emails='ngModel' [class.is-invalid]="emails.invalid && emails.touched" placeholder="Nhập email">
                         </mat-form-field>
                         <div *ngIf="emails.errors && (emails.valid || emails.touched)">
                             <small class="text-danger" *ngIf="emails.errors.required">Email không được để trống</small>
@@ -33,16 +29,16 @@
                     </div>
                     <div class="mb-3">
                         <mat-form-field class="example-full-width">
-                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required pattern="[\w]+[\w]{5,}" type="password"  #pass='ngModel' [class.is-invalid]="pass.invalid && pass.touched">
+                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Nhập mật khẩu" [(ngModel)]="password" name="password" required pattern="[\w]+[\w]{5,}" type="password" #pass='ngModel' [class.is-invalid]="pass.invalid && pass.touched">
                             <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                             </a>
                         </mat-form-field>
-                          <div *ngIf="pass.errors && (pass.valid || pass.touched)">
+                        <div *ngIf="pass.errors && (pass.valid || pass.touched)">
                             <small class="text-danger" *ngIf="pass.errors.required">Mật khẩu không được để trống</small>
                             <small class="text-danger" *ngIf="pass.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký tự đặc biệt</small>
                         </div>
-                      </div>
+                    </div>
                     <div style="text-align: center;" class="mb-3">
                         <button type="submit" class="loginButton btn btn-success " [disabled]="login.form.invalid" (click)="getToken()">Đăng nhập</button>
                     </div>
