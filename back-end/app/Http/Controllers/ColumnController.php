@@ -25,8 +25,11 @@ class ColumnController extends Controller
     {
         $cols = Column::where("board_id", "=", $board_id)->orderBy('orders')->get();
         $array = [];
-        foreach ($cols as $col) {
-            $tasks = Task::where("column_id", "=", $col->id)->orderBy('orders')->get();
+        foreach($cols as $col){
+            $tasks = Task::where("column_id","=",$col->id)->orderBy('orders')->get();
+            foreach($tasks as $task){
+                $members = $task->users;
+            }
             $column = [
                 "column" => $col,
                 "tasks" => $tasks,

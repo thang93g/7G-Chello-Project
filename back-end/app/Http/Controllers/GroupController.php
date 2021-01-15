@@ -72,12 +72,15 @@ class GroupController extends Controller
         return response()->json($group);
     }
 
-    public function addUser($id, Request $request)
-    {
+    public function addUser($id,Request $request){
+
         $group = Group::find($id);
-        $user_id = User::where('email', '=', $request->email)->get('id');
+        $user_id = User::where('email','=',$request->email)->get('id');
+        if($user_id) {
         $group->users()->attach($user_id);
         return response()->json($group);
+        }
+        return response()->json("Không có tài khoản trên", 400);
     }
 
     /**
