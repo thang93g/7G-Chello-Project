@@ -9,7 +9,7 @@ export class ColumnService {
   private baseUrl = "http://127.0.0.1:8000/api/columns"
 
   constructor(private http: HttpClient) { }
-  
+
   getColumnList(board_id: number){
     return this.http.get(`${this.baseUrl}/${board_id}`);
   }
@@ -45,5 +45,9 @@ export class ColumnService {
 
   getUserUpload(task_id: any){
     return this.http.get(`${this.baseUrl}/files/${task_id}`)
+  }
+
+  getTaskByLabel(board_id: number,label: number){
+    return this.http.get(`${this.baseUrl}/label/${board_id}/${label}`)
   }
 }

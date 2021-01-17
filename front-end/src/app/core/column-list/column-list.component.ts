@@ -131,6 +131,14 @@ export class ColumnListComponent implements OnInit {
       )
   }
 
+  getTaskByLabel(label: number){
+    this.columnService.getTaskByLabel(this.board_id,label).subscribe(
+      data => {
+        this.columns = data;
+      }
+    )
+  }
+
   getTaskById(task_id: any) {
     this.taskService.getTaskById(task_id).subscribe(
       data => {

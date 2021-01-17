@@ -200,4 +200,10 @@ body {
   border-radius: 50%;
   float: right;
   margin-left: 3px;
+  margin-top: 3px;
+}
+
+.label-menu{
+  width: 150px;
+  height: 40px;
 }

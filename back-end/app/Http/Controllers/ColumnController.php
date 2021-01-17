@@ -146,4 +146,41 @@ class ColumnController extends Controller
 
         return response()->json($column);
     }
+
+    public function getTaskByLabel($board_id,$id)
+    {
+        switch($id){
+            case "1":
+                $label = "#e4e405";
+                break;
+                case "2":
+                    $label = "#c02903";
+                    break;
+                    case "3":
+                        $label = "#2ba503";
+                        break;
+                        case "4":
+                            $label = "#0547c0";
+                            break;
+                            case "5":
+                                $label = "#d66a05";
+                                break;
+        }
+        $cols = Column::where("board_id", "=", $board_id)->orderBy('orders')->get();
+        $array = [];
+        foreach($cols as $col){
+            $tasks = Task::where("column_id","=",$col->id)->where('label','=',$label)->orderBy('orders')->get();
+            foreach($tasks as $task){
+                $members = $task->users;
+            }
+            $column = [
+                "column" => $col,
+                "tasks" => $tasks,
+            ];
+            array_push($array, $column);
+        }
+
+
+        return response()->json($array);
+    }
 }

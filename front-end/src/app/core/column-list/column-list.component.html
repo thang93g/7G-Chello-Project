@@ -94,8 +94,20 @@
                         <a (click)="logOut()" mat-menu-item>Đăng xuất </a>
                     </mat-menu>
     </nav>
+
+    <button style="margin-top: 100px;margin-left: 50px;" class="btn btn-light" mat-button [matMenuTriggerFor]="labelmenu">Tìm thẻ theo nhãn</button>
+    <!-- #enddocregion mat-menu-trigger-for -->
+    <mat-menu #labelmenu="matMenu">
+      <div (click)="loadData()" style="background-color: white;font-family: Helvetica Neue;" class="label-menu">All task</div>
+      <div (click)="getTaskByLabel(1)" style="background-color: #e4e405;font-family: Helvetica Neue;" class="label-menu">Yellow</div>
+      <div (click)="getTaskByLabel(2)" style="background-color: #c02903;font-family: Helvetica Neue;" class="label-menu">Red</div>
+      <div (click)="getTaskByLabel(3)" style="background-color: #2ba503;font-family: Helvetica Neue;" class="label-menu">Green</div>
+      <div (click)="getTaskByLabel(4)" style="background-color: #0547c0;font-family: Helvetica Neue;" class="label-menu">Blue</div>
+      <div (click)="getTaskByLabel(5)" style="background-color: #d66a05;font-family: Helvetica Neue;" class="label-menu">Orange</div>
+    </mat-menu>
+
     <div>
-        <div style="background-color: #1273ac; border: 0px; margin-top: 100px;" cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="my-board" (cdkDropListDropped)="dropColumn($event)">
+        <div style="background-color: #1273ac; border: 0px;" cdkDropList cdkDropListGroup cdkDropListOrientation="horizontal" class="my-board" (cdkDropListDropped)="dropColumn($event)">
             <div style="background-color: gainsboro; border-radius: 5px;" class="mt-3 ml-4 shadow p-2 mb-2 example-box" *ngFor="let column of columns" cdkDrag>
                 <div class="title">
                     <button *ngIf="showInput !== column.column.id" class="btn form-control" style="border: 0px; text-align: left;" (click)="showEditNameInput(column.column.id)"> <b style="font-size: 20px;">{{ column.column.name }}</b> </button>
@@ -105,10 +117,12 @@
                 </div>
 
                 <div cdkDropList [cdkDropListData]="column.tasks" class="task-list" (cdkDropListDropped)="dropTask($event,column.column.id,column.column.name)">
-                    <div (click)="openCommentDialog(task.id)" style="overflow: hidden;border-radius: 3px; height: 80px; border-left: 10px solid {{ task.label }};" class="my-task mt-2 shadow p-2 mb-2" *ngFor="let task of column.tasks" cdkDrag>
-                        <div style="height: 40px;">{{ task.title }}</div>
+                    <div (click)="openCommentDialog(task.id)" style="overflow: hidden;border-radius: 3px; border-left: 10px solid {{ task.label }};" class="my-task mt-2 shadow p-2 mb-2" *ngFor="let task of column.tasks" cdkDrag>
+                        <div style="height: 44px;overflow: hidden;"><p>{{ task.title }}</p></div>
+                        <div *ngIf="task.users !== []">
                         <div class="member" style="background-image: url({{user.image}});" *ngFor="let user of task.users"
                         title="{{ user.name }} ( {{ user.email }} )"></div>
+                      </div>
                     </div>
                     <button id="addTask" style="background-color: gainsboro;" (click)="clickTaskButton(column.column.id)" *ngIf="showAddTask !== column.column.id" class="btn  form-control"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                           <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
