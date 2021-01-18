@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
   user!: any;
   id!: any;
   userInfoFormGroup!: FormGroup;
+  img_load: boolean = false;
   constructor(
     private storage: AngularFireStorage,
     private userService: UserService,
@@ -37,6 +38,15 @@ export class ProfileComponent implements OnInit {
     this.loadData();
     this.getToken();
   }
+
+  imgLoad() {
+    this.img_load = true;
+  }
+
+  imgLoadDone() {
+    this.img_load = false;
+  }
+
   getToken() {
     if(localStorage.getItem('token')){
       this.router.navigate(['profile']);
@@ -62,7 +72,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    
+    this.imgLoad();
     var n = Date.now();
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
@@ -76,8 +86,8 @@ export class ProfileComponent implements OnInit {
           this.downloadURL.subscribe((url) => {
             if (url) {
               this.user.image = url;
+              this.imgLoadDone();
             }
-            console.log(this.user.image);
           });
         })
       )
@@ -96,7 +106,7 @@ export class ProfileComponent implements OnInit {
         console.log(data);
         this.user = new User();
         this.loadData();
-        this.toastr.success("Cập nhật thông tin thành công")
+        this.toastr.success("Cập nhật thông tin thành công");
       }, error => {this.toastr.error('Cập nhật thông tin không thành công')})
     }
 
