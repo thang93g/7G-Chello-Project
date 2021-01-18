@@ -15,6 +15,7 @@ export class MynavbarComponent implements OnInit {
   user_id!: any;
   items!: Item[];
   term!: string;
+  getNotice: boolean = false;
 
 
   constructor(
@@ -35,6 +36,8 @@ export class MynavbarComponent implements OnInit {
 
     this.userService.getNoti(this.user_id).subscribe(data => {
       this.notis = data;
+      this.onNotice()
+      console.log(data);
     },error => console.log(error))
 
     this.userService.getUser(this.user_id).subscribe(data => {
@@ -43,6 +46,13 @@ export class MynavbarComponent implements OnInit {
     )
   }
 
+  onNotice() {
+    this.getNotice = true;
+  }
+
+  seeNotice() {
+    this.getNotice = false;
+  }
 
   getInfo() {
     this.router.navigate(['profile']);

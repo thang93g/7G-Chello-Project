@@ -37,6 +37,7 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 
 
 Route::get('columns/{board_id}', [ColumnController::class, 'index']);
+Route::get('columns/label/{board_id}/{id}', [ColumnController::class, 'getTaskByLabel']);
 Route::get('columns/show/{id}', [ColumnController::class, 'show']);
 Route::post('columns/create', [ColumnController::class, 'create']);
 Route::put('columns/update/{id}', [ColumnController::class, 'update']);

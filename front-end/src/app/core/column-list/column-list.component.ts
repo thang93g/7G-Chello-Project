@@ -67,6 +67,7 @@ export class ColumnListComponent implements OnInit {
   notis! : any
   add_column: boolean = false;
   files!: File[];
+  getNotice: boolean = false;
 
   toggle() {
     this.showSearch = !this.showSearch;}
@@ -123,12 +124,29 @@ export class ColumnListComponent implements OnInit {
 
       this.userService.getNoti(this.user_id).subscribe(data => {
         this.notis = data;
+        this.onNotice()
       },error => console.log(error))
 
       this.userService.getUser(this.user_id).subscribe(data => {
         this.user = data;
       },error => console.log(error)
       )
+  }
+
+  onNotice() {
+    this.getNotice = true;
+  }
+
+  seeNotice() {
+    this.getNotice = false;
+  }
+
+  getTaskByLabel(label: number){
+    this.columnService.getTaskByLabel(this.board_id,label).subscribe(
+      data => {
+        this.columns = data;
+      }
+    )
   }
 
   getTaskById(task_id: any) {

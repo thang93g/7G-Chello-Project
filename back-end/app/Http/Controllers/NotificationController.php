@@ -24,6 +24,7 @@ class NotificationController extends Controller
                 'boards.name AS board',
                 'columns.name AS column',
                 'tasks.title AS task',
+                'tasks.label AS task_label',
                 'users.image AS image',
                 'boards.id AS board_id'
             )

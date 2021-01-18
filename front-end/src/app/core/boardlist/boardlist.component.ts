@@ -48,7 +48,7 @@ export class BoardlistComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
     this.getToken();
-   
+
   }
 
   openDialog(id: number) {
@@ -151,7 +151,7 @@ export class BoardlistComponent implements OnInit {
     });
   }
 
-  
+
 }
 
 
@@ -265,7 +265,7 @@ export class GroupDetaiDialog  implements OnInit{
   user!: any;
   add_member: boolean = false;
 
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private groupService: GroupService,
@@ -301,7 +301,7 @@ export class GroupDetaiDialog  implements OnInit{
       (error) => console.log(error)
     );
 
-    
+
 
     this.groupService.getMember(this.id).subscribe(
       (data) => {
@@ -354,7 +354,7 @@ export class GroupDetaiDialog  implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       this.loadData();
     });
-  }  
+  }
 }
 
 @Component({
@@ -396,7 +396,7 @@ export class DeleteGrouppDialog implements OnInit {
     this.groupService.getBoardList(this.user_id).subscribe(
       data => {
         this.group = data;
-      }, 
+      },
       error => console.log(error)
     );
   }
