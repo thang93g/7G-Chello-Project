@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+
+<body>
+    <div style="text-align: center; color:#3399ff;"><i style="font-size: 100px;text-shadow: 2px 5px 7px #3399ff; font-family: Comic Sans;"> SevenG </i></div>
+    <br>
+    <br>
+    <div class="row justify-content-center">
+        <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 25rem; height: 45rem;">
+            <div class="card-body">
+                <form #addform="ngForm">
+                    <p style="text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                        <b> Đăng ký cho tài khoản của bạn </b></p>
+                    <br>
+                    <div class="mb-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" [(ngModel)]="user.name" name="userName" required #userName="ngModel" [class.is-invalid]="userName.invalid && userName.touched" placeholder="Tên người dùng ">
+                        </mat-form-field>
+                        <div *ngIf="userName.errors && (userName.valid || userName.touched)">
+                            <small class="text-danger" *ngIf="userName.errors.required">Tên người dùng không được để trống</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [(ngModel)]="user.email" name="email" required email type="text" #emails='ngModel' [class.is-invalid]="emails.invalid && emails.touched" placeholder="Nhập email">
+                        </mat-form-field>
+                        <div *ngIf="emails.errors && (emails.valid || emails.touched)">
+                            <small class="text-danger" *ngIf="emails.errors.required">Email không được để trống</small>
+                            <small class="text-danger" *ngIf="emails.errors.email">Email phải nhập đúng định dạng</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [type]="hide ? 'password' : 'text'" type="password" [(ngModel)]="user.password" name="password" required pattern="[\w]+[\w]{5,}" #password="ngModel" [class.is-invalid]="password.invalid && password.touched" placeholder="Mật khẩu">
+                            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                        </mat-form-field>
+                        <div *ngIf="password.errors && (password.valid || password.touched)">
+                            <small class="text-danger" *ngIf="password.errors.required">Mật khẩu không được để trống</small>
+                            <small class="text-danger" *ngIf="password.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký
+              tự đặc biệt</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [type]="hide2 ? 'newPasswordConfirm' : 'text'" [(ngModel)]="newPasswordConfirm" type="password" required #newPassAgain="ngModel" [class.is-invalid]="newPassAgain.invalid && newPassAgain.touched" id="name" name="newPassAgain" placeholder="Nhập lại mật khẩu"
+                            />
+                            <a mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide newPasswordConfirm'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </a>
+                        </mat-form-field>
+                        <div *ngIf="newPassAgain.errors && (newPassAgain.valid || newPassAgain.touched)">
+                            <small class="text-danger" *ngIf="newPassAgain.errors.required">Mật khẩu mới không được để trống</small>
+                        </div>
+                        <div *ngIf="newPassAgain.valid && newPassAgain.value != password.value">
+                            <small class="text-danger" *ngIf="newPassAgain.valid && newPassAgain.value != password.value">Mật khẩu không
+              khớp </small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput type="text" [(ngModel)]="user.phone" name="phone" required pattern="^[0-9]+[0-9]" #phone="ngModel" [class.is-invalid]="phone.invalid && phone.touched" placeholder="Số điện thoại">
+                        </mat-form-field>
+                        <div *ngIf="phone.errors && (phone.valid || phone.touched)">
+                            <small class="text-danger" *ngIf="phone.errors.required">Số điện thoại không được để trống</small>
+                            <small class="text-danger" *ngIf="phone.errors.pattern">Số điện thoại không hợp lệ</small>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="buttonSign btn btn-success" [disabled]="addform.form.invalid" (click)="onSubmit()">Đăng ký tài khoản
+          </button>
+                    </div>
+                    <hr>
+                    <div style="text-align: center;" class="mb-3">
+                        <a (click)="gotoLogin()" class="btn btn-link">Bạn có tài khoản? Đăng nhập</a> <a class="btn btn-link" (click)="gobackHomePage()">Trở
+          về trang chủ</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

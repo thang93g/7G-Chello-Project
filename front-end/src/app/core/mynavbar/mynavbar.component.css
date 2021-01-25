@@ -1,0 +1,126 @@
+.small-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float: left;
+    background-size: cover;
+}
+
+#openAddBoardDialog {
+    margin-top: 15px !important;
+}
+::ng-deep .mat-menu-panel {
+    min-width: 112px;
+    max-width: 407px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px ;
+    outline: 0;
+    min-height: 64px;
+}
+
+::ng-deep .search-menu {
+    background: white;
+    width: 400px;
+    border-radius: 10px !important;
+    border: none !important;
+}
+
+
+/* .ng-autocomplete {
+    width:100%;
+    max-width: 600px;
+    display: table;
+    margin: 0 auto;
+  }
+   */
+
+.noti-group {
+    width: 255px;
+    background-color: rgb(126, 119, 230);
+    padding: 5px;
+    color: white;
+    display: inline-block;
+}
+
+.noti-task {
+    background-color: white;
+    width: 245px;
+    height: 60px;
+    border-radius: 3px;
+    color: black;
+    padding: 5px;
+}
+
+.small-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    float: left;
+    background-size: cover;
+}
+
+.comment {
+    margin-top: 5px;
+    width: 235px;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.noti-comment {
+    width: 255px;
+    padding: 7px;
+    background-color: rgb(206, 196, 196);
+}
+
+.noti-box {
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.navbar {
+    background-color: #3399ff;
+}
+
+.navbar-brand {
+    font-size: 32px!important;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+    color: white!important;
+}
+
+.navbar-brand:hover {
+    color: grey!important;
+}
+
+#noti {
+    color: white!important;
+}
+
+#noti:hover {
+    color: grey!important;
+}
+
+#home {
+    color: white;
+}
+
+#home:hover {
+    color: grey;
+}
+
+#avatar {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+#getInfo:hover {
+    color: grey !important;
+}
+
+#logout:hover {
+    color: white !important;
+}

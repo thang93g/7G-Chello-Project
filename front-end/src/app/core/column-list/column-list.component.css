@@ -1,0 +1,205 @@
+::ng-deep .mat-menu-panel {
+    min-width: 112px;
+    max-width: 407px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 4px;
+    outline: 0;
+    min-height: 64px;
+}
+
+::ng-deep .search-menu {
+    background: white;
+    width: 400px;
+    border-radius: 10px !important;
+    border: none !important;
+}
+
+body {
+    background-color: #1273ac;
+}
+
+.navbar {
+    background-color: #3399ff;
+    position: fixed;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-size: 32px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white!important;
+}
+
+.navbar-brand:hover {
+    color: grey!important;
+}
+
+.my-board {
+    width: 100%;
+    border: solid 1px white;
+    min-height: 60px;
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 4px;
+    overflow: auto;
+    float: left;
+    background-color: rgb(241, 238, 238);
+}
+
+.my-board.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.my-column {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+    padding: 5px;
+}
+
+#avatar {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+}
+
+.task-list.cdk-drop-list-dragging .my-task:not(.cdk-drag-placeholder) {
+    transition: transform 350ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.title {
+    width: 300px;
+    text-align: center;
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.my-task {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 rgba(9, 45, 66, .25);
+    padding: 10px 10px;
+    margin-bottom: 8px;
+    max-width: 100%!important;
+    position: relative;
+    text-decoration: none;
+    z-index: 0;
+    border: 5px;
+    box-sizing: border-box
+}
+
+.task-details {
+    overflow: hidden;
+    padding: 6px 8px;
+    position: relative;
+    z-index: 10;
+    display: block;
+}
+
+.add-form {
+    width: 300px;
+    float: right;
+}
+
+.my-task:hover {
+    background-color: whitesmoke;
+}
+
+.example-box {
+    width: 350px;
+}
+
+.noti-group {
+    width: 255px;
+    background-color: rgb(126, 119, 230);
+    padding: 5px;
+    color: white;
+    display: inline-block;
+}
+
+.noti-task {
+    background-color: white;
+    width: 245px;
+    height: 60px;
+    border-radius: 3px;
+    color: black;
+    padding: 5px;
+}
+
+.small-image {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    float: left;
+    background-size: cover;
+}
+
+.comment {
+    margin-top: 5px;
+    width: 235px;
+    display: inline-block;
+    border-radius: 3px;
+    padding: 10px;
+}
+
+.noti-comment {
+    width: 255px;
+    padding: 7px;
+    background-color: rgb(206, 196, 196);
+}
+
+.noti-box {
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.task-box {
+    height: 100px;
+    max-height: 100%;
+}
+
+#addTask:hover {
+    background-color: rgb(178, 185, 178)!important;
+}
+
+#addColumn:hover {
+    background-color: rgb(178, 185, 178)!important;
+}
+
+.member {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    border-radius: 50%;
+    float: right;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+.label-menu {
+    width: 150px;
+    height: 40px;
+}
+
+#uploadFile:hover {
+    background-color: #3399ff!important;
+}

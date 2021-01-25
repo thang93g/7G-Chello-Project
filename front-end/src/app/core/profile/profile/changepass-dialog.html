@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+<h1 style="text-align: center;">Đổi mật khẩu</h1>
+<div style="text-align: center; clear" class="mt-5">
+    <form #pass="ngForm">
+        <div class="mb-3">
+            <mat-form-field class="example-full-width">
+                <input matInput [type]="hide ? 'password' : 'text'" type="password" [(ngModel)]="oldPassword" name="oldPass" required #oldPass="ngModel" [class.is-invalid]="oldPass.invalid && oldPass.touched" placeholder="Nhập mật khẩu cũ">
+                <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </a>
+            </mat-form-field>
+            <div *ngIf="oldPass.errors && (oldPass.valid || oldPass.touched)">
+                <small class="text-danger" *ngIf="oldPass.errors.required">Mật khẩu cũ không được để trống</small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <mat-form-field class="example-full-width">
+                <input matInput [type]="hide2 ? 'password' : 'text'" type="password" [(ngModel)]="newPassword" name="newPass" required pattern="[\w]+[\w]{5,}" #newPass="ngModel" [class.is-invalid]="newPass.invalid && newPass.touched" placeholder="Nhập mật khẩu mới">
+                <a mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </a>
+            </mat-form-field>
+            <div *ngIf="newPass.errors && (newPass.valid || newPass.touched)">
+                <small class="text-danger" *ngIf="newPass.errors.required">Mật khẩu mới không được để trống</small>
+                <small class="text-danger" *ngIf="newPass.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký tự đặc biệt</small>
+            </div>
+        </div>
+        <div class="mb-3">
+            <mat-form-field class="example-full-width">
+                <input matInput [type]="hide3 ? 'password' : 'text'" type="password" [(ngModel)]="newPasswordConfirm" name="passConfirm" required #newPassAgain="ngModel" [class.is-invalid]="newPassAgain.invalid && newPassAgain.touched" placeholder="Nhập lại mật khẩu mới">
+                <a mat-icon-button matSuffix (click)="hide3 = !hide3" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </a>
+            </mat-form-field>
+            <div *ngIf="newPassAgain.errors && (newPassAgain.valid || newPassAgain.touched)">
+                <small class="text-danger" *ngIf="newPassAgain.errors.required">Mật khẩu mới không được để trống</small>
+                <small class="text-danger" *ngIf="newPassAgain.errors.pattern">Mật khẩu phải hơn 6 ký tự và không được dùng ký tự đặc biệt</small>
+            </div>
+            <div *ngIf="newPassAgain.valid && newPassAgain.value != newPass.value">
+                <small class="text-danger" *ngIf="newPassAgain.valid && newPassAgain.value != newPass.value">Nhập lại mật khẩu không đúng</small>
+            </div>
+        </div>
+        <button class="btn btn-success" (click)="updatePassword()" [disabled]="pass.form.invalid">Đổi mật khẩu</button>
+        <br>
+        <button class="btn btn-link" mat-dialog-close>Huỷ bỏ</button>
+    </form>
+</div>
